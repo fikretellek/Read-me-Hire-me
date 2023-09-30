@@ -3,11 +3,9 @@ import { Pool } from "pg";
 import config from "./utils/config";
 import logger from "./utils/logger";
 
-const localDb = [
-	"0.0.0.0",
-	"127.0.0.1",
-	"localhost",
-].includes(new URL(config.dbUrl).hostname);
+const localDb = ["0.0.0.0", "127.0.0.1", "localhost"].includes(
+	new URL(config.dbUrl).hostname
+);
 
 const pool = new Pool({
 	connectionString: config.dbUrl,
