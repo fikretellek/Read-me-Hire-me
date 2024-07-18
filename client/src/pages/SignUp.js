@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./SignUp.css";
+import { hashPassword } from "Util.js";
 
 const SignUp = () => {
 	const [username, setUsername] = useState("");
@@ -34,14 +35,7 @@ const SignUp = () => {
         setUserType("graduate");
 	};
 
-	const hashPassword = async (password) => {
-		const encoder = new TextEncoder();
-		const data = encoder.encode(password);
-		const hash = await crypto.subtle.digest("SHA-256", data);
-		return Array.from(new Uint8Array(hash))
-			.map((b) => b.toString(16).padStart(2, "0"))
-			.join("");
-	};
+
 
 	return (
 		<div className="signUpCard">

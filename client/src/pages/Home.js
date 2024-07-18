@@ -39,6 +39,7 @@ export function Home() {
 			</div>
 			<p>
 				<Link to="/signup">Sign Up</Link>
+				<Link to="/signin">Sign in </Link>
 			</p>
 		</main>
 	);

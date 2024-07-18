@@ -74,7 +74,7 @@ router.delete("/users/:id", async (req, res) => {
 	}
 });
 
-router.post("/login", async (req, res) => {
+router.post("/sign-in", async (req, res) => {
 	const { username, passwordHash } = req.body;
 
 	if (!username || !passwordHash) {
