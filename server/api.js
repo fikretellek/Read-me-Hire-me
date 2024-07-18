@@ -2,6 +2,8 @@ import { Router } from "express";
 
 import logger from "./utils/logger";
 import db from "./db";
+import jwt from "jsonwebtoken";
+import config from "./utils/config";
 
 const router = Router();
 
@@ -69,6 +71,49 @@ router.delete("/users/:id", async (req, res) => {
 				success: false,
 				error: "Failed to delete User from the database",
 			});
+	}
+});
+
+router.post("/login", async (req, res) => {
+	const { username, passwordHash } = req.body;
+
+	if (!username || !passwordHash) {
+		return res
+			.status(422)
+			.json({ message: "Username and password are required" });
+	}
+
+	try {
+		const result = await db.query(
+			"SELECT * FROM users WHERE username = $1",
+			[username]
+		);
+
+
+		if (result.rows.length === 0) {
+			return res
+				.status(404)
+				.json({ success: false, message: "User not found" });
+		}
+
+		const user = result.rows[0];
+
+		if (user.password_hash !== passwordHash) {
+			return res
+				.status(401)
+				.json({ success: false, message: "Invalid password" });
+		}
+
+		const token = jwt.sign(
+			{ id: user.id, username: user.username, userType: user.user_type },
+			config.jwtSecret,
+			{ expiresIn: "1h" }
+		);
+
+		user.token = token;
+		res.status(200).json({ success: true, data: { "user": user } });
+	} catch (error) {
+		res.status(500).json({ success: false, error: "Failed to log in" });
 	}
 });
 
