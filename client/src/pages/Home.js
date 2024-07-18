@@ -37,6 +37,9 @@ export function Home() {
 				</h1>
 				<Link to="/about/this/site">About</Link>
 			</div>
+			<p>
+				<Link to="/signup">Sign Up</Link>
+			</p>
 		</main>
 	);
 }

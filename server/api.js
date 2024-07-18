@@ -18,7 +18,7 @@ router.post("/users", async (req, res) => {
 		return res.status(422).json({ message: "Username field is required" });
 	}
 	if (!passwordHash) {
-		return res.status(422).json({ message: "Password_hash field is required"});
+		return res.status(422).json({ message: "Password_hash field is required" });
 	}
 	if (!userType) {
 		return res.status(422).json({ message: "User_type field is required" });
@@ -33,6 +33,12 @@ router.post("/users", async (req, res) => {
 		const newUserID = result.rows[0].id;
 		res.status(200).json({ success: true, data: { id: newUserID } });
 	} catch (error) {
+
+		if (error.code === "23505") {
+			return res
+				.status(409)
+				.json({ success: false, error: "Username already exists" });
+}
 		res
 			.status(500)
 			.json({ success: false, error: "Failed to create a new User into database" });
