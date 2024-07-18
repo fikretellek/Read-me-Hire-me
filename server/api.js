@@ -40,5 +40,30 @@ router.post("/users", async (req, res) => {
 });
 
 
+router.delete("/users/:id", async (req, res) => {
+	const userId = req.params.id;
+
+	try {
+		const result = await db.query(
+			"DELETE FROM users WHERE id = $1 RETURNING id",
+			[userId]
+		);
+
+		if (result.rows.length === 0) {
+			return res
+				.status(404)
+				.json({ success: false, message: "User not found" });
+		}
+
+		res.status(200).json({ success: true, data: { id: result.rows[0].id } });
+	} catch (error) {
+		res
+			.status(500)
+			.json({
+				success: false,
+				error: "Failed to delete User from the database",
+			});
+	}
+});
 
 export default router;
