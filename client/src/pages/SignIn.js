@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./SignIn.css";
-import { hashPassword } from "./Util";
+import { hashPassword } from "./Util.js";
 
 const authenticateUser = async (username, passwordHash) => {
 	try {

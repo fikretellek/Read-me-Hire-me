@@ -13,7 +13,7 @@ router.get("/", (_, res) => {
 });
 
 
-router.post("/users", async (req, res) => {
+router.post("/users",  async (req, res) => {
 	const { username, passwordHash, userType } = req.body;
 
 	if (!username) {
