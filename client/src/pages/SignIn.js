@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./SignIn.css";
+import "./FormStyles.css";
 import { hashPassword } from "./Util.js";
 
 const authenticateUser = async (username, passwordHash) => {
@@ -47,7 +47,7 @@ const SignIn = () => {
 	};
 
 	return (
-		<div className="signIn-container">
+		<div className="signInCard">
 			<h1>Sign In</h1>
 			<form onSubmit={handleSignIn}>
 				<label htmlFor="username">Username:</label>
