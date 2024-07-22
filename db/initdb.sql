@@ -13,6 +13,7 @@ CREATE TABLE users (
 CREATE TABLE portfolios (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id),
+    github_username VARCHAR,
     readme TEXT,
     activity TEXT,
     projects TEXT
