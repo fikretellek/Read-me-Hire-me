@@ -78,7 +78,8 @@
 		"helmet": "^7.0.0",
 		"morgan": "^1.10.0",
 		"pg": "^8.11.3",
-		"winston": "^3.10.0"
+		"winston": "^3.10.0",
+		"jsonwebtoken": "^8.5.1"
 	},
 	"engines": {
 		"node": "^18.3 || ^20",
