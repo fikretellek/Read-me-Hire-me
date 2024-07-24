@@ -4,6 +4,7 @@ import About from "./pages/About";
 import Home from "./pages/Home";
 import SignUp from "./pages/Signup";
 import SignIn from "./pages/SignIn";
+import UpdatePasswordForm from "./pages/UpdatePasswordForm";
 
 const App = () => (
 	<Routes>
@@ -11,6 +12,7 @@ const App = () => (
 		<Route path="/about/this/site" element={<About />} />
 		<Route path="/signup" element={<SignUp />} />
 		<Route path="/signIn" element={<SignIn />} />
+		<Route path="/update-password" element={<UpdatePasswordForm />} />
 	</Routes>
 );
 

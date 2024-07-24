@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "./SignUp.css";
 import { hashPassword } from "./Util.js";
+import "./FormStyles.css";
 
 const SignUp = () => {
 	const [username, setUsername] = useState("");
