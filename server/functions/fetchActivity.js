@@ -91,7 +91,7 @@ export default async function fetchActivity(username) {
 			}
 			activity.total++;
 		});
-        console.log(activity);
+
 		try {
 			const result = await db.query(
 				`WITH user_data AS (
@@ -110,7 +110,6 @@ export default async function fetchActivity(username) {
 			);
 			return { result: result, message: "successfully added to db" };
 		} catch (error) {
-            console.log(error)
 			return { error: error, message: "Cannot connect to db" };
 		}
 	} catch (error) {
