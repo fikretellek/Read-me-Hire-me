@@ -1,10 +1,10 @@
 import db from "../db";
 
 export default async function fetchActivity(username) {
-	const readmeLink = `https://api.github.com/repos/${username}/${username}/readme`;
+	const eventsLink = `https://api.github.com/users/${username}/events`;
 
 	try {
-		const response = await fetch(readmeLink);
+		const response = await fetch(eventsLink);
 		if (!response.ok) {
 			throw new Error(`GitHub API responded with status ${response.status}`);
 		}
@@ -61,47 +61,56 @@ export default async function fetchActivity(username) {
 			total: 0,
 			prDates: [],
 		};
-		data.forEach((element) => {
-			switch (element.type) {
+
+		data.forEach((event) => {
+			switch (event.type) {
 				case "PullRequestEvent":
-					if (element.payload.action == "opened") {
-						prDates.push(element.payload.pull_request.created_at);
+					if (event.payload.action == "opened") {
+                        
+						activity.prDates.push(event.payload.pull_request.created_at);
 					}
 				case "CommitCommentEvent":
 				case "ForkEvent":
 				case "PushEvent":
-					activity.production++;
+					activity.production ++;
 					break;
 				case "CreateEvent":
 				case "DeleteEvent":
 				case "IssuesEvent":
-					activity.documentation++;
+					activity.documentation ++;
 					break;
 				case "IssueCommentEvent":
 				case "MemberEvent":
 				case "PullRequestReviewEvent":
 				case "PullRequestReviewCommentEvent":
-					activity.collaboration++;
+					activity.collaboration ++;
 					break;
 
 				default:
 					break;
 			}
-			total++;
+			activity.total++;
 		});
-
+        console.log(activity);
 		try {
 			const result = await db.query(
 				`WITH user_data AS (
                     SELECT id AS user_id FROM users WHERE github_username = $1
-                  )
-                  INSERT INTO readmes (readme, user_id)
-                  SELECT $2, user_id FROM user_data
-                  RETURNING *;`,
-				[username, readme]
+                )
+                INSERT INTO activities (production, documentation, collaboration, total, pr_dates, user_id)
+                VALUES ($2, $3, $4, $5, $6, (SELECT user_id FROM user_data));`,
+				[
+					username,
+					activity.production,
+					activity.documentation,
+					activity.collaboration,
+					activity.total,
+					activity.prDates.toString(),
+				]
 			);
 			return { result: result, message: "successfully added to db" };
 		} catch (error) {
+            console.log(error)
 			return { error: error, message: "Cannot connect to db" };
 		}
 	} catch (error) {
