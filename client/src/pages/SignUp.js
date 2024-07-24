@@ -71,7 +71,8 @@ const SignUp = () => {
 					required
 				>
 					<option value="graduate">Graduate</option>
-					<option value="mentor-rec">Mentor / Recruiter </option>
+					<option value="mentor">Mentor</option>
+					<option value="recruiter">Recruiter</option>
 				</select>
 				<br />
 				<br />

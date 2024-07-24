@@ -4,6 +4,7 @@ import logger from "./utils/logger";
 import db from "./db";
 import jwt from "jsonwebtoken";
 import config from "./utils/config";
+import { roleBasedAuth } from "./utils/middleware";
 
 const router = Router();
 
@@ -11,6 +12,8 @@ router.get("/", (_, res) => {
 	logger.debug("Welcoming everyone...");
 	res.json({ message: "Hello, world!" });
 });
+
+
 
 
 router.post("/users",  async (req, res) => {
@@ -44,6 +47,31 @@ router.post("/users",  async (req, res) => {
 		res
 			.status(500)
 			.json({ success: false, error: "Failed to create a new User into database" });
+	}
+});
+
+
+router.get("/users/:id", roleBasedAuth("graduate", "mentor", "recruiter"), async (req, res) => {
+	const userId = req.params.id;
+	try {
+		const result = await db.query("SELECT * FROM users WHERE id = $1", [
+			userId,
+		]);
+
+		if (result.rows.length === 0) {
+			return res
+				.status(404)
+				.json({ success: false, message: "User not found" });
+		}
+
+		res.status(200).json({ success: true, data: result.rows[0] });
+	} catch (error) {
+		res
+			.status(500)
+			.json({
+				success: false,
+				error: "Failed to fetch User from the database",
+			});
 	}
 });
 
