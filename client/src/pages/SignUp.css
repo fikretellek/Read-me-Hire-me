@@ -1,0 +1,85 @@
+/* General styling for the Sign Up container */
+.signUpCard {
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #F3F3F3; /* Light Grey background for the form */
+    border: 1px solid #DEDEDE; /* Dark Grey border */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styling */
+h1 {
+    color: #333333; /* Body Text color */
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Label styling */
+label {
+    color: #333333; /* Body Text color */
+    font-weight: bold;
+}
+
+/* Input and Select field styling */
+input[type="text"],
+input[type="password"],
+select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #A9A9A9; /* Border color 2 for normal state */
+    border-radius: 2px;
+    box-sizing: border-box;
+}
+
+input[type="text"]:hover,
+input[type="password"]:hover,
+select:hover {
+    border-color: #495057; /* New hover border color */
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+select:focus {
+    border-color: #3455DB; /* Focus border color */
+}
+
+input[type="text"].error,
+input[type="password"].error,
+select.error {
+    border-color: #FF0000; /* Error border color */
+}
+
+/* Button styling */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #EE4434; /* Brand Red color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #b4001b; /* Dark Brand Red color */
+}
+
+/* Message styling */
+#message {
+    margin-top: 20px;
+    color: #333333; /* Body Text color */
+    text-align: center;
+    font-size: 16px;
+}
+
+.error-message {
+    color: #FF0000; /* Error color */
+    font-size: 14px;
+    margin-top: 5px;
+}
