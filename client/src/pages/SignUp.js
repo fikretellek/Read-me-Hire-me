@@ -41,6 +41,7 @@ const SignUp = () => {
 		setPassword("");
 		setUserType("graduate");
 		setUserGithub("");
+		setIsGraduate(true);
 	};
 
 	function handleOption(e) {
