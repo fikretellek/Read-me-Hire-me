@@ -25,8 +25,8 @@ router.post("/users", async (req, res) => {
 	if (!userType) {
 		return res.status(422).json({ message: "User_type field is required" });
 	}
-	if (!userType) {
-		return res.status(422).json({ message: "User_type field is required" });
+	if (userType == "graduate" && !github_username) {
+		return res.status(422).json({ message: "Github_username field is required" });
 	}
 	try {
 		const result = await db.query(
