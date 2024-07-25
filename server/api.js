@@ -5,6 +5,7 @@ import db from "./db";
 import jwt from "jsonwebtoken";
 import config from "./utils/config";
 import { roleBasedAuth } from "./utils/middleware";
+import fetchActivity from "./controller/fetchActivity";
 import fetchReadme from "./controller/fetchReadme";
 import infoRouter from "./routes/getInfoRouter";
 
@@ -37,7 +38,7 @@ router.post("/users", async (req, res) => {
 			[username, passwordHash, userType, userGithub]
 		);
 
-		fetchReadme(userGithub)
+		
 
 		const newUserID = result.rows[0].id;
 
@@ -46,8 +47,15 @@ router.post("/users", async (req, res) => {
 				"INSERT INTO portfolios (user_id, github_username) VALUES ($1, $2)",
 				[newUserID, userGithub]
 			);
+
+			fetchReadme(userGithub)
+		fetchActivity(userGithub);	
+
 		}
 
+
+		
+		
 		res.status(200).json({ success: true, data: { id: newUserID } });
 	} catch (error) {
 		if (error.code === "23505") {
