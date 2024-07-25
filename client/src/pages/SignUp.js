@@ -7,6 +7,8 @@ const SignUp = () => {
 	const [password, setPassword] = useState("");
 	const [userType, setUserType] = useState("graduate");
 	const [message, setMessage] = useState("");
+	const [isGraduate, setIsGraduate] = useState(true);
+	const [userGithub, setUserGithub] = useState("");
 
 	const handleSignUp = async (event) => {
 		event.preventDefault();
@@ -18,7 +20,12 @@ const SignUp = () => {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ username, passwordHash, userType }),
+			body: JSON.stringify({
+				username,
+				passwordHash,
+				userType,
+				userGithub,
+			}),
 		});
 
 		const result = await response.json();
@@ -30,12 +37,18 @@ const SignUp = () => {
 		} else {
 			setMessage(`Error: ${result.message || result.error}`);
 		}
-        setUsername("");
-        setPassword("");
-        setUserType("graduate");
+		setUsername("");
+		setPassword("");
+		setUserType("graduate");
+		setUserGithub("");
+		setIsGraduate(true);
 	};
 
-
+	function handleOption(e) {
+		const optionValue = e.target.value;
+		setUserType(optionValue);
+		setIsGraduate(optionValue === "graduate");
+	}
 
 	return (
 		<div className="signUpCard">
@@ -64,19 +77,27 @@ const SignUp = () => {
 				<br />
 
 				<label htmlFor="userType">User Type:</label>
-				<select
-					id="userType"
-					value={userType}
-					onChange={(e) => setUserType(e.target.value)}
-					required
-				>
+				<select id="userType" value={userType} onChange={handleOption} required>
 					<option value="graduate">Graduate</option>
 					<option value="mentor">Mentor</option>
 					<option value="recruiter">Recruiter</option>
 				</select>
+				{isGraduate && (
+					<>
+						<label htmlFor="github">Github Account:</label>
+						<input
+							type="text"
+							id="github"
+							value={userGithub}
+							onChange={(e) => setUserGithub(e.target.value)}
+							required
+						/>
+						<br />
+						<br />
+					</>
+				)}
 				<br />
 				<br />
-
 				<button type="submit">Sign Up</button>
 			</form>
 			{message && <div id="message">{message}</div>}

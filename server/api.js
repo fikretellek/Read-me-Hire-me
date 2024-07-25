@@ -5,7 +5,9 @@ import db from "./db";
 import jwt from "jsonwebtoken";
 import config from "./utils/config";
 import { roleBasedAuth } from "./utils/middleware";
-import fetchActivity from "./functions/fetchActivity";
+import fetchActivity from "./controller/fetchActivity";
+import fetchReadme from "./controller/fetchReadme";
+import infoRouter from "./routes/getInfoRouter";
 
 const router = Router();
 
@@ -15,29 +17,44 @@ router.get("/", (_, res) => {
 });
 
 router.post("/users", async (req, res) => {
-	const { username, passwordHash, userType, github_username } = req.body;
+	const { username, passwordHash, userType, userGithub } = req.body;
 
 	if (!username) {
 		return res.status(422).json({ message: "Username field is required" });
 	}
 	if (!passwordHash) {
-		return res.status(422).json({ message: "Password_hash field is required" });
+		return res.status(422).json({ message: "Password_hash field is required"  });
 	}
 	if (!userType) {
 		return res.status(422).json({ message: "User_type field is required" });
 	}
-	if (userType == "graduate" && !github_username) {
+	if (userType == "graduate" && !userGithub) {
 		return res.status(422).json({ message: "Github_username field is required" });
 	}
+
 	try {
 		const result = await db.query(
-			"INSERT INTO users (username, password_hash, user_type) VALUES ($1, $2, $3) RETURNING id",
-			[username, passwordHash, userType]
+			"INSERT INTO users (username, password_hash, user_type, github_username) VALUES ($1, $2, $3, $4) RETURNING id ",
+			[username, passwordHash, userType, userGithub]
 		);
+
+		
 
 		const newUserID = result.rows[0].id;
 
-		fetchActivity(github_username);
+		if (userType === "graduate" && userGithub) {
+			await db.query(
+				"INSERT INTO portfolios (user_id, github_username) VALUES ($1, $2)",
+				[newUserID, userGithub]
+			);
+
+			fetchReadme(userGithub)
+		fetchActivity(userGithub);	
+
+		}
+
+
+		
 		
 		res.status(200).json({ success: true, data: { id: newUserID } });
 	} catch (error) {
@@ -46,12 +63,10 @@ router.post("/users", async (req, res) => {
 				.status(409)
 				.json({ success: false, error: "Username already exists" });
 		}
-		res
-			.status(500)
-			.json({
-				success: false,
-				error: "Failed to create a new User into database",
-			});
+		res.status(500).json({
+			success: false,
+			error: "Failed to create a new User into database",
+		});
 	}
 });
 
@@ -174,4 +189,10 @@ router.put("/users/:id/password", async (req, res) => {
 		});
 	}
 });
+
+
+router.use("/info", infoRouter)
+
+
+
 export default router;
