@@ -5,7 +5,8 @@ import db from "./db";
 import jwt from "jsonwebtoken";
 import config from "./utils/config";
 import { roleBasedAuth } from "./utils/middleware";
-import fetchReadme from "./functions/fetchReadme";
+import fetchReadme from "./controller/fetchReadme";
+import infoRouter from "./routes/getInfoRouter";
 
 const router = Router();
 
@@ -177,4 +178,10 @@ router.put("/users/:id/password", async (req, res) => {
 		});
 	}
 });
+
+
+router.use("/info", infoRouter)
+
+
+
 export default router;
