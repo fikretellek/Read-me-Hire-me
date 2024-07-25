@@ -5,6 +5,7 @@ import db from "./db";
 import jwt from "jsonwebtoken";
 import config from "./utils/config";
 import { roleBasedAuth } from "./utils/middleware";
+import fetchActivity from "./functions/fetchActivity";
 
 const router = Router();
 
