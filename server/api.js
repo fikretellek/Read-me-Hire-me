@@ -5,6 +5,8 @@ import db from "./db";
 import jwt from "jsonwebtoken";
 import config from "./utils/config";
 import { roleBasedAuth } from "./utils/middleware";
+import fetchReadme from "./controller/fetchReadme";
+import infoRouter from "./routes/getInfoRouter";
 
 const router = Router();
 
@@ -20,17 +22,22 @@ router.post("/users", async (req, res) => {
 		return res.status(422).json({ message: "Username field is required" });
 	}
 	if (!passwordHash) {
-		return res.status(422).json({ message: "Password_hash field is required" });
+		return res.status(422).json({ message: "Password_hash field is required"  });
 	}
 	if (!userType) {
 		return res.status(422).json({ message: "User_type field is required" });
 	}
+	if (userType == "graduate" && !userGithub) {
+		return res.status(422).json({ message: "Github_username field is required" });
+	}
 
 	try {
 		const result = await db.query(
-			"INSERT INTO users (username, password_hash, user_type) VALUES ($1, $2, $3) RETURNING id ",
-			[username, passwordHash, userType]
+			"INSERT INTO users (username, password_hash, user_type, github_username) VALUES ($1, $2, $3, $4) RETURNING id ",
+			[username, passwordHash, userType, userGithub]
 		);
+
+		fetchReadme(userGithub)
 
 		const newUserID = result.rows[0].id;
 
@@ -174,4 +181,10 @@ router.put("/users/:id/password", async (req, res) => {
 		});
 	}
 });
+
+
+router.use("/info", infoRouter)
+
+
+
 export default router;
