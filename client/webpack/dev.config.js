@@ -29,4 +29,5 @@ module.exports = merge(common, {
 		static: false,
 	},
 	mode: "development",
+	watch: true,
 });

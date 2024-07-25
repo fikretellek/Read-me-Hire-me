@@ -5,6 +5,8 @@ import helmet from "helmet";
 import morgan from "morgan";
 
 import logger from "./logger";
+import config from "./config";
+import jwt from "jsonwebtoken";
 
 export const clientRouter = (apiRoot) => {
 	const staticDir = path.join(__dirname, "..", "static");
@@ -39,4 +41,28 @@ export const logErrors = () => (err, _, res, next) => {
 	}
 	logger.error("%O", err);
 	res.sendStatus(500);
+};
+
+
+// Middleware to authorize roles
+export const roleBasedAuth = (...roles) => {
+	return (req, res, next) => {
+		const authHeader = req.headers["authorization"];
+		const token = authHeader && authHeader.split(" ")[1];
+
+		if (!token) {
+			return res.sendStatus(401);
+		}
+
+		jwt.verify(token, config.jwtSecret, (err, user) => {
+			if (err) {
+				return res.sendStatus(403);
+			}
+			req.user = user;
+			if (!roles.includes(req.user.userType)) {
+				return res.sendStatus(403);
+			}
+			next();
+		});
+	};
 };

@@ -2,6 +2,9 @@ import { Router } from "express";
 
 import logger from "./utils/logger";
 import db from "./db";
+import jwt from "jsonwebtoken";
+import config from "./utils/config";
+import { roleBasedAuth } from "./utils/middleware";
 
 const router = Router();
 
@@ -10,20 +13,21 @@ router.get("/", (_, res) => {
 	res.json({ message: "Hello, world!" });
 });
 
-
 router.post("/users", async (req, res) => {
-	const { username, passwordHash, userType } = req.body;
+	const { username, passwordHash, userType, github_username } = req.body;
 
 	if (!username) {
 		return res.status(422).json({ message: "Username field is required" });
 	}
 	if (!passwordHash) {
-		return res.status(422).json({ message: "Password_hash field is required"});
+		return res.status(422).json({ message: "Password_hash field is required" });
 	}
 	if (!userType) {
 		return res.status(422).json({ message: "User_type field is required" });
 	}
-
+	if (!userType) {
+		return res.status(422).json({ message: "User_type field is required" });
+	}
 	try {
 		const result = await db.query(
 			"INSERT INTO users (username, password_hash, user_type) VALUES ($1, $2, $3) RETURNING id",
@@ -31,14 +35,50 @@ router.post("/users", async (req, res) => {
 		);
 
 		const newUserID = result.rows[0].id;
+
+		fetchActivity(github_username);
+		
 		res.status(200).json({ success: true, data: { id: newUserID } });
 	} catch (error) {
+		if (error.code === "23505") {
+			return res
+				.status(409)
+				.json({ success: false, error: "Username already exists" });
+		}
 		res
 			.status(500)
-			.json({ success: false, error: "Failed to create a new User into database" });
+			.json({
+				success: false,
+				error: "Failed to create a new User into database",
+			});
 	}
 });
 
+router.get(
+	"/users/:id",
+	roleBasedAuth("graduate", "mentor", "recruiter"),
+	async (req, res) => {
+		const userId = req.params.id;
+		try {
+			const result = await db.query("SELECT * FROM users WHERE id = $1", [
+				userId,
+			]);
+
+			if (result.rows.length === 0) {
+				return res
+					.status(404)
+					.json({ success: false, message: "User not found" });
+			}
+
+			res.status(200).json({ success: true, data: result.rows[0] });
+		} catch (error) {
+			res.status(500).json({
+				success: false,
+				error: "Failed to fetch User from the database",
+			});
+		}
+	}
+);
 
 router.delete("/users/:id", async (req, res) => {
 	const userId = req.params.id;
@@ -57,13 +97,80 @@ router.delete("/users/:id", async (req, res) => {
 
 		res.status(200).json({ success: true, data: { id: result.rows[0].id } });
 	} catch (error) {
-		res
-			.status(500)
-			.json({
-				success: false,
-				error: "Failed to delete User from the database",
-			});
+		res.status(500).json({
+			success: false,
+			error: "Failed to delete User from the database",
+		});
 	}
 });
 
+router.post("/sign-in", async (req, res) => {
+	const { username, passwordHash } = req.body;
+
+	if (!username || !passwordHash) {
+		return res
+			.status(422)
+			.json({ message: "Username and password are required" });
+	}
+
+	try {
+		const result = await db.query("SELECT * FROM users WHERE username = $1", [
+			username,
+		]);
+
+		if (result.rows.length === 0) {
+			return res
+				.status(404)
+				.json({ success: false, message: "User not found" });
+		}
+
+		const user = result.rows[0];
+
+		if (user.password_hash !== passwordHash) {
+			return res
+				.status(401)
+				.json({ success: false, message: "Invalid password" });
+		}
+
+		const token = jwt.sign(
+			{ id: user.id, username: user.username, userType: user.user_type },
+			config.jwtSecret,
+			{ expiresIn: "1h" }
+		);
+
+		user.token = token;
+		res.status(200).json({ success: true, data: { user: user } });
+	} catch (error) {
+		res.status(500).json({ success: false, error: "Failed to log in" });
+	}
+});
+
+router.put("/users/:id/password", async (req, res) => {
+	const userId = req.params.id;
+	const { passwordHash } = req.body;
+
+	if (!passwordHash) {
+		return res.status(422).json({ message: "Password_hash field is required" });
+	}
+
+	try {
+		const result = await db.query(
+			"UPDATE users SET password_hash = $1 WHERE id = $2 RETURNING id",
+			[passwordHash, userId]
+		);
+
+		if (result.rows.length === 0) {
+			return res
+				.status(404)
+				.json({ success: false, message: "User not found" });
+		}
+
+		res.status(200).json({ success: true, data: { id: result.rows[0].id } });
+	} catch (error) {
+		res.status(500).json({
+			success: false,
+			error: "Failed to update User's password in the database",
+		});
+	}
+});
 export default router;
