@@ -8,6 +8,7 @@ const SignUp = () => {
 	const [userType, setUserType] = useState("graduate");
 	const [message, setMessage] = useState("");
 	const [isGraduate, setIsGraduate] = useState(true);
+	const [userGithub, setUserGithub] = useState("");
 
 	const handleSignUp = async (event) => {
 		event.preventDefault();
@@ -19,7 +20,12 @@ const SignUp = () => {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ username, passwordHash, userType }),
+			body: JSON.stringify({
+				username,
+				passwordHash,
+				userType,
+				userGithub,
+			}),
 		});
 
 		const result = await response.json();
@@ -34,6 +40,7 @@ const SignUp = () => {
 		setUsername("");
 		setPassword("");
 		setUserType("graduate");
+		setUserGithub("");
 	};
 
 	function handleOption(e) {
@@ -77,7 +84,13 @@ const SignUp = () => {
 				{isGraduate && (
 					<>
 						<label htmlFor="github">Github Account:</label>
-						<input type="text" id="github" required />
+						<input
+							type="text"
+							id="github"
+							value={userGithub}
+							onChange={(e) => setUserGithub(e.target.value)}
+							required
+						/>
 						<br />
 						<br />
 					</>
