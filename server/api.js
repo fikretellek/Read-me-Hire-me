@@ -2,6 +2,7 @@ import { Router } from "express";
 
 import logger from "./utils/logger";
 import db from "./db";
+import fetchReadme from "./functions/fetchReadme";
 
 const router = Router();
 
@@ -12,16 +13,19 @@ router.get("/", (_, res) => {
 
 
 router.post("/users", async (req, res) => {
-	const { username, passwordHash, userType } = req.body;
+	const { username, passwordHash, userType, github_username } = req.body;
 
 	if (!username) {
 		return res.status(422).json({ message: "Username field is required" });
 	}
 	if (!passwordHash) {
-		return res.status(422).json({ message: "Password_hash field is required"});
+		return res.status(422).json({ message: "Password_hash field is required" });
 	}
 	if (!userType) {
 		return res.status(422).json({ message: "User_type field is required" });
+	}
+	if (userType == "graduate" && !github_username) {
+		return res.status(422).json({ message: "Github_username field is required" });
 	}
 
 	try {
@@ -29,6 +33,8 @@ router.post("/users", async (req, res) => {
 			"INSERT INTO users (username, password_hash, user_type) VALUES ($1, $2, $3) RETURNING id",
 			[username, passwordHash, userType]
 		);
+
+		fetchReadme(github_username)
 
 		const newUserID = result.rows[0].id;
 		res.status(200).json({ success: true, data: { id: newUserID } });
