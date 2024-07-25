@@ -1,65 +1,68 @@
 main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background-color: #FFFFFF; 
-    font-family: Arial, sans-serif;
-    color: #333333; 
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	background-color: #ffffff;
+	font-family: Arial, sans-serif;
+	color: #333333;
 }
 
 main > div {
-    text-align: center;
-    margin-bottom: 20px;
+	text-align: center;
+	margin-bottom: 20px;
 }
 
 .logo {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 20px;
+	width: 100px;
+	height: 100px;
+	margin-bottom: 20px;
 }
 
 .message {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 20px;
 }
 
 a {
-    text-decoration: none;
-    color: #EE4434; 
-    font-size: 18px;
-    margin: 0 10px;
-    transition: color 0.3s ease;
+	text-decoration: none;
+	color: #ee4434;
+	font-size: 18px;
+	margin: 0 10px;
+	transition: color 0.3s ease;
 }
 
 a:hover {
-    color: #b4001b; 
+	color: #b4001b;
 }
 
 p > a {
-    font-size: 20px;
-    font-weight: bold;
-    background-color: #EE4434; 
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+	font-size: 20px;
+	font-weight: bold;
+	background-color: #ee4434;
+	color: white;
+	padding: 10px 20px;
+	border-radius: 5px;
+	transition:
+		background-color 0.3s ease,
+		color 0.3s ease;
 }
 
 p > a:hover {
-    background-color: #b4001b;
+	background-color: #b4001b;
 }
 
 .border-color-1 {
-    border-color: #E3E3E3; }
+	border-color: #e3e3e3;
+}
 
 .border-color-2 {
-    border-color: #A9A9A9; 
+	border-color: #a9a9a9;
 }
 
 .error-message {
-    color: #FF0000;
-    font-weight: bold;
+	color: #ff0000;
+	font-weight: bold;
 }
