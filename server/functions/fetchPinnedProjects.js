@@ -1,6 +1,6 @@
 import db from "../db";
 
-export default async function fetchActivity(username) {
+export default async function fetchPinnedProjects(username) {
 	const eventsLink = `https://api.github.com/users/${username}/events`;
 
 	try {
@@ -119,7 +119,7 @@ export default async function fetchActivity(username) {
 
 // to test this function use this endpoint in api.js file
 
-// router.get("/fetchActivity", async (_, res) => {
-// 	const test = await fetchActivity("RbAvci")
+// router.get("/fetchPinnedProjects", async (_, res) => {
+// 	const test = await fetchPinnedProjects("RbAvci")
 // 	res.send(test)
 // });
