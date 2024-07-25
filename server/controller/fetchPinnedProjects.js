@@ -1,9 +1,56 @@
+
 import db from "../db";
 
 export default async function fetchPinnedProjects(username) {
-	const eventsLink = `https://api.github.com/users/${username}/events`;
+	const gitHubGraphqlLink = "https://api.github.com/graphql";
+	const header = {
+		Authorization: process.env.GITHUB_AUTH_KEY,
+		"Content-Type": "application/json",
+	};
+	const body = JSON.stringify({
+		query: `{
+			user(login: ${username}) {
+			  pinnedItems(first: 6, types: REPOSITORY) {
+				nodes {
+				  ... on RepositoryInfo {
+					name
+					description
+					url
+					createdAt
+					updatedAt
+				  }
+				}
+			  }
+			}
+		  }`,
+	});
 
 	try {
+		fetch(gitHubGraphqlLink, {
+			method: "post",
+			headers: {
+				Authorization: key,
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				query: `{
+              user(login: "UserNameHere") {
+                pinnedItems(first: 6, types: REPOSITORY) {
+                  nodes {
+                    ... on RepositoryInfo {
+                      name
+                      description
+                      url
+                      createdAt
+                      updatedAt
+                    }
+                  }
+                }
+              }
+            }`,
+			}),
+		});
+
 		const response = await fetch(eventsLink);
 		if (!response.ok) {
 			throw new Error(`GitHub API responded with status ${response.status}`);
@@ -66,24 +113,23 @@ export default async function fetchPinnedProjects(username) {
 			switch (event.type) {
 				case "PullRequestEvent":
 					if (event.payload.action == "opened") {
-                        
 						activity.prDates.push(event.payload.pull_request.created_at);
 					}
 				case "CommitCommentEvent":
 				case "ForkEvent":
 				case "PushEvent":
-					activity.production ++;
+					activity.production++;
 					break;
 				case "CreateEvent":
 				case "DeleteEvent":
 				case "IssuesEvent":
-					activity.documentation ++;
+					activity.documentation++;
 					break;
 				case "IssueCommentEvent":
 				case "MemberEvent":
 				case "PullRequestReviewEvent":
 				case "PullRequestReviewCommentEvent":
-					activity.collaboration ++;
+					activity.collaboration++;
 					break;
 
 				default:
