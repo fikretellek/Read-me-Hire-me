@@ -8,7 +8,7 @@ export default async function fetchPinnedProjects(username) {
 	};
 	const body = JSON.stringify({
 		query: `{
-			user(login: ${username}) {
+			user(login: "${username}") {
 			  pinnedItems(first: 6, types: REPOSITORY) {
 				nodes {
 				  ... on RepositoryInfo {
@@ -35,29 +35,30 @@ export default async function fetchPinnedProjects(username) {
 			throw new Error(`GitHub API responded with status ${response.status}`);
 		}
 
-		const projects = await response.json();
+		const projects_data = await response.json();
 
-		console.log(projects)
-
-		
+		const projects = projects_data.data.user.pinnedItems.nodes;
+		console.log(projects);
 
 		try {
-			const result = await db.query(
-				`WITH user_data AS (
-                    SELECT id AS user_id FROM users WHERE github_username = $1
-                )
-                INSERT INTO activities (production, documentation, collaboration, total, pr_dates, user_id)
-                VALUES ($2, $3, $4, $5, $6, (SELECT user_id FROM user_data));`,
-				[
-					username,
-					activity.production,
-					activity.documentation,
-					activity.collaboration,
-					activity.total,
-					activity.prDates.toString(),
-				]
-			);
-			return { result: result, message: "successfully added to db" };
+			for (const project of projects) {
+				await db.query(
+					`WITH user_data AS (
+					  SELECT id AS user_id FROM users WHERE github_username = $1
+					)
+					INSERT INTO projects (name, description, url, preview_url, user_id)
+					VALUES ($2, $3, $4, $5, (SELECT user_id FROM user_data));`,
+					[
+						username,
+						project.name,
+						project.description,
+						project.url,
+						project.homepageUrl,
+					]
+				);
+			}
+
+			return { message: "successfully added to db" };
 		} catch (error) {
 			return { error: error, message: "Cannot connect to db" };
 		}
