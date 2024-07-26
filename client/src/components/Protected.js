@@ -11,7 +11,7 @@ export const Protected = ({ element: Element, roles }) => {
 	const decodedToken = jwtDecode(token);
 	console.log(decodedToken);
 	if (roles && roles.indexOf(decodedToken.userType) === -1) {
-		return <Navigate to="/unauthorized" />;
+		return <Navigate to="/unauthorised" />;
 	}
 
 	return <Element />;
