@@ -10,7 +10,7 @@ const router = Router();
 
 router.get("/", (_, res) => {
 	logger.debug("Welcoming everyone...");
-	res.json({ message: "Hello, world!" });
+	res.json({ message: "Read me, Hire me!" });
 });
 
 

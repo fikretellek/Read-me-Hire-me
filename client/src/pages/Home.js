@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import "./Home.css";
-import logo from "./logo.svg";
-
+import readme_logo from "../assets/readme_logo.png";
 export function Home() {
 	const [message, setMessage] = useState("Loading...");
 
@@ -27,20 +26,17 @@ export function Home() {
 		<main role="main">
 			<div>
 				<img
-					className="logo"
+					className="main_page_logo"
 					data-qa="logo"
-					src={logo}
-					alt="Just the React logo"
+					src={readme_logo
+					}
+					alt="read me logo"
 				/>
-				<h1 className="message" data-qa="message">
-					{message}
-				</h1>
-				<Link to="/about/this/site">About</Link>
 			</div>
 			<p>
 				<Link to="/signup">Sign Up</Link>
 				<Link to="/signIn">Sign in </Link>
-				<Link to="/update-password">Update Password</Link>
+				{/* <Link to="/update-password">Update Password</Link> */}
 			</p>
 		</main>
 	);

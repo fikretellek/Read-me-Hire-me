@@ -14,10 +14,9 @@ main > div {
     margin-bottom: 20px;
 }
 
-.logo {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 20px;
+.main_page_logo {
+    width: 90%;
+    height: 600px;
 }
 
 .message {
