@@ -70,7 +70,7 @@
 }
 
 .form-container button:hover {
-    background-color: #b4001b; /* Dark Brand Red color */
+    background-color: #4eb400; /* Dark Brand Red color */
 }
 
 /* Message styling */
@@ -90,7 +90,7 @@
 /* General styling for form containers */
 .signUpCard, .updatePasswordForm-container, .signInCard {
     max-width: 400px;
-    margin: 50px auto;
+    margin: 100px auto;
     padding: 20px;
     background-color: #ffffff; /* Clean white background */
     border-radius: 8px; /* Rounded corners */

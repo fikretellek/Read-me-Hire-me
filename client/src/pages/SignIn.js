@@ -40,7 +40,7 @@ const SignIn = () => {
 
 		if (result.success) {
 			localStorage.setItem("token", result.data.user.token);
-			setMessage("Sign in successful!");
+			window.location.replace("/");
 		} else {
 			setMessage(`Error: ${result.message}`);
 		}

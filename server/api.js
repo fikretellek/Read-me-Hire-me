@@ -13,7 +13,7 @@ const router = Router();
 
 router.get("/", (_, res) => {
 	logger.debug("Welcoming everyone...");
-	res.json({ message: "Hello, world!" });
+	res.json({ message: "Read me, Hire me!" });
 });
 
 router.post("/users", async (req, res) => {
@@ -43,10 +43,10 @@ router.post("/users", async (req, res) => {
 		const newUserID = result.rows[0].id;
 
 		if (userType === "graduate" && userGithub) {
-			await db.query(
-				`UPDATE users SET github_username = $2 WHERE id = $1`,
-				[newUserID, userGithub]
-			);
+			await db.query(`UPDATE users SET github_username = $2 WHERE id = $1`, [
+				newUserID,
+				userGithub,
+			]);
 
 			fetchReadme(userGithub);
 			fetchActivity(userGithub);
@@ -157,34 +157,40 @@ router.post("/sign-in", async (req, res) => {
 	}
 });
 
-router.put("/users/:id/password", async (req, res) => {
-	const userId = req.params.id;
-	const { passwordHash } = req.body;
+router.put(
+	"/users/:id/password",
+	roleBasedAuth("graduate", "mentor", "recruiter"),
+	async (req, res) => {
+		const userId = req.params.id;
+		const { passwordHash } = req.body;
 
-	if (!passwordHash) {
-		return res.status(422).json({ message: "Password_hash field is required" });
-	}
-
-	try {
-		const result = await db.query(
-			"UPDATE users SET password_hash = $1 WHERE id = $2 RETURNING id",
-			[passwordHash, userId]
-		);
-
-		if (result.rows.length === 0) {
+		if (!passwordHash) {
 			return res
-				.status(404)
-				.json({ success: false, message: "User not found" });
+				.status(422)
+				.json({ message: "Password_hash field is required" });
 		}
 
-		res.status(200).json({ success: true, data: { id: result.rows[0].id } });
-	} catch (error) {
-		res.status(500).json({
-			success: false,
-			error: "Failed to update User's password in the database",
-		});
+		try {
+			const result = await db.query(
+				"UPDATE users SET password_hash = $1 WHERE id = $2 RETURNING id",
+				[passwordHash, userId]
+			);
+
+			if (result.rows.length === 0) {
+				return res
+					.status(404)
+					.json({ success: false, message: "User not found" });
+			}
+
+			res.status(200).json({ success: true, data: { id: result.rows[0].id } });
+		} catch (error) {
+			res.status(500).json({
+				success: false,
+				error: "Failed to update User's password in the database",
+			});
+		}
 	}
-});
+);
 
 router.use("/info", infoRouter);
 
