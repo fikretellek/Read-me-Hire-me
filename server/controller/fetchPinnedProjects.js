@@ -1,10 +1,9 @@
-
 import db from "../db";
 
 export default async function fetchPinnedProjects(username) {
 	const gitHubGraphqlLink = "https://api.github.com/graphql";
-	const header = {
-		Authorization: process.env.GITHUB_AUTH_KEY,
+	const headers = {
+		Authorization: `Bearer ${process.env.GITHUB_AUTH_KEY}`,
 		"Content-Type": "application/json",
 	};
 	const body = JSON.stringify({
@@ -16,8 +15,8 @@ export default async function fetchPinnedProjects(username) {
 					name
 					description
 					url
-					createdAt
-					updatedAt
+					homepageUrl
+					
 				  }
 				}
 			  }
@@ -26,117 +25,21 @@ export default async function fetchPinnedProjects(username) {
 	});
 
 	try {
-		fetch(gitHubGraphqlLink, {
-			method: "post",
-			headers: {
-				Authorization: key,
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				query: `{
-              user(login: "UserNameHere") {
-                pinnedItems(first: 6, types: REPOSITORY) {
-                  nodes {
-                    ... on RepositoryInfo {
-                      name
-                      description
-                      url
-                      createdAt
-                      updatedAt
-                    }
-                  }
-                }
-              }
-            }`,
-			}),
+		const response = await fetch(gitHubGraphqlLink, {
+			method: "POST",
+			headers: headers,
+			body: body,
 		});
 
-		const response = await fetch(eventsLink);
 		if (!response.ok) {
 			throw new Error(`GitHub API responded with status ${response.status}`);
 		}
 
-		const data = await response.json();
+		const projects = await response.json();
 
-		/* these are github api events
-		CommitCommentEvent
-		CreateEvent
-		DeleteEvent
-		ForkEvent
-		GollumEvent
-		IssueCommentEvent
-		IssuesEvent
-		MemberEvent
-		PublicEvent
-		PullRequestEvent
-		PullRequestReviewEvent
-		PullRequestReviewCommentEvent
-		PullRequestReviewThreadEvent
-		PushEvent
-		ReleaseEvent
-		SponsorshipEvent
-		WatchEvent
+		console.log(projects)
 
-        production
-        --CommitCommentEvent
-        --ForkEvent
-        --PullRequestEvent
-        --PushEvent
-        documentation
-        --CreateEvent
-        --DeleteEvent
-        --IssuesEvent
-        collaboration
-        --IssueCommentEvent
-        --MemberEvent
-        --PullRequestReviewEvent
-		--PullRequestReviewCommentEvent
-
-        undecided
-        --GollumEvent
-        --PublicEvent
-        --PullRequestReviewThreadEvent
-        --ReleaseEvent
-        --SponsorshipEvent
-		--WatchEvent       
-        */
-
-		let activity = {
-			production: 0,
-			documentation: 0,
-			collaboration: 0,
-			total: 0,
-			prDates: [],
-		};
-
-		data.forEach((event) => {
-			switch (event.type) {
-				case "PullRequestEvent":
-					if (event.payload.action == "opened") {
-						activity.prDates.push(event.payload.pull_request.created_at);
-					}
-				case "CommitCommentEvent":
-				case "ForkEvent":
-				case "PushEvent":
-					activity.production++;
-					break;
-				case "CreateEvent":
-				case "DeleteEvent":
-				case "IssuesEvent":
-					activity.documentation++;
-					break;
-				case "IssueCommentEvent":
-				case "MemberEvent":
-				case "PullRequestReviewEvent":
-				case "PullRequestReviewCommentEvent":
-					activity.collaboration++;
-					break;
-
-				default:
-					break;
-			}
-			activity.total++;
-		});
+		
 
 		try {
 			const result = await db.query(

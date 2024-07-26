@@ -16,6 +16,11 @@ router.get("/", (_, res) => {
 	res.json({ message: "Hello, world!" });
 });
 
+router.get("/fetchPinnedProjects", async (_, res) => {
+	const test = await fetchPinnedProjects("RbAvci")
+	res.send(test)
+});
+
 router.post("/users", async (req, res) => {
 	const { username, passwordHash, userType, userGithub } = req.body;
 
