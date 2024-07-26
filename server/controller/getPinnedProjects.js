@@ -19,7 +19,7 @@ export default async function getPinnedProjects(req, res, next) {
 				[user_id]
 			);
 
-			res.status(200).json(projects_data.rows[0]);
+			res.status(200).json({projects : projects_data.rows});
 
 		} catch (error) {
             res.status(500).json({ error: 'Database connection error' });
