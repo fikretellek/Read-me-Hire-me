@@ -23,22 +23,22 @@ router.post("/users", async (req, res) => {
 		return res.status(422).json({ message: "Username field is required" });
 	}
 	if (!passwordHash) {
-		return res.status(422).json({ message: "Password_hash field is required"  });
+		return res.status(422).json({ message: "Password_hash field is required" });
 	}
 	if (!userType) {
 		return res.status(422).json({ message: "User_type field is required" });
 	}
 	if (userType == "graduate" && !userGithub) {
-		return res.status(422).json({ message: "Github_username field is required" });
+		return res
+			.status(422)
+			.json({ message: "Github_username field is required" });
 	}
 
 	try {
 		const result = await db.query(
-			"INSERT INTO users (username, password_hash, user_type, github_username) VALUES ($1, $2, $3, $4) RETURNING id ",
-			[username, passwordHash, userType, userGithub]
+			"INSERT INTO users (username, password_hash, user_type) VALUES ($1, $2, $3) RETURNING id ",
+			[username, passwordHash, userType]
 		);
-
-		
 
 		const newUserID = result.rows[0].id;
 
@@ -48,14 +48,10 @@ router.post("/users", async (req, res) => {
 				[newUserID, userGithub]
 			);
 
-			fetchReadme(userGithub)
-		fetchActivity(userGithub);	
-
+			fetchReadme(userGithub);
+			fetchActivity(userGithub);
 		}
 
-
-		
-		
 		res.status(200).json({ success: true, data: { id: newUserID } });
 	} catch (error) {
 		if (error.code === "23505") {
@@ -190,9 +186,6 @@ router.put("/users/:id/password", async (req, res) => {
 	}
 });
 
-
-router.use("/info", infoRouter)
-
-
+router.use("/info", infoRouter);
 
 export default router;
