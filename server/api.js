@@ -44,7 +44,7 @@ router.post("/users", async (req, res) => {
 
 		if (userType === "graduate" && userGithub) {
 			await db.query(
-				"INSERT INTO portfolios (user_id, github_username) VALUES ($1, $2)",
+				`UPDATE users SET github_username = $2 WHERE id = $1`,
 				[newUserID, userGithub]
 			);
 
