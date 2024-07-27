@@ -1,11 +1,11 @@
 import db from "../db";
 
-export default async function getActivity(req, res, next) {
+export default async function getPinnedProjects(req, res, next) {
 	const user_id = req.params.id;
 
 	try {
 		const user_id_check = await db.query(
-			`SELECT COUNT(*) as count FROM activities WHERE user_id = $1`,
+			`SELECT COUNT(*) as count FROM projects WHERE user_id = $1`,
 			[user_id]
 		);
 
@@ -14,12 +14,12 @@ export default async function getActivity(req, res, next) {
 		}
 
 		try {
-			const activity_data = await db.query(
-				`SELECT user_id, production, documentation, collaboration, total, pr_dates FROM activities WHERE user_id = $1`,
+			const projects_data = await db.query(
+				`SELECT * FROM projects WHERE user_id = $1`,
 				[user_id]
 			);
 
-			res.status(200).json({activity : activity_data.rows[0]});
+			res.status(200).json({projects : projects_data.rows});
 
 		} catch (error) {
             res.status(500).json({ error: 'Database connection error' });
