@@ -71,13 +71,3 @@ npm run dev
 ```
 
 This command starts both the frontend and backend servers and watches for any changes in the source code.
-
-## Contributing
-
-We welcome contributions to enhance the project. Please follow these steps to contribute:
-
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Commit your changes (`git commit -am 'Add new feature'`).
-4. Push to the branch (`git push origin feature-branch`).
-5. Open a pull request.
