@@ -17,8 +17,8 @@ router.get("/", (_, res) => {
 });
 
 router.get("/fetchPinnedProjects", async (_, res) => {
-	const test = await fetchPinnedProjects("RbAvci")
-	res.send(test)
+	const test = await fetchPinnedProjects("RbAvci");
+	res.send(test);
 });
 
 router.post("/users", async (req, res) => {
@@ -157,7 +157,9 @@ router.post("/sign-in", async (req, res) => {
 		);
 
 		user.token = token;
-		res.status(200).json({ success: true, data: { user: user } });
+		res
+			.status(200)
+			.json({ success: true, data: { id: user.id, user: { ...user, token } } });
 	} catch (error) {
 		res.status(500).json({ success: false, error: "Failed to log in" });
 	}
