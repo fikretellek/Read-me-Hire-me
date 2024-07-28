@@ -9,11 +9,10 @@ import SignIn from "./pages/SignIn";
 import UpdatePasswordForm from "./pages/UpdatePasswordForm";
 
 import Profile from "./components/Readme/Profile";
-import { Protected } from "./pages/Protected";
+// import { Protected } from "./pages/Protected";
 
-// import { Protected } from "./components/Protected";
-// import Unauthorised from "./pages/Unauthorised";
-
+import { Protected } from "./components/Protected";
+import Unauthorised from "./pages/Unauthorised";
 
 const App = () => (
 	<>

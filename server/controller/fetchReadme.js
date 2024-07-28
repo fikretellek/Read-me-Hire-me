@@ -12,14 +12,9 @@ export default async function fetchReadme(username) {
 		const data = await response.json();
 		const readme = atob(data.content);
 
-
 		try {
 			const result = await db.query(
 				`WITH user_data AS (
-
-        try {
-            const result = await db.query(
-                `WITH user_data AS (
 
                     SELECT id AS user_id FROM users WHERE github_username = $1
                   )
