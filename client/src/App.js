@@ -7,8 +7,8 @@ import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import UpdatePasswordForm from "./pages/UpdatePasswordForm";
+import Profile from "./pages/Profile";
 import { Protected } from "./pages/Protected";
-
 
 const App = () => (
 	<>
@@ -18,6 +18,7 @@ const App = () => (
 			<Route path="/about/this/site" element={<About />} />
 			<Route path="/signup" element={<SignUp />} />
 			<Route path="/signIn" element={<SignIn />} />
+			<Route path="/profile/:id" element={<Profile />} />
 			{/* <Route path="/unauthorized" element={<Unauthorized />} /> */}
 			{/* <Route path="/grad-dashboard" element={<Protected element={GradDashboard} roles={["graduate", "mentor", "recruiter"]} />} /> */}
 			<Route

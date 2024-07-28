@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./FormStyles.css";
+import { useNavigate } from "react-router-dom";
 import { hashPassword } from "./Util.js";
 
 const authenticateUser = async (username, passwordHash) => {
@@ -31,7 +32,7 @@ const SignIn = () => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [message, setMessage] = useState("");
-
+	const navigate = useNavigate();
 	const handleSignIn = async (event) => {
 		event.preventDefault();
 		const passwordHash = await hashPassword(password);
@@ -40,7 +41,7 @@ const SignIn = () => {
 
 		if (result.success) {
 			localStorage.setItem("token", result.data.user.token);
-			window.location.replace("/");
+			navigate(`/profile/${result.data.id}`);
 		} else {
 			setMessage(`Error: ${result.message}`);
 		}
