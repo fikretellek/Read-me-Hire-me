@@ -32,7 +32,6 @@ const SignUp = () => {
 
 		if (response.ok) {
 			setMessage(`User created with ID: ${result.data.id}`);
-			window.location.replace("/");
 		} else if (response.status === 409) {
 			setMessage("Error: Username already exists");
 		} else {

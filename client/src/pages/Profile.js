@@ -9,8 +9,13 @@ const Profile = () => {
 
 	useEffect(() => {
 		const fetchUser = async () => {
+			const token = localStorage.getItem("token");
 			try {
-				const response = await fetch(`/api/users/${id}`);
+				const response = await fetch(`/api/users/${id}`, {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				});
 				if (!response.ok) {
 					throw new Error("User not found");
 				}
@@ -22,8 +27,13 @@ const Profile = () => {
 		};
 
 		const fetchReadme = async () => {
+			const token = localStorage.getItem("token");
 			try {
-				const response = await fetch(`/info/${id}/readme`);
+				const response = await fetch(`/api/info/${id}/readme`, {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				});
 				if (!response.ok) {
 					throw new Error("README not found");
 				}
