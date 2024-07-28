@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import UpdatePasswordForm from "./pages/UpdatePasswordForm";
-import Profile from "./pages/Profile";
+import Profile from "./components/Readme/Profile";
 import { Protected } from "./pages/Protected";
 
 const App = () => (
