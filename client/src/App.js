@@ -7,8 +7,8 @@ import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import UpdatePasswordForm from "./pages/UpdatePasswordForm";
-import { Protected } from "./pages/Protected";
-
+import { Protected } from "./components/Protected";
+import Unauthorised from "./pages/Unauthorised";
 
 const App = () => (
 	<>
@@ -18,8 +18,7 @@ const App = () => (
 			<Route path="/about/this/site" element={<About />} />
 			<Route path="/signup" element={<SignUp />} />
 			<Route path="/signIn" element={<SignIn />} />
-			{/* <Route path="/unauthorized" element={<Unauthorized />} /> */}
-			{/* <Route path="/grad-dashboard" element={<Protected element={GradDashboard} roles={["graduate", "mentor", "recruiter"]} />} /> */}
+			<Route path="/unauthorised" element={<Unauthorised />} />
 			<Route
 				path="/update-password"
 				element={

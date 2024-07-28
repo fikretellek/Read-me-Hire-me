@@ -48,7 +48,7 @@ router.post("/users", async (req, res) => {
 		const newUserID = result.rows[0].id;
 
 		if (userType === "graduate" && userGithub) {
-			await db.query(`UPDATE users SET github_username = $2 WHERE id = $1`, [
+			await db.query("UPDATE users SET github_username = $2 WHERE id = $1", [
 				newUserID,
 				userGithub,
 			]);
@@ -64,6 +64,7 @@ router.post("/users", async (req, res) => {
 				.status(409)
 				.json({ success: false, error: "Username already exists" });
 		}
+		console.log(error);
 		res.status(500).json({
 			success: false,
 			error: "Failed to create a new User into database",
