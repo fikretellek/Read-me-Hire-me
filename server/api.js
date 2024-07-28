@@ -7,6 +7,7 @@ import config from "./utils/config";
 import { roleBasedAuth } from "./utils/middleware";
 import fetchActivity from "./controller/fetchActivity";
 import fetchReadme from "./controller/fetchReadme";
+import fetchPinnedProjects from "./controller/fetchPinnedProjects";
 import infoRouter from "./routes/getInfoRouter";
 
 const router = Router();
@@ -16,10 +17,10 @@ router.get("/", (_, res) => {
 	res.json({ message: "Read me, Hire me!" });
 });
 
-router.get("/fetchPinnedProjects", async (_, res) => {
-	const test = await fetchPinnedProjects("RbAvci");
-	res.send(test);
-});
+// router.get("/fetchPinnedProjects", async (_, res) => {
+// // 	const test = await fetchPinnedProjects("RbAvci");
+// // 	res.send(test);
+// // });
 
 router.post("/users", async (req, res) => {
 	const { username, passwordHash, userType, userGithub } = req.body;
@@ -54,6 +55,7 @@ router.post("/users", async (req, res) => {
 			]);
 
 			fetchReadme(userGithub);
+			fetchPinnedProjects(userGithub);
 			fetchActivity(userGithub);
 		}
 

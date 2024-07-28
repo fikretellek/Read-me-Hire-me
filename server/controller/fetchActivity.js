@@ -1,7 +1,7 @@
 import db from "../db";
 
 export default async function fetchActivity(username) {
-	const eventsLink = `https://api.github.com/users/${username}/events`;
+	const eventsLink = async`https://api.github.com/users/${username}/events`;
 
 	try {
 		const response = await fetch(eventsLink);
@@ -66,24 +66,23 @@ export default async function fetchActivity(username) {
 			switch (event.type) {
 				case "PullRequestEvent":
 					if (event.payload.action == "opened") {
-                        
 						activity.prDates.push(event.payload.pull_request.created_at);
 					}
 				case "CommitCommentEvent":
 				case "ForkEvent":
 				case "PushEvent":
-					activity.production ++;
+					activity.production++;
 					break;
 				case "CreateEvent":
 				case "DeleteEvent":
 				case "IssuesEvent":
-					activity.documentation ++;
+					activity.documentation++;
 					break;
 				case "IssueCommentEvent":
 				case "MemberEvent":
 				case "PullRequestReviewEvent":
 				case "PullRequestReviewCommentEvent":
-					activity.collaboration ++;
+					activity.collaboration++;
 					break;
 
 				default:

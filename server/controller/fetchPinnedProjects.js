@@ -36,7 +36,7 @@ export default async function fetchPinnedProjects(username) {
 		}
 
 		const projects_data = await response.json();
-
+		console.log(JSON.stringify(projects_data, null, 2));
 		const projects = projects_data.data.user.pinnedItems.nodes;
 		console.log(projects);
 

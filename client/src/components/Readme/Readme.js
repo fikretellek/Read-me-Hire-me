@@ -1,36 +1,15 @@
+// Readme.js
 import React, { useEffect, useState } from "react";
-import "./Profile.css";
-import { useParams } from "react-router-dom";
 
-const Profile = () => {
-	const { id } = useParams();
-	const [user, setUser] = useState(null);
+const Readme = ({ userId }) => {
 	const [readme, setReadme] = useState(null);
 	const [error, setError] = useState(null);
 
 	useEffect(() => {
-		const fetchUser = async () => {
-			const token = localStorage.getItem("token");
-			try {
-				const response = await fetch(`/api/users/${id}`, {
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				});
-				if (!response.ok) {
-					throw new Error("User not found");
-				}
-				const result = await response.json();
-				setUser(result.data);
-			} catch (error) {
-				setError(error.message);
-			}
-		};
-
 		const fetchReadme = async () => {
 			const token = localStorage.getItem("token");
 			try {
-				const response = await fetch(`/api/info/${id}/readme`, {
+				const response = await fetch(`/api/info/${userId}/readme`, {
 					headers: {
 						Authorization: `Bearer ${token}`,
 					},
@@ -45,15 +24,14 @@ const Profile = () => {
 			}
 		};
 
-		fetchUser();
 		fetchReadme();
-	}, [id]);
+	}, [userId]);
 
 	if (error) {
 		return <div>Error: {error}</div>;
 	}
 
-	if (!user || !readme) {
+	if (!readme) {
 		return <div>Loading...</div>;
 	}
 
@@ -93,58 +71,40 @@ const Profile = () => {
 	const { allowedLinks, cleanedContent } = extractAndFilterLinks(readme);
 
 	return (
-		<div className="container">
-			<header>
-				<h1>Welcome {user.username}</h1>
-				{user.github_username && (
-					<p>
-						Github:{" "}
-						<a
-							href={`https://github.com/${user.github_username}`}
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							{user.github_username}
-						</a>
-					</p>
+		<div className="readme-container">
+			<h2>README</h2>
+			<p>{cleanedContent}</p>
+			<nav className="navig">
+				{allowedLinks.cv && (
+					<a
+						href={allowedLinks.cv.url}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						{allowedLinks.cv.text}
+					</a>
 				)}
-			</header>
-			<div>
-				<h2>README</h2>
-
-				<p>{cleanedContent}</p>
-				<nav className="navig">
-					{allowedLinks.cv && (
-						<a
-							href={allowedLinks.cv.url}
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							{allowedLinks.cv.text}
-						</a>
-					)}
-					{allowedLinks.linkedin && (
-						<a
-							href={allowedLinks.linkedin.url}
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							{allowedLinks.linkedin.text}
-						</a>
-					)}
-					{allowedLinks.personalStatement && (
-						<a
-							href={allowedLinks.personalStatement.url}
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							{allowedLinks.personalStatement.text}
-						</a>
-					)}
-				</nav>
-			</div>
+				{allowedLinks.linkedin && (
+					<a
+						href={allowedLinks.linkedin.url}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						{allowedLinks.linkedin.text}
+					</a>
+				)}
+				{allowedLinks.personalStatement && (
+					<a
+						href={allowedLinks.personalStatement.url}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						{allowedLinks.personalStatement.text}
+					</a>
+				)}
+			</nav>
 		</div>
 	);
 };
 
-export default Profile;
+export default Readme;

@@ -8,7 +8,7 @@ import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import UpdatePasswordForm from "./pages/UpdatePasswordForm";
 
-import Profile from "./components/Readme/Profile";
+import Profile from "./components/Profile/Profile";
 // import { Protected } from "./pages/Protected";
 
 import { Protected } from "./components/Protected";
