@@ -1,7 +1,7 @@
 import db from "../db";
 
 export default async function fetchActivity(username) {
-	const eventsLink = async`https://api.github.com/users/${username}/events`;
+	const eventsLink = `https://api.github.com/users/${username}/events`;
 
 	try {
 		const response = await fetch(eventsLink);

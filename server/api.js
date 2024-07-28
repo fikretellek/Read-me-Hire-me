@@ -8,7 +8,6 @@ import { roleBasedAuth } from "./utils/middleware";
 import fetchActivity from "./controller/fetchActivity";
 import fetchReadme from "./controller/fetchReadme";
 import fetchPinnedProjects from "./controller/fetchPinnedProjects";
-import infoRouter from "./routes/getInfoRouter";
 
 const router = Router();
 
@@ -201,7 +200,5 @@ router.put(
 		}
 	}
 );
-
-router.use("/info", infoRouter);
 
 export default router;

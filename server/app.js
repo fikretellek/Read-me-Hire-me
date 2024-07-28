@@ -1,5 +1,5 @@
 import express from "express";
-
+import infoRouter from "./routes/getInfoRouter";
 import apiRouter from "./api";
 import config from "./utils/config";
 import {
@@ -24,6 +24,7 @@ if (config.production) {
 }
 
 app.use(apiRoot, apiRouter);
+app.use("/info", infoRouter);
 app.use("/health", (_, res) => res.sendStatus(200));
 app.use(clientRouter(apiRoot));
 
