@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import "./Profile.css";
 import Readme from "../Readme/Readme";
 import useFetchUser from "../hooks/useFetchUser";
+import Project from "../Project/Project";
 
 const Profile = () => {
 	const { id } = useParams();
@@ -34,6 +35,8 @@ const Profile = () => {
 				)}
 			</header>
 			<Readme userId={id} />
+
+			<Project userId={id} />
 		</div>
 	);
 };
