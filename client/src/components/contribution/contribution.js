@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./contribution.css";
 
 const Contribution = ({ userId }) => {
-	const [activity, setActivity] = useState([]);
+	const [activities, setActivity] = useState([]);
 	const [error, setError] = useState(null);
 
 	useEffect(() => {
@@ -18,7 +18,8 @@ const Contribution = ({ userId }) => {
 					throw new Error("Activity not found");
 				}
 				const result = await response.json();
-				setActivity(result.data);
+
+				setActivity(result.activity);
 			} catch (error) {
 				setError(error.message);
 			}
@@ -26,17 +27,18 @@ const Contribution = ({ userId }) => {
 
 		fetchContribution();
 	}, [userId]);
-
+	console.log(activities);
 	if (error) {
 		return <div className="Activity-container">Error: {error}</div>;
 	}
 
-	if (!activity) {
+	if (Object.keys(activities).length === 0) {
 		return <div className="Activity-container">Loading...</div>;
 	}
 
 	return (
 		<div className="activity-table">
+			<h1>Contributions</h1>
 			<table>
 				<thead>
 					<tr>
@@ -48,15 +50,13 @@ const Contribution = ({ userId }) => {
 					</tr>
 				</thead>
 				<tbody>
-					{activity.map((act, index) => (
-						<tr key={index}>
-							<td>{act.production}</td>
-							<td>{act.documentation}</td>
-							<td>{act.collaboration}</td>
-							<td>{act.total}</td>
-							<td>{act.prDates}</td>
-						</tr>
-					))}
+					<tr>
+						<td>{activities.production}</td>
+						<td>{activities.documentation}</td>
+						<td>{activities.collaboration}</td>
+						<td>{activities.total}</td>
+						<td>{activities.pr_dates}</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
