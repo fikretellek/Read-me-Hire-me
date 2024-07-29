@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Project.css"; // Ensure you create and import the CSS file
+import "./Project.css";
 
 const Project = ({ userId }) => {
 	const [projects, setProjects] = useState([]);
