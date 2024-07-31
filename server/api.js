@@ -55,7 +55,9 @@ router.post("/users", async (req, res) => {
 
 			await fetchReadme(userGithub);
 			await fetchActivity(userGithub);
+
 			await FetchSkills(userGithub);
+
 			await fetchPinnedProjects(userGithub);
 		}
 

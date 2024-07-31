@@ -19,11 +19,10 @@ export default async function getActivity(req, res, next) {
 				[user_id]
 			);
 
-			res.status(200).json({activity : activity_data.rows[0]});
-
+			res.status(200).json({ activity: activity_data.rows[0] });
 		} catch (error) {
-            res.status(500).json({ error: 'Database connection error' });
-        }
+			res.status(500).json({ error: "Database connection error" });
+		}
 	} catch (error) {
 		res.status(500).json({ error: "Internal server error" });
 	}

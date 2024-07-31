@@ -32,27 +32,30 @@ const Project = ({ userId }) => {
 	}
 
 	if (!projects.length) {
-		return <div className="project-container">Loading...</div>;
+		return <div className="project-container">There is no Activity</div>;
 	}
 
 	return (
-		<div className="projects-grid">
-			{projects.map((project) => (
-				<div key={project.id} className="project-card">
-					<h3>{project.name}</h3>
-					<p>{project.description}</p>
-					<a href={project.url} target="_blank" rel="noopener noreferrer">
-						Project URL
-					</a>
-					<a
-						href={project.homepageUrl}
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						Homepage
-					</a>
-				</div>
-			))}
+		<div>
+			<h1>Pinned Projects</h1>
+			<div className="projects-grid">
+				{projects.map((project) => (
+					<div key={project.id} className="project-card">
+						<h3>{project.name}</h3>
+						<p>{project.description}</p>
+						<a href={project.url} target="_blank" rel="noopener noreferrer">
+							Project URL
+						</a>
+						<a
+							href={project.homepageUrl}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Homepage
+						</a>
+					</div>
+				))}
+			</div>
 		</div>
 	);
 };
