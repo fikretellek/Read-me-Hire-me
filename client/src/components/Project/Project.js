@@ -32,7 +32,7 @@ const Project = ({ userId }) => {
 	}
 
 	if (!projects.length) {
-		return <div className="project-container">Loading...</div>;
+		return <div className="project-container">There is no Activity</div>;
 	}
 
 	return (
