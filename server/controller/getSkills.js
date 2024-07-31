@@ -14,7 +14,7 @@ export default async function getSkills(req, res) {
 				`SELECT skills FROM profiles WHERE user_id = $1`,
 				[user_id]
 			);
-			res.status(200).json(readme_data.rows[0]);
+			res.status(200).json(skills_data.rows[0]);
 		} catch (error) {
 			res.status(500).json({ error: "Database connection error" });
 		}
