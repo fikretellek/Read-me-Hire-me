@@ -33,7 +33,7 @@ const Contribution = ({ userId }) => {
 	}
 
 	if (Object.keys(activities).length === 0) {
-		return <div className="Activity-container">Loading...</div>;
+		return <div className="Activity-container">There is no Activity</div>;
 	}
 
 	return (
