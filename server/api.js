@@ -8,6 +8,7 @@ import { roleBasedAuth } from "./utils/middleware";
 import fetchActivity from "./controller/fetchActivity";
 import fetchReadme from "./controller/fetchReadme";
 import infoRouter from "./routes/getInfoRouter";
+import FetchSkills from "./controller/fetchSkills";
 const router = Router();
 
 router.get("/", (_, res) => {
@@ -54,7 +55,8 @@ router.post("/users", async (req, res) => {
 
 			await fetchReadme(userGithub);
 			await fetchActivity(userGithub);
-			// await fetchPinnedProjects(userGithub);
+			await FetchSkills(userGithub);
+			await fetchPinnedProjects(userGithub);
 		}
 
 		res.status(200).json({ success: true, data: { id: newUserID } });
