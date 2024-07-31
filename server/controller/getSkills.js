@@ -3,7 +3,7 @@ export default async function getSkills(req, res) {
 	const user_id = req.params.id;
 	try {
 		const user_id_check = await db.query(
-			`SELECT COUNT(*) as count FROM Profiles where user_id = $1`,
+			`SELECT COUNT(*) as count FROM profiles where user_id = $1`,
 			[user_id]
 		);
 		if (!user_id_check.row[0].count == 0) {
@@ -11,7 +11,7 @@ export default async function getSkills(req, res) {
 		}
 		try {
 			const skills_data = db.query(
-				`SELECT skills FROM Profiles WHERE user_id = $1`,
+				`SELECT skills FROM profiles WHERE user_id = $1`,
 				[user_id]
 			);
 			res.status(200).json(readme_data.rows[0]);
