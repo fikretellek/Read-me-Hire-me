@@ -13,13 +13,19 @@ body {
 	justify-content: center;
 	padding: 20px;
 	position: relative;
-	height: 100vh;
-	/* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQa7CEKUWHjEgzG831vXz1xtIVBmNrGH9vNg&s"); */
-
+	height: 90vh;
+	margin: 20px;
 	background-image: url("https://cdni.iconscout.com/illustration/premium/thumb/cute-panda-working-on-laptop-illustration-download-in-svg-png-gif-file-formats--business-illustrations-3535311.png?f=webp");
-	background-size: contain;
+	background-size: 35% 60%;
 	background-position: right center;
 	background-repeat: no-repeat;
+}
+
+.cyf-img {
+	width: 15%;
+	position: relative;
+	left: 97%;
+	top: 25%;
 }
 
 .background-overlay {
@@ -34,14 +40,14 @@ body {
 
 .front-container h1 {
 	margin-top: 10%;
-	font-size: 2.5rem;
+	font-size: 3rem;
 	color: #333333;
-	margin-bottom: 20px;
-	margin-left: 28%;
+	margin-left: 24%;
 	font-weight: 700;
 }
 
 .front-content {
+	padding-top: 0;
 	padding: 20px;
 	width: 100%;
 	max-width: 800px;
@@ -56,6 +62,7 @@ body {
 	color: #333333;
 	margin-bottom: 35px;
 	margin-left: 10%;
+	margin-top: -20px;
 }
 
 .front-content ul {
@@ -74,20 +81,22 @@ body {
 	margin-top: 25px;
 
 	display: block;
-	width: 100%;
-	padding: 13px;
+	margin-left: 25%;
+	padding: 20px;
 	font-size: 1.25rem;
 	color: #fff;
-	background-color: #4a90e2;
+	background-color: #304ffe;
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
 	margin-bottom: 30px;
 	transition: background-color 0.3s ease;
+	border-radius: 2;
+	font-weight: bold;
 }
 
 .front-button:hover {
-	background-color: #357abd;
+	background-color: #0026ca;
 }
 
 .front-content p {
