@@ -4,6 +4,7 @@ import "./Profile.css";
 import Readme from "../Readme/Readme";
 import useFetchUser from "../hooks/useFetchUser";
 import Project from "../Project/Project";
+import Contribution from "../contribution/contribution";
 
 const Profile = () => {
 	const { id } = useParams();
@@ -37,6 +38,7 @@ const Profile = () => {
 			<Readme userId={id} />
 
 			<Project userId={id} />
+			<Contribution userId={id} />
 		</div>
 	);
 };
