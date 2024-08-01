@@ -1,13 +1,20 @@
 .profile-container {
 	background-color: #e3e3e3;
 	display: grid;
-	grid-template-columns: auto auto;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
 	grid-template-areas:
 		"myAv readme"
-		"myAv con"
-		"mypr mypr";
+		"myAv mypr"
+		"myAv"
+		"con con";
 	grid-gap: 10px;
 	padding: 10px;
+	width: 100%;
+	height: 100vh; /* Ensure the container has height */
+	box-sizing: border-box;
+	position: relative;
+	top: 100px;
 }
 
 .item1 {
