@@ -2,7 +2,7 @@ body {
 	margin: 0;
 	padding: 0;
 	font-family: "Arial", sans-serif;
-	background-color: #f9f9f9;
+
 	color: #333;
 }
 
@@ -10,30 +10,59 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: center;
 	padding: 20px;
+	position: relative;
+	height: 90vh;
+	margin: 20px;
+	background-image: url("https://cdni.iconscout.com/illustration/premium/thumb/cute-panda-working-on-laptop-illustration-download-in-svg-png-gif-file-formats--business-illustrations-3535311.png?f=webp");
+	background-size: 35% 60%;
+	background-position: right center;
+	background-repeat: no-repeat;
+}
+
+.cyf-img {
+	width: 15%;
+	position: relative;
+	left: 97%;
+	top: 25%;
+}
+
+.background-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 70%;
+	height: 100%;
+	background: linear-gradient(to right, #dedede 70%, transparent 100%);
+	z-index: 1;
 }
 
 .front-container h1 {
-	font-size: 2.5rem;
-	color: #4a90e2;
-	margin-bottom: 20px;
-	text-align: center;
+	margin-top: 10%;
+	font-size: 3rem;
+	color: #333333;
+	margin-left: 24%;
+	font-weight: 700;
 }
 
 .front-content {
-	background: #fff;
-	border-radius: 10px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	padding-top: 0;
 	padding: 20px;
 	width: 100%;
-	max-width: 600px;
+	max-width: 800px;
 	text-align: left;
+	margin-left: 10%;
 }
 
 .front-content h2 {
 	color: #4a90e2;
 	font-size: 1.75rem;
-	margin-bottom: 15px;
+	font-size: 1.95em;
+	color: #333333;
+	margin-bottom: 35px;
+	margin-left: 10%;
+	margin-top: -20px;
 }
 
 .front-content ul {
@@ -43,32 +72,36 @@ body {
 }
 
 .front-content li {
-	font-size: 1rem;
-	margin-bottom: 10px;
+	font-size: 1.5rem;
+	margin-bottom: 35px;
 	color: #555;
 }
 
 .front-button {
+	margin-top: 25px;
+
 	display: block;
-	width: 100%;
-	padding: 10px;
+	margin-left: 25%;
+	padding: 20px;
 	font-size: 1.25rem;
 	color: #fff;
-	background-color: #4a90e2;
+	background-color: #304ffe;
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 	transition: background-color 0.3s ease;
+	border-radius: 2;
+	font-weight: bold;
 }
 
 .front-button:hover {
-	background-color: #357abd;
+	background-color: #0026ca;
 }
 
 .front-content p {
 	font-size: 0.875rem;
 	color: #777;
-	margin-bottom: 10px;
+	margin-bottom: 25px;
 	text-align: center;
 }
