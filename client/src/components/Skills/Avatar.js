@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./avatar.css";
+import Skill from "./Skill";
 
 const Avatar = ({ userId, user }) => {
 	const [avatar, setAvatar] = useState(null);
@@ -45,19 +46,10 @@ const Avatar = ({ userId, user }) => {
 					target="_blank"
 					rel="noopener noreferrer"
 				>
-					<h2>{user.github_username}</h2>
+					<h1>{user.github_username}</h1>
 				</a>
 			)}
-			<ul className="skill_list">
-				<li>skill 1</li>
-				<li>skill 2</li>
-				<li>skill 3</li>
-				<li>skill 4</li>
-				<li>skill 5</li>
-				<li>skill 6</li>
-				<li>skill 7</li>
-				<li>skill 8</li>
-			</ul>
+			<Skill userId={userId} user={user} />
 		</div>
 	);
 };

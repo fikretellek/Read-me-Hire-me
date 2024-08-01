@@ -8,6 +8,7 @@
 	width: 100%;
 	height: 100%;
 	box-sizing: border-box;
+	overflow: hidden;
 }
 
 .readme-container h2 {
@@ -21,6 +22,7 @@
 	line-height: 1.6;
 	color: #555;
 	margin-bottom: 20px;
+	flex: 1;
 }
 
 .navig {
@@ -28,12 +30,15 @@
 	gap: 12px;
 	flex-wrap: wrap;
 	margin-top: 20px;
+	justify-content: flex-start;
+	margin-bottom: 30px;
 }
 
 .navig a {
+	flex: 1;
 	text-align: center;
-	padding: 10px 15px;
-	font-size: 14px;
+	padding: 17px 15px;
+	font-size: 18px;
 	color: #fff;
 	background-color: #4a90e2;
 	border-radius: 5px;
@@ -47,4 +52,10 @@
 
 .navig a:hover {
 	background-color: #357abd;
+}
+
+.readme-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
