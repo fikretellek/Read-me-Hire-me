@@ -54,7 +54,7 @@ const Readme = ({ userId }) => {
 		cleanedContent = cleanedContent
 			.replace(/https?:\/\/[^\s)]+/gi, "")
 			.replace(/\[.*?\]\((https?:\/\/[^\s)]+)\)/gi, "")
-			.replace(/(?:^|\s)[-•]\s.*(?=\n|\r|$)/g, "")
+			.replace(/(?:^|\s)#\w+/g, "")
 			.replace(/\s\s+/g, " ")
 			.trim();
 
@@ -65,7 +65,7 @@ const Readme = ({ userId }) => {
 
 	return (
 		<div className="readme-container">
-			<h2>README</h2>
+			<h2>Read me</h2>
 			<p>{cleanedContent}</p>
 			<nav className="navig">
 				{allowedLinks.cv && (
@@ -74,7 +74,7 @@ const Readme = ({ userId }) => {
 						target="_blank"
 						rel="noopener noreferrer"
 					>
-						{allowedLinks.cv.text}
+						Cv
 					</a>
 				)}
 				{allowedLinks.linkedin && (
@@ -83,7 +83,7 @@ const Readme = ({ userId }) => {
 						target="_blank"
 						rel="noopener noreferrer"
 					>
-						{allowedLinks.linkedin.text}
+						LinkedIn
 					</a>
 				)}
 				{allowedLinks.personalStatement && (
@@ -92,7 +92,7 @@ const Readme = ({ userId }) => {
 						target="_blank"
 						rel="noopener noreferrer"
 					>
-						{allowedLinks.personalStatement.text}
+						Personal Statement
 					</a>
 				)}
 			</nav>

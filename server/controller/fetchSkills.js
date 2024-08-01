@@ -11,16 +11,17 @@ export default async function FetchSkills(username) {
 		}
 		const responseData = await fetchResponse.json();
 		const skills = responseData.bio;
-		console.log(skills);
+		const avatar = responseData.avatar_url;
+
 		try {
 			const result = await db.query(
 				`WITH user_data AS (
-					SELECT id AS user_id FROM users WHERE github_username = $1
-				)
-				INSERT INTO profiles (skills, user_id)
-				SELECT $2, user_id FROM user_data
-				RETURNING *;`,
-				[username, skills]
+                SELECT id AS user_id FROM users WHERE github_username = $1
+            )
+            INSERT INTO profiles (skills, avatar, user_id)
+            SELECT $2, $3, user_id FROM user_data
+            RETURNING *;`,
+				[username, skills, avatar]
 			);
 			return { result: result.rows, message: "Successfully added to db" };
 		} catch (dbError) {

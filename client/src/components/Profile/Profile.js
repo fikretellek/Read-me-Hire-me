@@ -4,7 +4,8 @@ import "./Profile.css";
 import Readme from "../Readme/Readme";
 import useFetchUser from "../hooks/useFetchUser";
 import Project from "../Project/Project";
-import Contribution from "../contribution/contribution";
+import Contribution from "../Contribution/Contribution";
+import Avatar from "../Skills/Avatar";
 
 const Profile = () => {
 	const { id } = useParams();
@@ -20,25 +21,10 @@ const Profile = () => {
 
 	return (
 		<div className="profile-container">
-			<header>
-				<h1>Welcome {user.username}</h1>
-				{user.github_username && (
-					<p>
-						Github:{" "}
-						<a
-							href={`https://github.com/${user.github_username}`}
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							{user.github_username}
-						</a>
-					</p>
-				)}
-			</header>
-			<Readme userId={id} />
-
-			<Project userId={id} />
-			<Contribution userId={id} />
+			<Avatar userId={id} user={user} className="item1" />
+			<Readme userId={id} user={user} className="item2" />
+			<Project userId={id} className="item3" />
+			<Contribution userId={id} className="item4" />
 		</div>
 	);
 };
