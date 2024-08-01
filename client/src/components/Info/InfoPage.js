@@ -43,8 +43,8 @@ const InfoPage = () => {
 							Your GitHub README should include a link to your LinkedIn profile,
 							your CV, and a Codewars .
 						</li>
-						<li>You must make at least 10 contributions within a month.</li>
-						<li>Include your skills in your GitHub profile.</li>
+						<li>You must open at least 10 Pull requests within a month.</li>
+						<li>Include at least 5 skills in your GitHub profile.</li>
 						<li>
 							The graph is calculated based on the criteria mentioned above. You
 							will lose points if you fail to meet any of these requirements.
