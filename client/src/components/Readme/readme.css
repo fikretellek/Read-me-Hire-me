@@ -1,12 +1,15 @@
 .readme-container {
-	max-width: 800px;
-	margin: 20px auto;
+	position: relative;
+	top: 130px;
+	border: none;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	border-radius: 20px;
 	padding: 20px;
+	height: 40%;
 	background-color: white;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	border-radius: 8px;
+	width: 110%;
 	font-family: Arial, Helvetica, sans-serif;
-	background-color: #f4f4f4;
+	margin-left: -25%;
 }
 
 .readme-container h2 {
@@ -25,23 +28,28 @@
 .navig {
 	display: flex;
 	gap: 12px;
-	margin-bottom: 20px;
+
+	margin-top: 7%;
 }
 
 .navig a {
-	text-decoration: none;
+	flex: 1;
+	text-align: center;
 	padding: 10px 15px;
 	font-size: 16px;
-	background-color: #ee4434;
-	color: white;
+	color: #fff;
+	background-color: #4a90e2;
 	border-radius: 5px;
 	transition: background-color 0.3s ease;
 	line-height: 40px;
+	font-family: Arial, Helvetica, sans-serif;
 	font-weight: bold;
-	display: inline-block;
-	text-align: center;
+	border: none;
+	text-decoration: none;
+	cursor: pointer;
+	box-sizing: border-box; /* Ensures padding and border are included in width */
 }
 
 .navig a:hover {
-	background-color: #d32f2f;
+	background-color: #357abd;
 }

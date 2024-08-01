@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Project.css";
+import "./project.css";
 
 const Project = ({ userId }) => {
 	const [projects, setProjects] = useState([]);
@@ -28,17 +28,17 @@ const Project = ({ userId }) => {
 	}, [userId]);
 
 	if (error) {
-		return <div className="project-container">Error: {error}</div>;
+		return <div>Error: {error}</div>;
 	}
 
 	if (!projects.length) {
-		return <div className="project-container">There is no Activity</div>;
+		return <div>no project</div>;
 	}
 
 	return (
-		<div>
+		<div className="projects-container">
 			<h1>Pinned Projects</h1>
-			<div className="projects-grid">
+			<div className="projects-row">
 				{projects.map((project) => (
 					<div key={project.id} className="project-card">
 						<h3>{project.name}</h3>
