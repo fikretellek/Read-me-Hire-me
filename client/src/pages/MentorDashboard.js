@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./MentorDashboard.css";
 import GradCard from "../components/GradsCards/GradCard";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const MentorDashboard = () => {
 	const [grads, setGrads] = useState([]);
@@ -35,17 +36,23 @@ const MentorDashboard = () => {
 			</header>
 
 			<section id="filter-search">
-				<input
-					type="text"
-					id="search"
-					placeholder="Search by name & skill..."
-				/>
+				<div className="search-container">
+					<i className="fas fa-search search-icon"></i>
+					<input
+						type="text"
+						id="search"
+						placeholder="Search by name & skill..."
+					/>
+				</div>
 				<input type="text" id="skill-filter" placeholder="Filter by skill..." />
-				<select id="sort-order">
-					<option value="">Sort by activity score</option>
-					<option value="asc">Ascending</option>
-					<option value="desc">Descending</option>
-				</select>
+				<div className="sort-select-container">
+					<select id="sort-order">
+						<option value="">Sort by activity score</option>
+						<option value="asc">Ascending</option>
+						<option value="desc">Descending</option>
+					</select>
+				</div>
+				<button id="show-all-grads">Show All Grads</button>
 			</section>
 
 			<section id="grads-cards">

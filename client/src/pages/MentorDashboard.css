@@ -10,13 +10,12 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    margin-top: 75px
-   ;
+    margin-top: 75px;
 }
 
 .mentor-dashboard header h1 {
     font-family: "Lato", sans-serif;
-  font-weight: 300;
+    font-weight: 300;
     color:  #333333; 
     text-decoration: none;
 }
@@ -27,9 +26,7 @@
     color:  #333333; 
     font-size: 16px;
     font-family: "Lato", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-
+    font-weight: 400;
 }
 
 .header-links a:hover {
@@ -41,10 +38,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 3rem;
+    gap: 10px;
     padding: 1rem;
     border-radius: 1rem;
     box-shadow: 0 5px 20px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
 }
 
 #filter-search input,
@@ -56,6 +54,7 @@
     border: 1px solid #A9A9A9; 
     border-radius: 4px;
     box-sizing: border-box;
+    padding-left: 50px;
 }
 
 #filter-search input:focus,
@@ -79,7 +78,6 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     width: 220px;
-    text-decoration: none;
     color: #333333; 
     transition: box-shadow 0.3s ease; 
 }
@@ -88,7 +86,8 @@
     border-radius: 50%;
     width: 100px;
     height: 100px;
-    margin-bottom: 10px; }
+    margin-bottom: 10px; 
+}
 
 .grad-card h3 {
     margin: 10px 0;
@@ -102,4 +101,35 @@
 
 .grad-card:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+}
+
+#show-all-grads {
+    padding: 10px 15px;
+    background-color: #EE4434; 
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#show-all-grads:hover {
+    background-color: #d32f2f; 
+}
+
+.search-container {
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #888888; 
+    pointer-events: none;
+}
+
+#search {
+    padding-left: 30px;
 }
