@@ -37,18 +37,17 @@ const InfoPage = () => {
 					<h2>How to Stay on the Top Active List</h2>
 					<ul>
 						<li>
-							Ensure at least three projects are pinned on your GitHub profile.
+							Ensure at least four projects are pinned on your GitHub profile.
 						</li>
 						<li>
 							Your GitHub README should include a link to your LinkedIn profile,
-							your CV, and a personal statement.
+							your CV, and a Codewars .
 						</li>
 						<li>You must make at least 10 contributions within a month.</li>
 						<li>Include your skills in your GitHub profile.</li>
 						<li>
-							The heatmap is calculated based on the criteria mentioned above.
-							You will lose points if you fail to meet any of these
-							requirements.
+							The graph is calculated based on the criteria mentioned above. You
+							will lose points if you fail to meet any of these requirements.
 						</li>
 					</ul>
 					<button className="front-button" onClick={handleButtonClick}>
