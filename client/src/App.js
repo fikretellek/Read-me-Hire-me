@@ -9,7 +9,7 @@ import SignIn from "./pages/SignIn";
 import UpdatePasswordForm from "./pages/UpdatePasswordForm";
 import InfoPage from "./components/Info/InfoPage";
 import Profile from "./components/Profile/Profile";
-// import { Protected } from "./pages/Protected";
+import MentorDashboard from "./pages/MentorDashboard";
 
 import { Protected } from "./components/Protected";
 import Unauthorised from "./pages/Unauthorised";
@@ -22,12 +22,33 @@ const App = () => (
 			<Route path="/about/this/site" element={<About />} />
 			<Route path="/signup" element={<SignUp />} />
 			<Route path="/signIn" element={<SignIn />} />
-			<Route path="/info/:id" element={<InfoPage />} />
-			<Route path="/profile/:id" element={<Profile />} />
-
-			{/* <Route path="/unauthorized" element={<Unauthorized />} /> */}
-			{/* <Route path="/grad-dashboard" element={<Protected element={GradDashboard} roles={["graduate", "mentor", "recruiter"]} />} /> */}
-
+			<Route
+				path="/info/:id"
+				element={
+					<Protected
+						element={InfoPage}
+						roles={["graduate", "mentor", "recruiter"]}
+					/>
+				}
+			/>
+			<Route
+				path="/profile/:id"
+				element={
+					<Protected
+						element={Profile}
+						roles={["graduate", "mentor", "recruiter"]}
+					/>
+				}
+			/>
+			<Route
+				path="/mentor-dashboard"
+				element={
+					<Protected
+						element={MentorDashboard}
+						roles={["mentor", "recruiter"]}
+					/>
+				}
+			/>
 			<Route path="/unauthorised" element={<Unauthorised />} />
 
 			<Route
