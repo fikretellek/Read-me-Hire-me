@@ -8,6 +8,7 @@
 // };
 
 // export { hashPassword };
+import crypto from "crypto";
 
 export default async function hashPassword(req, res, next) {
 	if (req.body.password) {
