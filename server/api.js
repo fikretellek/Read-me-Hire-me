@@ -17,19 +17,14 @@ router.get("/", (_, res) => {
 	res.json({ message: "Read me, Hire me!" });
 });
 
-// router.get("/fetchPinnedProjects", async (_, res) => {
-// 	const test = await fetchPinnedProjects("RbAvci");
-// 	res.send(test);
-// });
-
-router.post("/users", async (req, res) => {
-	const { username, passwordHash, userType, userGithub } = req.body;
+router.post("/sign-up", hashPassword, async (req, res) => {
+	const { username, password, passwordHash, userType, userGithub } = req.body;
 
 	if (!username) {
 		return res.status(422).json({ message: "Username field is required" });
 	}
-	if (!passwordHash) {
-		return res.status(422).json({ message: "Password_hash field is required" });
+	if (!password) {
+		return res.status(422).json({ message: "Password field is required" });
 	}
 	if (!userType) {
 		return res.status(422).json({ message: "User_type field is required" });
@@ -69,7 +64,6 @@ router.post("/users", async (req, res) => {
 				.status(409)
 				.json({ success: false, error: "Username already exists" });
 		}
-		console.log(error);
 		res.status(500).json({
 			success: false,
 			error: "Failed to create a new User into database",

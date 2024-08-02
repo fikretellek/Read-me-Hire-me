@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { hashPassword } from "./Util.js";
 import "./FormStyles.css";
 
 const SignUp = () => {
@@ -13,16 +12,16 @@ const SignUp = () => {
 	const handleSignUp = async (event) => {
 		event.preventDefault();
 
-		const passwordHash = await hashPassword(password);
+		// const passwordHash = await hashPassword(password);
 
-		const response = await fetch("/api/users", {
+		const response = await fetch("/api/sign-up", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
 				username,
-				passwordHash,
+				password,
 				userType,
 				userGithub,
 			}),
