@@ -4,7 +4,7 @@ import "./Profile.css";
 import Readme from "../Readme/Readme";
 import useFetchUser from "../hooks/useFetchUser";
 import Project from "../Project/Project";
-import Contribution from "../Contribution/Contribution";
+import Contribution from "../Contribution/Contribution.js";
 import Avatar from "../Skills/Avatar";
 
 const Profile = () => {
