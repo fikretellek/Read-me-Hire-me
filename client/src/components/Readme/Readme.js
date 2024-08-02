@@ -51,13 +51,6 @@ const Readme = ({ userId }) => {
 			cleanedContent = cleanedContent.replace(linkPatterns[key], "");
 		});
 
-		cleanedContent = cleanedContent
-			.replace(/https?:\/\/[^\s)]+/gi, "")
-			.replace(/\[.*?\]\((https?:\/\/[^\s)]+)\)/gi, "")
-			.replace(/(?:^|\s)#\w+/g, "")
-			.replace(/\s\s+/g, " ")
-			.trim();
-
 		return { allowedLinks, cleanedContent };
 	};
 
@@ -65,8 +58,8 @@ const Readme = ({ userId }) => {
 
 	return (
 		<div className="readme-container">
-			<h2>Read me</h2>
-			<p>{cleanedContent}</p>
+			<h1>Read me</h1>
+
 			<nav className="navig">
 				{allowedLinks.cv && (
 					<a
