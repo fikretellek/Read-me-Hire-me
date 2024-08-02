@@ -9,7 +9,7 @@ import fetchActivity from "./controller/fetchActivity";
 import fetchReadme from "./controller/fetchReadme";
 import infoRouter from "./routes/getInfoRouter";
 import FetchSkills from "./controller/fetchSkills";
-import hashPassword from "./middlewares/HashPassword";
+import hashPassword from "./middlewares/hashPassword";
 const router = Router();
 
 router.get("/", (_, res) => {
