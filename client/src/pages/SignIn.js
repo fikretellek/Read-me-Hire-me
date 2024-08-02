@@ -40,7 +40,11 @@ const SignIn = () => {
 
 		if (result.success) {
 			localStorage.setItem("token", result.data.user.token);
-			navigate(`/info/${result.data.id}`);
+			if (result.data.user.user_type === "mentor") {
+				navigate("/mentor-dashboard");
+			} else if (result.data.user.user_type === "graduate") {
+				navigate(`/info/${result.data.id}`);
+			}
 		} else {
 			setMessage(`Error: ${result.message}`);
 		}

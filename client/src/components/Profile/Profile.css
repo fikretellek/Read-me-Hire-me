@@ -1,18 +1,34 @@
-/* .profile-container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	min-height: 100vh;
-	padding: 16px;
-	background-color: #f0f0f0;
+.profile-container {
+	background-color: #e3e3e3;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	grid-template-areas:
+		"myAv readme"
+		"myAv mypr"
+		"myAv"
+		"con con";
+	grid-gap: 10px;
+	padding: 10px;
+	width: 100%;
+	height: 100vh;
+	box-sizing: border-box;
+	position: relative;
+	top: 100px;
 }
 
-.profile-container header {
-	text-align: center;
-	margin-bottom: 32px;
-	width: 100%;
+.item1 {
+	grid-area: myAv;
 }
 
-.projects-section {
-	width: 100%;
-} */
+.item2 {
+	grid-area: readme;
+}
+
+.item3 {
+	grid-area: mypr;
+}
+
+.item4 {
+	grid-area: con;
+}

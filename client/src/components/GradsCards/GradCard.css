@@ -1,0 +1,42 @@
+.grad-card {
+    border: 1px solid #DEDEDE;
+    text-align: center;
+    width: 220px; 
+    text-decoration: none; 
+    color: #333333; 
+    transition: box-shadow 0.3s ease; 
+    border-radius: 3rem;
+    box-shadow: 0 5px 20px 10px rgba(0, 0, 0, 0.1);
+    margin: 2rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.grad-card img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin-bottom: 10px; 
+}
+
+.grad-card h3 {
+    margin: 10px 0;
+    font-size: 1.2em;
+    color: #333333; 
+}
+
+.grad-card p {
+    margin: 5px 0;
+    color: #888888; 
+}
+
+.grad-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+}
+
+.grad-card a {
+    text-decoration: none; 
+    color: #333333; 
+}
