@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import "./FormStyles.css";
 import { useNavigate } from "react-router-dom";
-import { hashPassword } from "./Util.js";
 
-const authenticateUser = async (username, passwordHash) => {
+const authenticateUser = async (username, password) => {
 	try {
 		const response = await fetch("/api/sign-in", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ username, passwordHash }),
+			body: JSON.stringify({ username, password }),
 		});
 
 		if (response.ok) {
@@ -35,9 +34,9 @@ const SignIn = () => {
 	const navigate = useNavigate();
 	const handleSignIn = async (event) => {
 		event.preventDefault();
-		const passwordHash = await hashPassword(password);
+		// const passwordHash = await hashPassword(password);
 
-		const result = await authenticateUser(username, passwordHash);
+		const result = await authenticateUser(username, password);
 
 		if (result.success) {
 			localStorage.setItem("token", result.data.user.token);

@@ -2,7 +2,6 @@ import db from "../db";
 
 export default async function getPinnedProjects(req, res, next) {
 	const user_id = req.params.id;
-	console.log(user_id);
 
 	try {
 		const user_id_check = await db.query(

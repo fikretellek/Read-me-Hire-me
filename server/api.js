@@ -9,6 +9,7 @@ import fetchActivity from "./controller/fetchActivity";
 import fetchReadme from "./controller/fetchReadme";
 import infoRouter from "./routes/getInfoRouter";
 import FetchSkills from "./controller/fetchSkills";
+import hashPassword from "./middlewares/HashPassword";
 const router = Router();
 
 router.get("/", (_, res) => {
@@ -16,19 +17,14 @@ router.get("/", (_, res) => {
 	res.json({ message: "Read me, Hire me!" });
 });
 
-// router.get("/fetchPinnedProjects", async (_, res) => {
-// 	const test = await fetchPinnedProjects("RbAvci");
-// 	res.send(test);
-// });
-
-router.post("/users", async (req, res) => {
-	const { username, passwordHash, userType, userGithub } = req.body;
+router.post("/sign-up", hashPassword, async (req, res) => {
+	const { username, password, passwordHash, userType, userGithub } = req.body;
 
 	if (!username) {
 		return res.status(422).json({ message: "Username field is required" });
 	}
-	if (!passwordHash) {
-		return res.status(422).json({ message: "Password_hash field is required" });
+	if (!password) {
+		return res.status(422).json({ message: "Password field is required" });
 	}
 	if (!userType) {
 		return res.status(422).json({ message: "User_type field is required" });
@@ -68,7 +64,6 @@ router.post("/users", async (req, res) => {
 				.status(409)
 				.json({ success: false, error: "Username already exists" });
 		}
-		console.log(error);
 		res.status(500).json({
 			success: false,
 			error: "Failed to create a new User into database",
@@ -126,10 +121,10 @@ router.delete("/users/:id", async (req, res) => {
 	}
 });
 
-router.post("/sign-in", async (req, res) => {
-	const { username, passwordHash } = req.body;
+router.post("/sign-in",hashPassword, async (req, res) => {
+	const { username, password, passwordHash } = req.body;
 
-	if (!username || !passwordHash) {
+	if (!username || !password) {
 		return res
 			.status(422)
 			.json({ message: "Username and password are required" });
@@ -147,6 +142,7 @@ router.post("/sign-in", async (req, res) => {
 		}
 
 		const user = result.rows[0];
+		
 
 		if (user.password_hash !== passwordHash) {
 			return res
@@ -170,13 +166,13 @@ router.post("/sign-in", async (req, res) => {
 });
 
 router.put(
-	"/users/:id/password",
+	"/users/:id/password", hashPassword,
 	roleBasedAuth("graduate", "mentor", "recruiter"),
 	async (req, res) => {
 		const userId = req.params.id;
-		const { passwordHash } = req.body;
+		const { password, passwordHash } = req.body;
 
-		if (!passwordHash) {
+		if (!password) {
 			return res
 				.status(422)
 				.json({ message: "Password_hash field is required" });

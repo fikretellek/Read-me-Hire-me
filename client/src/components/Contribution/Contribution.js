@@ -27,7 +27,6 @@ const Contribution = ({ userId }) => {
 
 		fetchContribution();
 	}, [userId]);
-	console.log(activities);
 	if (error) {
 		return <div className="Activity-container">Error: {error}</div>;
 	}
