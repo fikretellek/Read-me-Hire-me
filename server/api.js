@@ -166,13 +166,13 @@ router.post("/sign-in",hashPassword, async (req, res) => {
 });
 
 router.put(
-	"/users/:id/password",
+	"/users/:id/password", hashPassword,
 	roleBasedAuth("graduate", "mentor", "recruiter"),
 	async (req, res) => {
 		const userId = req.params.id;
-		const { passwordHash } = req.body;
+		const { password, passwordHash } = req.body;
 
-		if (!passwordHash) {
+		if (!password) {
 			return res
 				.status(422)
 				.json({ message: "Password_hash field is required" });

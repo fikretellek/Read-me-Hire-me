@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import "./FormStyles.css";
 import { hashPassword } from "./Util.js";
-const updatePassword = async (userId, passwordHash) => {
+import jwtDecode from "jwt-decode";
+const updatePassword = async (id, password) => {
 	try {
-		const response = await fetch(`/api/users/${userId}/password`, {
+		const response = await fetch(`/api/users/${id}/password`, {
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": `Bearer ${localStorage.getItem("token")}`,
+				Authorization: `Bearer ${localStorage.getItem("token")}`,
 			},
-			body: JSON.stringify({ passwordHash }),
+			body: JSON.stringify({ password }),
 		});
 
 		if (response.ok) {
@@ -27,7 +28,7 @@ const updatePassword = async (userId, passwordHash) => {
 	}
 };
 
-const UpdatePasswordForm = ({ userId }) => {
+const UpdatePasswordForm = () => {
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [message, setMessage] = useState("");
@@ -39,9 +40,10 @@ const UpdatePasswordForm = ({ userId }) => {
 			return;
 		}
 
-		const passwordHash = await hashPassword(password);
+		const token = localStorage.getItem("token");
+		const decodedToken = jwtDecode(token);
 
-		const result = await updatePassword(userId, passwordHash);
+		const result = await updatePassword(decodedToken.id, password);
 
 		if (result.success) {
 			setMessage("Password updated successfully!");
