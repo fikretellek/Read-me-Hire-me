@@ -9,7 +9,7 @@ const GradCard = ({ grad }) => {
 				src={`https://github.com/${grad.github_username}.png`}
 				alt={`${grad.username}'s Avatar`}
 			/>
-			<h3>{grad.username}</h3>
+			<h3>{grad.github_username}</h3>
 			<p>Activity Score: </p>
 		</Link>
 	);
