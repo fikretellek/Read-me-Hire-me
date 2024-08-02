@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./FormStyles.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+
 
 const authenticateUser = async (username, password) => {
 	try {
@@ -79,6 +80,9 @@ const SignIn = () => {
 				<button type="submit">Sign In</button>
 			</form>
 			{message && <div className="message">{message}</div>}
+			<div className="unique-signup">
+				Don't have an account? <a href="/signup">Sign up</a>
+			</div>
 		</div>
 	);
 };

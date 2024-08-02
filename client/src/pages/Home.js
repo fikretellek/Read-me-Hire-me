@@ -36,7 +36,6 @@ export function Home() {
 			<p>
 				<Link to="/signup">Sign Up</Link>
 				<Link to="/signIn">Sign in </Link>
-				<Link to="/update-password">Update Password</Link>
 			</p>
 		</main>
 	);
