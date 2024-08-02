@@ -9,6 +9,7 @@ import fetchActivity from "./controller/fetchActivity";
 import fetchReadme from "./controller/fetchReadme";
 import infoRouter from "./routes/getInfoRouter";
 import FetchSkills from "./controller/fetchSkills";
+import hashPassword from "./middlewares/HashPassword";
 const router = Router();
 
 router.get("/", (_, res) => {
@@ -126,10 +127,10 @@ router.delete("/users/:id", async (req, res) => {
 	}
 });
 
-router.post("/sign-in", async (req, res) => {
-	const { username, passwordHash } = req.body;
+router.post("/sign-in",hashPassword, async (req, res) => {
+	const { username, password, passwordHash } = req.body;
 
-	if (!username || !passwordHash) {
+	if (!username || !password) {
 		return res
 			.status(422)
 			.json({ message: "Username and password are required" });
@@ -147,6 +148,7 @@ router.post("/sign-in", async (req, res) => {
 		}
 
 		const user = result.rows[0];
+		
 
 		if (user.password_hash !== passwordHash) {
 			return res
