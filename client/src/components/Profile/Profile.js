@@ -21,10 +21,10 @@ const Profile = () => {
 
 	return (
 		<div className="profile-container">
-			<Avatar userId={id} user={user} className="item1" />
-			<Readme userId={id} user={user} className="item2" />
-			<Project userId={id} className="item3" />
-			<Contribution userId={id} className="item4" />
+			<Avatar userId={id} user={user} />
+			<Readme userId={id} user={user} />
+			<Project userId={id} />
+			<Contribution userId={id} />
 		</div>
 	);
 };

@@ -4,9 +4,8 @@
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: 1fr 1fr 1fr;
 	grid-template-areas:
-		"myAv readme"
-		"myAv mypr"
-		"myAv"
+		"myAv myAv"
+		"readme mypr"
 		"con con";
 	grid-gap: 10px;
 	padding: 10px;
@@ -15,20 +14,4 @@
 	box-sizing: border-box;
 	position: relative;
 	top: 100px;
-}
-
-.item1 {
-	grid-area: myAv;
-}
-
-.item2 {
-	grid-area: readme;
-}
-
-.item3 {
-	grid-area: mypr;
-}
-
-.item4 {
-	grid-area: con;
 }
