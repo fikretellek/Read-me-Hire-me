@@ -13,9 +13,16 @@ export default async function getPinnedProjects(req, res, next) {
 			return res.status(404).json({ error: "User not found" });
 		}
 
-		const projects_data = await db.query(
-			`SELECT * FROM projects WHERE user_id = $1`,
+		const latestTimestampResult = await db.query(
+			`SELECT MAX(fetch_time) AS latest_timestamp FROM projects WHERE user_id = $1`,
 			[user_id]
+		);
+
+		const latestTimestamp = latestTimestampResult.rows[0].latest_timestamp;
+
+		const projects_data = await db.query(
+			`SELECT * FROM projects WHERE user_id = $1 AND fetch_time = $2`,
+			[user_id, latestTimestamp]
 		);
 
 		res.status(200).json({ projects: projects_data.rows });

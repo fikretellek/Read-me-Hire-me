@@ -5,6 +5,8 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const MentorDashboard = () => {
 	const [grads, setGrads] = useState([]);
+	const [isUpdating, setIsUpdating] = useState(false);
+
 
 	useEffect(() => {
 		fetch("api/getAllGradUsers", {
@@ -23,6 +25,30 @@ const MentorDashboard = () => {
 			})
 			.catch((error) => console.error("Error fetching graduate users:", error));
 	}, []);
+
+	const handleClick = async () => {
+		setIsUpdating(true);
+		try {
+			const response = await fetch("api/updateAllGradData", {
+				method: "POST", // or 'GET' depending on your API
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${localStorage.getItem("token")}`,
+				},
+			});
+
+			if (!response.ok) {
+				throw new Error("Network response was not ok");
+			}
+
+			const data = await response.json();
+			console.log("Data updated successfully:", data);
+		} catch (error) {
+			console.error("Error updating data:", error);
+		} finally {
+			setIsUpdating(false);
+		}
+	};
 
 	return (
 		<div className="mentor-dashboard">
@@ -51,7 +77,9 @@ const MentorDashboard = () => {
 						<option value="desc">Descending</option>
 					</select>
 				</div>
-				<button id="show-all-grads">Show All Grads</button>
+				<button id="show-all-grads" onClick={handleClick} disabled={isUpdating}>
+					{isUpdating ? "Updating..." : "Update Graduates Data"}
+				</button>
 			</section>
 
 			<section id="grads-cards">

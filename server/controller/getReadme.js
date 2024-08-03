@@ -15,7 +15,7 @@ export default async function getReadme(req, res, next) {
 
 		try {
 			const readme_data = await db.query(
-				`SELECT readme FROM readmes WHERE user_id = $1`,
+				`SELECT readme FROM readmes WHERE user_id = $1 ORDER BY fetch_time DESC`,
 				[user_id]
 			);
 

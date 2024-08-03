@@ -40,19 +40,21 @@ export default async function fetchPinnedProjects(username) {
 		const projects = projects_data.data.user.pinnedItems.nodes;
 
 		try {
+			const fetchTime = Math.floor(Date.now() / 1000);
 			for (const project of projects) {
 				await db.query(
 					`WITH user_data AS (
 					  SELECT id AS user_id FROM users WHERE github_username = $1
 					)
-					INSERT INTO projects (name, description, url, preview_url, user_id)
-					VALUES ($2, $3, $4, $5, (SELECT user_id FROM user_data));`,
+					INSERT INTO projects (name, description, url, preview_url, user_id, fetch_time)
+					VALUES ($2, $3, $4, $5, (SELECT user_id FROM user_data), $6);`,
 					[
 						username,
 						project.name,
 						project.description,
 						project.url,
 						project.homepageUrl,
+						fetchTime,
 					]
 				);
 			}
