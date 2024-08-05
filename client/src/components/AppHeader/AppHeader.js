@@ -9,9 +9,6 @@ const Header = () => (
 				<img className="app__logo" src={cyf_logo} alt="CYF Logo" />
 			</Link>
 		</div>
-		<nav className="nav">
-			<Link to="/signup">Sign Up</Link>
-		</nav>
 	</header>
 );
 
