@@ -2,7 +2,7 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 
-export const Protected = ({ element: Element, roles }) => {
+export const Protected = ({ element: Element, roles, props }) => {
 	const token = localStorage.getItem("token");
 	if (!token) {
 		return <Navigate to="/signIn" />;
@@ -13,5 +13,5 @@ export const Protected = ({ element: Element, roles }) => {
 		return <Navigate to="/unauthorised" />;
 	}
 
-	return <Element />;
+	return <Element {...props} />;
 };

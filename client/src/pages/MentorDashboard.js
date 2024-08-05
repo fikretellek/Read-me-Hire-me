@@ -30,7 +30,6 @@ const MentorDashboard = () => {
 				<h1>Welcome Mentor</h1>
 				<div className="header-links">
 					<a href="/settings">Settings</a>
-					<a href="/logout">Logout</a>
 				</div>
 			</header>
 

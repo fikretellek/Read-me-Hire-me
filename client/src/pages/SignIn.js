@@ -28,7 +28,7 @@ const authenticateUser = async (email, password) => {
 	}
 };
 
-const SignIn = () => {
+const SignIn = ({ setSignedIn }) => {
 	const [email, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [message, setMessage] = useState("");
@@ -50,6 +50,7 @@ const SignIn = () => {
 
 		if (result.success) {
 			localStorage.setItem("token", result.data.user.token);
+			setSignedIn(true);
 			if (result.data.user.user_type === "mentor") {
 				navigate("/mentor-dashboard");
 			} else if (result.data.user.user_type === "graduate") {
