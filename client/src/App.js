@@ -13,7 +13,7 @@ import MentorDashboard from "./pages/MentorDashboard";
 
 import { Protected } from "./components/Protected";
 import Unauthorised from "./pages/Unauthorised";
-import Logout from "./pages/Logout";
+import SignOut from "./pages/SignOut";
 import { useEffect, useState } from "react";
 
 const App = () => {
@@ -63,10 +63,10 @@ const App = () => {
 				}
 			/>
 			<Route
-				path="/logout"
+				path="/signOut"
 				element={
 					<Protected
-						element={Logout}
+						element={SignOut}
 						roles={["graduate", "mentor", "recruiter"]}
 						props={{ setSignedIn }}
 					/>

@@ -12,7 +12,7 @@ const Header = ({ signedIn }) => {
 			</div>
 			{signedIn ? (
 				<p>
-					<a href="/logout">Logout</a>
+					<a href="/signOut">Sign Out</a>
 				</p>
 			) : ""}
 		</header>
