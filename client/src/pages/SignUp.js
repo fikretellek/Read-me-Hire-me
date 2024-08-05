@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; 
+
 import "./FormStyles.css";
 
 const SignUp = () => {
@@ -8,6 +10,8 @@ const SignUp = () => {
 	const [message, setMessage] = useState("");
 	const [isGraduate, setIsGraduate] = useState(true);
 	const [userGithub, setUserGithub] = useState("");
+
+	const navigate = useNavigate(); 
 
 	const handleSignUp = async (event) => {
 		event.preventDefault();
@@ -29,7 +33,7 @@ const SignUp = () => {
 
 		if (response.ok) {
 			setMessage(`User created with ID: ${result.data.id}`);
-			window.location.replace("/");
+			navigate("/signIn"); 
 		} else if (response.status === 409) {
 			setMessage("Error: Username already exists");
 		} else {
