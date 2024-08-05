@@ -42,18 +42,13 @@ router.post("/sign-up", hashPassword, async (req, res) => {
 
 	try {
 		const result = await db.query(
-			"INSERT INTO users (email, password_hash, user_type) VALUES ($1, $2, $3) RETURNING id ",
-			[email, passwordHash, userType]
+			"INSERT INTO users (email, password_hash, user_type, github_username) VALUES ($1, $2, $3, $4) RETURNING id ",
+			[email, passwordHash, userType, userGithub]
 		);
 
 		const newUserID = result.rows[0].id;
 
 		if (userType === "graduate" && userGithub) {
-			await db.query("UPDATE users SET github_username = $2 WHERE id = $1", [
-				newUserID,
-				userGithub,
-			]);
-
 			await fetchReadme(userGithub);
 			await fetchActivity(userGithub);
 
