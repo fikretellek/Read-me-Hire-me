@@ -12,8 +12,6 @@ const SignUp = () => {
 	const handleSignUp = async (event) => {
 		event.preventDefault();
 
-		// const passwordHash = await hashPassword(password);
-
 		const response = await fetch("/api/sign-up", {
 			method: "POST",
 			headers: {
