@@ -12,6 +12,9 @@ import FetchSkills from "./controller/fetchSkills";
 import hashPassword from "./middlewares/hashPassword";
 const router = Router();
 
+// Email validation regex
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 router.get("/", (_, res) => {
 	logger.debug("Welcoming everyone...");
 	res.json({ message: "Read me, Hire me!" });
@@ -20,9 +23,11 @@ router.get("/", (_, res) => {
 router.post("/sign-up", hashPassword, async (req, res) => {
 	const { username, password, passwordHash, userType, userGithub } = req.body;
 
-	if (!username) {
-		return res.status(422).json({ message: "Username field is required" });
+	// Check for valid email format
+	if (!username || !emailRegex.test(username)) {
+		return res.status(422).json({ message: "Invalid email format" });
 	}
+
 	if (!password) {
 		return res.status(422).json({ message: "Password field is required" });
 	}
@@ -142,7 +147,7 @@ router.post("/sign-in",hashPassword, async (req, res) => {
 		}
 
 		const user = result.rows[0];
-		
+
 
 		if (user.password_hash !== passwordHash) {
 			return res

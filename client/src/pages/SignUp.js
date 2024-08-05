@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 
 import "./FormStyles.css";
 
@@ -11,10 +11,19 @@ const SignUp = () => {
 	const [isGraduate, setIsGraduate] = useState(true);
 	const [userGithub, setUserGithub] = useState("");
 
-	const navigate = useNavigate(); 
+	const navigate = useNavigate();
+
+	// Email validation regex
+	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 	const handleSignUp = async (event) => {
 		event.preventDefault();
+
+		// Email validation check
+		if (!emailRegex.test(username)) {
+			setMessage("Error: Invalid email format");
+			return;
+		}
 
 		const response = await fetch("/api/sign-up", {
 			method: "POST",
@@ -33,7 +42,7 @@ const SignUp = () => {
 
 		if (response.ok) {
 			setMessage(`User created with ID: ${result.data.id}`);
-			navigate("/signIn"); 
+			navigate("/signIn");
 		} else if (response.status === 409) {
 			setMessage("Error: Username already exists");
 		} else {
@@ -56,7 +65,7 @@ const SignUp = () => {
 		<div className="signUpCard">
 			<h1>Sign Up</h1>
 			<form onSubmit={handleSignUp}>
-				<label htmlFor="username">Username:</label>
+				<label htmlFor="username">Email:</label>
 				<input
 					type="text"
 					id="username"

@@ -33,9 +33,18 @@ const SignIn = () => {
 	const [password, setPassword] = useState("");
 	const [message, setMessage] = useState("");
 	const navigate = useNavigate();
+
+	// Email validation regex
+	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 	const handleSignIn = async (event) => {
 		event.preventDefault();
-		// const passwordHash = await hashPassword(password);
+
+		// Email validation check
+		if (!emailRegex.test(username)) {
+			setMessage("Error: Invalid email format");
+			return;
+		}
 
 		const result = await authenticateUser(username, password);
 
@@ -55,7 +64,7 @@ const SignIn = () => {
 		<div className="signInCard">
 			<h1>Sign In</h1>
 			<form onSubmit={handleSignIn}>
-				<label htmlFor="username">Username:</label>
+				<label htmlFor="username">Email:</label>
 				<input
 					type="text"
 					id="username"
