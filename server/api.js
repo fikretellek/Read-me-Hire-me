@@ -65,10 +65,11 @@ router.post("/sign-up", hashPassword, async (req, res) => {
 		res.status(200).json({ success: true, data: { id: newUserID } });
 	} catch (error) {
 		console.error(error);
+
 		if (error.code === "23505") {
 			return res
 				.status(409)
-				.json({ success: false, error: "Email already exists" });
+				.json({ success: false, error: "Email or GithubUsername already exists" });
 		}
 		res.status(500).json({
 			success: false,

@@ -44,7 +44,7 @@ const SignUp = () => {
 			setMessage(`User created with ID: ${result.data.id}`);
 			navigate("/signIn");
 		} else if (response.status === 409) {
-			setMessage("Error: Email already exists");
+			setMessage("Error: Email or Github Username already exists");
 		} else {
 			setMessage(`Error: ${result.message || result.error}`);
 		}
