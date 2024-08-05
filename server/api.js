@@ -12,17 +12,22 @@ import FetchSkills from "./controller/fetchSkills";
 import hashPassword from "./middlewares/hashPassword";
 const router = Router();
 
+// Email validation regex
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 router.get("/", (_, res) => {
 	logger.debug("Welcoming everyone...");
 	res.json({ message: "Read me, Hire me!" });
 });
 
 router.post("/sign-up", hashPassword, async (req, res) => {
-	const { username, password, passwordHash, userType, userGithub } = req.body;
+	const { email, password, passwordHash, userType, userGithub } = req.body;
 
-	if (!username) {
-		return res.status(422).json({ message: "Username field is required" });
+	// Check for valid email format
+	if (!email || !emailRegex.test(email)) {
+		return res.status(422).json({ message: "Invalid email format" });
 	}
+
 	if (!password) {
 		return res.status(422).json({ message: "Password field is required" });
 	}
@@ -37,8 +42,8 @@ router.post("/sign-up", hashPassword, async (req, res) => {
 
 	try {
 		const result = await db.query(
-			"INSERT INTO users (username, password_hash, user_type) VALUES ($1, $2, $3) RETURNING id ",
-			[username, passwordHash, userType]
+			"INSERT INTO users (email, password_hash, user_type) VALUES ($1, $2, $3) RETURNING id ",
+			[email, passwordHash, userType]
 		);
 
 		const newUserID = result.rows[0].id;
@@ -59,10 +64,12 @@ router.post("/sign-up", hashPassword, async (req, res) => {
 
 		res.status(200).json({ success: true, data: { id: newUserID } });
 	} catch (error) {
+		console.error(error);
+
 		if (error.code === "23505") {
 			return res
 				.status(409)
-				.json({ success: false, error: "Username already exists" });
+				.json({ success: false, error: "Email or GithubUsername already exists" });
 		}
 		res.status(500).json({
 			success: false,
@@ -122,17 +129,17 @@ router.delete("/users/:id", async (req, res) => {
 });
 
 router.post("/sign-in",hashPassword, async (req, res) => {
-	const { username, password, passwordHash } = req.body;
+	const { email, password, passwordHash } = req.body;
 
-	if (!username || !password) {
+	if (!email || !password) {
 		return res
 			.status(422)
-			.json({ message: "Username and password are required" });
+			.json({ message: "Email and password are required" });
 	}
 
 	try {
-		const result = await db.query("SELECT * FROM users WHERE username = $1", [
-			username,
+		const result = await db.query("SELECT * FROM users WHERE email = $1", [
+			email,
 		]);
 
 		if (result.rows.length === 0) {
@@ -142,7 +149,7 @@ router.post("/sign-in",hashPassword, async (req, res) => {
 		}
 
 		const user = result.rows[0];
-		
+
 
 		if (user.password_hash !== passwordHash) {
 			return res
@@ -151,7 +158,7 @@ router.post("/sign-in",hashPassword, async (req, res) => {
 		}
 
 		const token = jwt.sign(
-			{ id: user.id, username: user.username, userType: user.user_type },
+			{ id: user.id, email: user.email, userType: user.user_type },
 			config.jwtSecret,
 			{ expiresIn: "1h" }
 		);
@@ -207,7 +214,7 @@ router.get(
 	async (_, res) => {
 		try {
 			const result = await db.query(
-				"SELECT id, username, github_username FROM users WHERE user_type = 'graduate'"
+				"SELECT id, email, github_username FROM users WHERE user_type = 'graduate'"
 			);
 			res.status(200).json({ success: true, data: result.rows });
 		} catch (error) {

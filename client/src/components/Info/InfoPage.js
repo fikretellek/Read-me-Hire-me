@@ -19,19 +19,15 @@ const InfoPage = () => {
 	const handleButtonClick = () => {
 		navigate(`/profile/${id}`);
 	};
-	const capitalizeFirstLetter = (string) => {
-		return string.charAt(0).toUpperCase() + string.slice(1);
-	};
-
-	const userName = capitalizeFirstLetter(user.username);
 
 	return (
 		<div className="front-container">
 			<div className="background-overlay">
-				<h1>Welcome {userName}</h1>
+				<h1>Welcome {user.github_username}</h1>
 				<img
 					className="cyf-img"
 					src="http://localhost:3000/21c4a35ee689fbfff8b5d1e2041b5b07.png"
+					alt="CodeYourFuture Logo"
 				/>
 				<div className="front-content">
 					<h2>How to Stay on the Top Active List</h2>

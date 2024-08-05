@@ -7,7 +7,7 @@ const GradCard = ({ grad }) => {
 		<Link to={`/profile/${grad.id}`} className="grad-card" key={grad.id}>
 			<img
 				src={`https://github.com/${grad.github_username}.png`}
-				alt={`${grad.username}'s Avatar`}
+				alt={`${grad.github_username}'s Avatar`}
 			/>
 			<h3>{grad.github_username}</h3>
 			<p>Activity Score: </p>

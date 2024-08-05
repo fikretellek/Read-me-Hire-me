@@ -3,14 +3,14 @@ import "./FormStyles.css";
 import { useNavigate, Link } from "react-router-dom";
 
 
-const authenticateUser = async (username, password) => {
+const authenticateUser = async (email, password) => {
 	try {
 		const response = await fetch("/api/sign-in", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ username, password }),
+			body: JSON.stringify({ email, password }),
 		});
 
 		if (response.ok) {
@@ -29,15 +29,24 @@ const authenticateUser = async (username, password) => {
 };
 
 const SignIn = () => {
-	const [username, setUsername] = useState("");
+	const [email, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [message, setMessage] = useState("");
 	const navigate = useNavigate();
+
+	// Email validation regex
+	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 	const handleSignIn = async (event) => {
 		event.preventDefault();
-		// const passwordHash = await hashPassword(password);
 
-		const result = await authenticateUser(username, password);
+		// Email validation check
+		if (!emailRegex.test(email)) {
+			setMessage("Error: Invalid email format");
+			return;
+		}
+
+		const result = await authenticateUser(email, password);
 
 		if (result.success) {
 			localStorage.setItem("token", result.data.user.token);
@@ -55,11 +64,11 @@ const SignIn = () => {
 		<div className="signInCard">
 			<h1>Sign In</h1>
 			<form onSubmit={handleSignIn}>
-				<label htmlFor="username">Username:</label>
+				<label htmlFor="email">Email:</label>
 				<input
 					type="text"
-					id="username"
-					value={username}
+					id="email"
+					value={email}
 					onChange={(e) => setUsername(e.target.value)}
 					required
 				/>

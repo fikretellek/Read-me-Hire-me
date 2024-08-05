@@ -1,20 +1,29 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 
 import "./FormStyles.css";
 
 const SignUp = () => {
-	const [username, setUsername] = useState("");
+	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [userType, setUserType] = useState("graduate");
 	const [message, setMessage] = useState("");
 	const [isGraduate, setIsGraduate] = useState(true);
 	const [userGithub, setUserGithub] = useState("");
 
-	const navigate = useNavigate(); 
+	const navigate = useNavigate();
+
+	// Email validation regex
+	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 	const handleSignUp = async (event) => {
 		event.preventDefault();
+
+		// Email validation check
+		if (!emailRegex.test(email)) {
+			setMessage("Error: Invalid email format");
+			return;
+		}
 
 		const response = await fetch("/api/sign-up", {
 			method: "POST",
@@ -22,7 +31,7 @@ const SignUp = () => {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
-				username,
+				email,
 				password,
 				userType,
 				userGithub,
@@ -33,13 +42,13 @@ const SignUp = () => {
 
 		if (response.ok) {
 			setMessage(`User created with ID: ${result.data.id}`);
-			navigate("/signIn"); 
+			navigate("/signIn");
 		} else if (response.status === 409) {
-			setMessage("Error: Username already exists");
+			setMessage("Error: Email or Github Username already exists");
 		} else {
 			setMessage(`Error: ${result.message || result.error}`);
 		}
-		setUsername("");
+		setEmail("");
 		setPassword("");
 		setUserType("graduate");
 		setUserGithub("");
@@ -56,12 +65,12 @@ const SignUp = () => {
 		<div className="signUpCard">
 			<h1>Sign Up</h1>
 			<form onSubmit={handleSignUp}>
-				<label htmlFor="username">Username:</label>
+				<label htmlFor="email">Email:</label>
 				<input
 					type="text"
-					id="username"
-					value={username}
-					onChange={(e) => setUsername(e.target.value)}
+					id="email"
+					value={email}
+					onChange={(e) => setEmail(e.target.value)}
 					required
 				/>
 				<br />
