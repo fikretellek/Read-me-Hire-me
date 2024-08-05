@@ -7,6 +7,7 @@ export default async function getSkills(req, res) {
             SELECT skills, avatar 
             FROM profiles 
             WHERE user_id = $1
+			ORDER BY fetch_time DESC
         `;
 		const { rows } = await db.query(userCheckQuery, [userId]);
 

@@ -18,8 +18,8 @@ export default async function FetchSkills(username) {
 				`WITH user_data AS (
                 SELECT id AS user_id FROM users WHERE github_username = $1
             )
-            INSERT INTO profiles (skills, avatar, user_id)
-            SELECT $2, $3, user_id FROM user_data
+            INSERT INTO profiles (skills, avatar, user_id, fetch_time)
+            SELECT $2, $3, user_id, EXTRACT(EPOCH FROM CURRENT_TIMESTAMP) FROM user_data
             RETURNING *;`,
 				[username, skills, avatar]
 			);

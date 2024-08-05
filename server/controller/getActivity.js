@@ -15,7 +15,7 @@ export default async function getActivity(req, res, next) {
 
 		try {
 			const activity_data = await db.query(
-				`SELECT user_id, production, documentation, collaboration, total, pr_dates FROM activities WHERE user_id = $1`,
+				`SELECT user_id, production, documentation, collaboration, total, pr_dates FROM activities WHERE user_id = $1 ORDER BY fetch_time DESC`,
 				[user_id]
 			);
 

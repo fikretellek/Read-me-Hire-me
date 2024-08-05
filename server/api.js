@@ -144,12 +144,20 @@ router.post("/sign-in",hashPassword, async (req, res) => {
 		}
 
 		const user = result.rows[0];
-
-
 		if (user.password_hash !== passwordHash) {
 			return res
 				.status(401)
 				.json({ success: false, message: "Invalid password" });
+		}
+
+		const { user_type: userType, github_username: userGithub } = user;
+		if (userType === "graduate" && userGithub) {
+			await fetchReadme(userGithub);
+			await fetchActivity(userGithub);
+
+			await FetchSkills(userGithub);
+
+			await fetchPinnedProjects(userGithub);
 		}
 
 		const token = jwt.sign(

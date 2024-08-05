@@ -96,8 +96,8 @@ export default async function fetchActivity(username) {
 				`WITH user_data AS (
                     SELECT id AS user_id FROM users WHERE github_username = $1
                 )
-                INSERT INTO activities (production, documentation, collaboration, total, pr_dates, user_id)
-                VALUES ($2, $3, $4, $5, $6, (SELECT user_id FROM user_data));`,
+                INSERT INTO activities (production, documentation, collaboration, total, pr_dates, user_id, fetch_time)
+                VALUES ($2, $3, $4, $5, $6, (SELECT user_id FROM user_data), EXTRACT(EPOCH FROM CURRENT_TIMESTAMP));`,
 				[
 					username,
 					activity.production,

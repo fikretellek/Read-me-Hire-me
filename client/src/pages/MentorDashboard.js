@@ -51,7 +51,6 @@ const MentorDashboard = () => {
 						<option value="desc">Descending</option>
 					</select>
 				</div>
-				<button id="show-all-grads">Show All Grads</button>
 			</section>
 
 			<section id="grads-cards">
