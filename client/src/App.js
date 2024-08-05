@@ -31,7 +31,7 @@ const App = () => {
 	return <>
 		<Header signedIn={signedIn} />
 		<Routes>
-			<Route path="/" element={<Home />} />
+			<Route path="/" element={<Home signedIn={signedIn} />} />
 			<Route path="/about/this/site" element={<About />} />
 			<Route path="/signup" element={<SignUp />} />
 			<Route path="/signIn" element={<SignIn setSignedIn={setSignedIn} />} />

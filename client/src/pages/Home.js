@@ -1,26 +1,26 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
 import "./Home.css";
 import readme_logo from "../assets/readme_logo.png";
-export function Home() {
-	const [message, setMessage] = useState("Loading...");
+import jwtDecode from "jwt-decode";
 
-	useEffect(() => {
-		fetch("/api")
-			.then((res) => {
-				if (!res.ok) {
-					throw new Error(res.statusText);
-				}
-				return res.json();
-			})
-			.then((body) => {
-				setMessage(body.message);
-			})
-			.catch((err) => {
-				console.error(err);
-			});
-	}, []);
+export function Home({ signedIn }) {
+	function getDashboard() {
+		const token = localStorage.getItem("token");
+		const decodedToken = jwtDecode(token);
+		if (decodedToken.userType === "mentor") {
+			return (
+				<p>
+					<a href="/mentor-dashboard">Dashboard</a>
+				</p>
+			);
+		} else {
+			return (
+				<p>
+					<a href={`/profile/${decodedToken.id}`}>Dashboard</a>
+				</p>
+			);
+		}
+	}
 
 	return (
 		<main role="main">
@@ -28,15 +28,18 @@ export function Home() {
 				<img
 					className="main_page_logo"
 					data-qa="logo"
-					src={readme_logo
-					}
+					src={readme_logo}
 					alt="read me logo"
 				/>
 			</div>
-			<p>
-				<Link to="/signup">Sign Up</Link>
-				<Link to="/signIn">Sign in </Link>
-			</p>
+			{signedIn ? (
+				getDashboard()
+			) : (
+				<p>
+					<Link to="/signup">Sign Up</Link>
+					<Link to="/signIn">Sign in </Link>
+				</p>
+			)}
 		</main>
 	);
 }
