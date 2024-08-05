@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./FormStyles.css";
 
 const SignUp = () => {
-	const [username, setUsername] = useState("");
+	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [userType, setUserType] = useState("graduate");
 	const [message, setMessage] = useState("");
@@ -20,7 +20,7 @@ const SignUp = () => {
 		event.preventDefault();
 
 		// Email validation check
-		if (!emailRegex.test(username)) {
+		if (!emailRegex.test(email)) {
 			setMessage("Error: Invalid email format");
 			return;
 		}
@@ -31,7 +31,7 @@ const SignUp = () => {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
-				username,
+				email,
 				password,
 				userType,
 				userGithub,
@@ -44,11 +44,11 @@ const SignUp = () => {
 			setMessage(`User created with ID: ${result.data.id}`);
 			navigate("/signIn");
 		} else if (response.status === 409) {
-			setMessage("Error: Username already exists");
+			setMessage("Error: Email already exists");
 		} else {
 			setMessage(`Error: ${result.message || result.error}`);
 		}
-		setUsername("");
+		setEmail("");
 		setPassword("");
 		setUserType("graduate");
 		setUserGithub("");
@@ -65,12 +65,12 @@ const SignUp = () => {
 		<div className="signUpCard">
 			<h1>Sign Up</h1>
 			<form onSubmit={handleSignUp}>
-				<label htmlFor="username">Email:</label>
+				<label htmlFor="email">Email:</label>
 				<input
 					type="text"
-					id="username"
-					value={username}
-					onChange={(e) => setUsername(e.target.value)}
+					id="email"
+					value={email}
+					onChange={(e) => setEmail(e.target.value)}
 					required
 				/>
 				<br />

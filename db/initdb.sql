@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS portfolios CASCADE;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    username VARCHAR UNIQUE,
+    email VARCHAR UNIQUE,
     password_hash VARCHAR,
     user_type VARCHAR
 );
@@ -19,6 +19,6 @@ CREATE TABLE portfolios (
     projects TEXT
 );
 
-INSERT INTO users (username, password_hash, user_type) VALUES ('testUser@gmail.com', 'pass_hash', 'graduate');
-INSERT INTO users (username, password_hash, user_type) VALUES ('testUser1@gmail.com', 'pass_hash', 'mentor');
-INSERT INTO users (username, password_hash, user_type) VALUES ('testUser2@gmail.com', 'pass_hash', 'requiter');
+INSERT INTO users (email, password_hash, user_type) VALUES ('testUser@gmail.com', 'pass_hash', 'graduate');
+INSERT INTO users (email, password_hash, user_type) VALUES ('testUser1@gmail.com', 'pass_hash', 'mentor');
+INSERT INTO users (email, password_hash, user_type) VALUES ('testUser2@gmail.com', 'pass_hash', 'requiter');
