@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
 import "./readme.css";
 
 const Readme = ({ userId }) => {
-	const [readme, setReadme] = useState(null);
+	const [readMeContent, setReadMeContent] = useState("");
 	const [error, setError] = useState(null);
 
 	useEffect(() => {
@@ -18,7 +20,7 @@ const Readme = ({ userId }) => {
 					throw new Error("README not found");
 				}
 				const result = await response.json();
-				setReadme(result.readme);
+				setReadMeContent(result.readme);
 			} catch (error) {
 				setError(error.message);
 			}
@@ -28,67 +30,13 @@ const Readme = ({ userId }) => {
 	}, [userId]);
 
 	if (error) {
-		return <div className="readme-container">Error: {error}</div>;
+		return <p>Error: {error}</p>;
 	}
-
-	if (!readme) {
-		return <div className="readme-container">Loading...</div>;
-	}
-
-	const extractAndFilterLinks = (content) => {
-		const linkPatterns = {
-			cv: /\[cv\]\((https?:\/\/[^\s)]+)\)/i,
-			linkedin: /\[linkedin\]\((https?:\/\/[^\s)]+)\)/i,
-			personalStatement: /\[personal-statement\]\((https?:\/\/[^\s)]+)\)/i,
-		};
-
-		const allowedLinks = {};
-		let cleanedContent = content;
-
-		Object.keys(linkPatterns).forEach((key) => {
-			const match = content.match(linkPatterns[key]);
-			allowedLinks[key] = match ? { text: key, url: match[1] } : null;
-			cleanedContent = cleanedContent.replace(linkPatterns[key], "");
-		});
-
-		return { allowedLinks, cleanedContent };
-	};
-
-	const { allowedLinks, cleanedContent } = extractAndFilterLinks(readme);
 
 	return (
 		<div className="readme-container">
-			<h1>Read me</h1>
-
-			<nav className="navig">
-				{allowedLinks.cv && (
-					<a
-						href={allowedLinks.cv.url}
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						Cv
-					</a>
-				)}
-				{allowedLinks.linkedin && (
-					<a
-						href={allowedLinks.linkedin.url}
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						LinkedIn
-					</a>
-				)}
-				{allowedLinks.personalStatement && (
-					<a
-						href={allowedLinks.personalStatement.url}
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						Personal Statement
-					</a>
-				)}
-			</nav>
+			<h1>README Content</h1>
+			<ReactMarkdown rehypePlugins={[rehypeRaw]}>{readMeContent}</ReactMarkdown>
 		</div>
 	);
 };
