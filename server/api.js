@@ -234,34 +234,6 @@ router.get(
 	}
 );
 
-router.post(
-	"/updateAllGradData",
-	roleBasedAuth("mentor", "recruiter"),
-	async (_, res) => {
-		try {
-			const result = await db.query(
-				"SELECT id, username, github_username FROM users WHERE user_type = 'graduate'"
-			);
-			for (const user of result.rows) {
-				const { github_username: userGithub } = user;
-				if (userGithub) {
-					await fetchReadme(userGithub);
-					await fetchActivity(userGithub);
-					await FetchSkills(userGithub);
-					await fetchPinnedProjects(userGithub);
-				}
-			}
-			res.status(200).json({ success: true });
-		} catch (error) {
-			res.status(500).json({
-				success: false,
-				error: "Failed to fetch user or data from the database",
-			});
-		}
-	}
-);
-
-
 
 router.use("/info", infoRouter);
 export default router;
