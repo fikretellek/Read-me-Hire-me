@@ -10,7 +10,7 @@ export default async function fetchReadme(username) {
 		}
 
 		const data = await response.json();
-		const readme = atob(data.content);
+		const readme = Buffer.from(data.content, "base64").toString("utf-8");
 
 		try {
 			const result = await db.query(
