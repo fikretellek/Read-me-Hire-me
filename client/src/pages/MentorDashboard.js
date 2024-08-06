@@ -44,13 +44,6 @@ const MentorDashboard = () => {
 				<InputFilter grads={grads} onFilterChange={handleFilterChange} />
 
 				<InputFilterName grads={grads} onFilterChange={handleFilterChange} />
-				<div className="sort-select-container">
-					<select id="sort-order">
-						<option value="">Sort by activity score</option>
-						<option value="asc">Ascending</option>
-						<option value="desc">Descending</option>
-					</select>
-				</div>
 
 			</section>
 			<section id="grads-cards">
