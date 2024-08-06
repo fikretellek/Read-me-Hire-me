@@ -4,7 +4,7 @@ import "./GradCard.css";
 
 const GradCard = ({ grad }) => {
 	return (
-		<Link to={`/profile/${grad.id}`} className="grad-card" key={grad.id}>
+		<Link to={`/profile/${grad.id}`} className="grad-card">
 			<img
 				src={`https://github.com/${grad.github_username}.png`}
 				alt={`${grad.github_username}'s Avatar`}

@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+
 import "./MentorDashboard.css";
 import GradCard from "../components/GradsCards/GradCard";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import InputFilter from "./InputFilter";
 
 const MentorDashboard = () => {
 	const [grads, setGrads] = useState([]);
+	const [filteredGrads, setFilteredGrads] = useState([]);
 
 	useEffect(() => {
 		fetch("api/getAllGradUsers", {
@@ -17,11 +20,19 @@ const MentorDashboard = () => {
 			.then((data) => {
 				if (data.success) {
 					setGrads(data.data);
+					setFilteredGrads(data.data);
 				} else {
 					console.error("Failed to fetch graduate users");
 				}
 			})
 			.catch((error) => console.error("Error fetching graduate users:", error));
+	}, []);
+
+	const handleFilterChange = useCallback((filteredGrads) => {
+		const uniqueGrads = Array.from(
+			new Map(filteredGrads.map((grad) => [grad.id, grad])).values()
+		);
+		setFilteredGrads(uniqueGrads);
 	}, []);
 
 	return (
@@ -43,7 +54,7 @@ const MentorDashboard = () => {
 						placeholder="Search by name & skill..."
 					/>
 				</div>
-				<input type="text" id="skill-filter" placeholder="Filter by skill..." />
+				<InputFilter grads={grads} onFilterChange={handleFilterChange} />
 				<div className="sort-select-container">
 					<select id="sort-order">
 						<option value="">Sort by activity score</option>
@@ -54,7 +65,7 @@ const MentorDashboard = () => {
 			</section>
 
 			<section id="grads-cards">
-				{grads.map((grad) => (
+				{filteredGrads.map((grad) => (
 					<GradCard grad={grad} key={grad.id} />
 				))}
 			</section>

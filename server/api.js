@@ -62,9 +62,10 @@ router.post("/sign-up", hashPassword, async (req, res) => {
 		console.error(error);
 
 		if (error.code === "23505") {
-			return res
-				.status(409)
-				.json({ success: false, error: "Email or GithubUsername already exists" });
+			return res.status(409).json({
+				success: false,
+				error: "Email or GithubUsername already exists",
+			});
 		}
 		res.status(500).json({
 			success: false,
@@ -123,13 +124,11 @@ router.delete("/users/:id", async (req, res) => {
 	}
 });
 
-router.post("/sign-in",hashPassword, async (req, res) => {
+router.post("/sign-in", hashPassword, async (req, res) => {
 	const { email, password, passwordHash } = req.body;
 
 	if (!email || !password) {
-		return res
-			.status(422)
-			.json({ message: "Email and password are required" });
+		return res.status(422).json({ message: "Email and password are required" });
 	}
 
 	try {
@@ -176,7 +175,8 @@ router.post("/sign-in",hashPassword, async (req, res) => {
 });
 
 router.put(
-	"/users/:id/password", hashPassword,
+	"/users/:id/password",
+	hashPassword,
 	roleBasedAuth("graduate", "mentor", "recruiter"),
 	async (req, res) => {
 		const userId = req.params.id;
@@ -210,10 +210,9 @@ router.put(
 	}
 );
 
-
 router.get(
 	"/getAllGradUsers",
-	roleBasedAuth ("mentor", "recruiter"),
+	roleBasedAuth("mentor", "recruiter"),
 	async (_, res) => {
 		try {
 			const result = await db.query(
@@ -228,7 +227,28 @@ router.get(
 		}
 	}
 );
-
+router.get(
+	"/getAllGradUsers/:filteredSkill",
+	roleBasedAuth("mentor", "recruiter"),
+	async (req, res) => {
+		const filteredInput = `%${req.params.filteredSkill}%`;
+		try {
+			const result = await db.query(
+				`SELECT u.id, u.email, u.github_username
+                FROM users u
+                JOIN profiles p ON u.id = p.user_id
+                WHERE u.user_type = 'graduate' AND p.skills ILIKE $1`,
+				[filteredInput]
+			);
+			res.status(200).json({ success: true, data: result.rows });
+		} catch (error) {
+			res.status(500).json({
+				success: false,
+				error: "Failed to fetch User from the database",
+			});
+		}
+	}
+);
 
 router.use("/info", infoRouter);
 export default router;
