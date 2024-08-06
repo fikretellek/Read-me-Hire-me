@@ -14,7 +14,7 @@
 .avatar_container h1 {
 	font-size: 30px;
 	color: #fff;
-	background-color: #4a90e2;
+	background-color: #EE4434; ;
 	padding: 17px 15px;
 	transition: background-color 0.3s ease;
 	font-family: Arial, Helvetica, sans-serif;
@@ -52,18 +52,12 @@
 .skill_item {
 	padding: 15px 20px;
 	font-size: 18px;
-	background-color: #ee4434;
+	background-color:  #357abd;
 	color: white;
 	border-radius: 5px;
 	transition: background-color 0.3s ease;
-	cursor: pointer;
 	text-align: center;
-	border: 2px solid #ee4434;
 	outline: none;
 	text-decoration: none;
 }
 
-.skill_item:hover {
-	background-color: #d73a30;
-	border-color: #d73a30;
-}
