@@ -252,5 +252,26 @@ router.get(
 	}
 );
 
+router.get(
+	"/getGradUsersByName/:filteredName",
+	roleBasedAuth("mentor", "recruiter"),
+	async (req, res) => {
+		const filteredName = `%${req.params.filteredName}%`;
+		try {
+			const result = await db.query(
+				`SELECT u.id, u.email, u.github_username
+                FROM users u
+                WHERE u.user_type = 'graduate' AND u.github_username ILIKE $1`,
+				[filteredName]
+			);
+			res.status(200).json({ success: true, data: result.rows });
+		} catch (error) {
+			res.status(500).json({
+				success: false,
+				error: "Failed to fetch User from the database",
+			});
+		}
+	}
+);
 router.use("/info", infoRouter);
 export default router;
