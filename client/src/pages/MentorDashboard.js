@@ -42,6 +42,7 @@ const MentorDashboard = () => {
 			</header>
 			<section id="filter-search">
 				<InputFilter grads={grads} onFilterChange={handleFilterChange} />
+
 				<InputFilterName grads={grads} onFilterChange={handleFilterChange} />
 				<div className="sort-select-container">
 					<select id="sort-order">
@@ -50,6 +51,7 @@ const MentorDashboard = () => {
 						<option value="desc">Descending</option>
 					</select>
 				</div>
+
 			</section>
 			<section id="grads-cards">
 				{filteredGrads.map((grad) => (
