@@ -37,7 +37,7 @@ const InfoPage = () => {
 						</li>
 						<li>
 							Your GitHub README should include a link to your LinkedIn profile,
-							your CV, and a Codewars .
+							your CV, and a Personal Statement .
 						</li>
 						<li>You must open at least 10 Pull requests within a month.</li>
 						<li>Include at least 5 skills in your GitHub profile.</li>
