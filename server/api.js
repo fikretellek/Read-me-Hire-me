@@ -41,9 +41,11 @@ router.post("/sign-up", hashPassword, async (req, res) => {
 	}
 
 	try {
+		const githubUsername = userGithub || null;
+
 		const result = await db.query(
 			"INSERT INTO users (email, password_hash, user_type, github_username) VALUES ($1, $2, $3, $4) RETURNING id ",
-			[email, passwordHash, userType, userGithub]
+			[email, passwordHash, userType, githubUsername]
 		);
 
 		const newUserID = result.rows[0].id;
