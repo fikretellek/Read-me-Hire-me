@@ -10,7 +10,6 @@ const GradCard = ({ grad }) => {
 				alt={`${grad.github_username}'s Avatar`}
 			/>
 			<h3>{grad.github_username}</h3>
-			<p>Activity Score: </p>
 		</Link>
 	);
 };
