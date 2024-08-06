@@ -13,15 +13,28 @@ import MentorDashboard from "./pages/MentorDashboard";
 
 import { Protected } from "./components/Protected";
 import Unauthorised from "./pages/Unauthorised";
+import SignOut from "./pages/SignOut";
+import { useEffect, useState } from "react";
 
-const App = () => (
-	<>
-		<Header />
+const App = () => {
+
+
+	const [signedIn, setSignedIn] = useState(false);
+
+	useEffect(() => {
+		const token = localStorage.getItem("token");
+		if (token) {
+			setSignedIn(true);
+		}
+	}, []);
+
+	return <>
+		<Header signedIn={signedIn} />
 		<Routes>
-			<Route path="/" element={<Home />} />
+			<Route path="/" element={<Home signedIn={signedIn} />} />
 			<Route path="/about/this/site" element={<About />} />
 			<Route path="/signup" element={<SignUp />} />
-			<Route path="/signIn" element={<SignIn />} />
+			<Route path="/signIn" element={<SignIn setSignedIn={setSignedIn} />} />
 			<Route
 				path="/info/:id"
 				element={
@@ -49,6 +62,16 @@ const App = () => (
 					/>
 				}
 			/>
+			<Route
+				path="/signOut"
+				element={
+					<Protected
+						element={SignOut}
+						roles={["graduate", "mentor", "recruiter"]}
+						props={{ setSignedIn }}
+					/>
+				}
+			/>
 			<Route path="/unauthorised" element={<Unauthorised />} />
 
 			<Route
@@ -62,7 +85,7 @@ const App = () => (
 			/>
 		</Routes>
 		<Footer />
-	</>
-);
+	</>;
+};
 
 export default App;
