@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
-
 import "./MentorDashboard.css";
 import GradCard from "../components/GradsCards/GradCard";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import InputFilter from "./InputFilter";
+import InputFilterName from "./InputFilterName";
 
 const MentorDashboard = () => {
 	const [grads, setGrads] = useState([]);
@@ -40,17 +40,9 @@ const MentorDashboard = () => {
 			<header>
 				<h1>Welcome Mentor</h1>
 			</header>
-
 			<section id="filter-search">
-				<div className="search-container">
-					<i className="fas fa-search search-icon"></i>
-					<input
-						type="text"
-						id="search"
-						placeholder="Search by name & skill..."
-					/>
-				</div>
 				<InputFilter grads={grads} onFilterChange={handleFilterChange} />
+				<InputFilterName grads={grads} onFilterChange={handleFilterChange} />
 				<div className="sort-select-container">
 					<select id="sort-order">
 						<option value="">Sort by activity score</option>
@@ -59,7 +51,6 @@ const MentorDashboard = () => {
 					</select>
 				</div>
 			</section>
-
 			<section id="grads-cards">
 				{filteredGrads.map((grad) => (
 					<GradCard grad={grad} key={grad.id} />
