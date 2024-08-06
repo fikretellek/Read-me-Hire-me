@@ -36,8 +36,8 @@ const InfoPage = () => {
 							Ensure at least four projects are pinned on your GitHub profile.
 						</li>
 						<li>
-							Your GitHub README should include a link to your LinkedIn profile,
-							your CV, and a Personal Statement .
+							Your GitHub README should include links to your LinkedIn profile,
+							CV, and Personal Statement.
 						</li>
 						<li>You must open at least 10 Pull requests within a month.</li>
 						<li>Include at least 5 skills in your GitHub profile.</li>
