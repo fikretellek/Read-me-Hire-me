@@ -1,101 +1,103 @@
 body {
-	margin: 0;
-	padding: 0;
-	font-family: "Arial", sans-serif;
-
-	color: #333;
+    margin: 0;
+    padding: 0;
+    font-family: "Arial", sans-serif;
+    color: #333333; /* Updated to match your dark text color */
 }
 
 .front-container {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	justify-content: center;
-	padding: 20px;
-	position: relative;
-	background-image: url("https://cdni.iconscout.com/illustration/premium/thumb/cute-panda-working-on-laptop-illustration-download-in-svg-png-gif-file-formats--business-illustrations-3535311.png?f=webp");
-	background-size: 30% auto;
-	background-position: right center;
-	background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    height: 90vh;
+    margin: 20px;
+    background-image: url("https://cdni.iconscout.com/illustration/premium/thumb/cute-panda-working-on-laptop-illustration-download-in-svg-png-gif-file-formats--business-illustrations-3535311.png?f=webp");
+    background-size: 35% 60%;
+    background-position: right center;
+    background-repeat: no-repeat;
 }
 
 .cyf-img {
-	width: 10%;
-    position: absolute;
-    right: calc(18% - 5px);
-    top: calc(52% - 30px);
+    width: 15%;
+    position: relative;
+    left: 97%;
+    top: 25%;
 }
 
 .background-overlay {
-	width: 63%;
-	background: linear-gradient(to right, #dedede 70%, transparent 100%);
-	z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 70%;
+    height: 100%;
+    background: linear-gradient(to right, #DEDEDE 70%, transparent 100%); /* Light Grey background overlay */
+    z-index: 1;
 }
 
 .front-container h1 {
-	margin-top: 10%;
-	font-size: 3rem;
-	color: #333333;
-	margin-left: 24%;
-	font-weight: 700;
+    margin-top: 10%;
+    font-size: 3rem;
+    color: #333333; /* Dark text color */
+    margin-left: 24%;
+    font-weight: 700;
 }
 
 .front-content {
-	padding-top: 0;
-	padding: 20px;
-	width: 100%;
-	max-width: 800px;
-	text-align: left;
-	margin-left: 10%;
+    padding-top: 0;
+    padding: 20px;
+    width: 100%;
+    max-width: 800px;
+    text-align: left;
+    margin-left: 10%;
 }
 
 .front-content h2 {
-	color: #4a90e2;
-	font-size: 1.75rem;
-	font-size: 1.95em;
-	color: #333333;
-	margin-bottom: 35px;
-	margin-left: 10%;
-	margin-top: -20px;
+    color: #EE4434; /* Brand Red color */
+    font-size: 1.75rem;
+    font-size: 1.95em;
+    margin-bottom: 35px;
+    margin-left: 10%;
+    margin-top: -20px;
 }
 
 .front-content ul {
-	list-style-type: disc;
-	padding-left: 20px;
-	margin-bottom: 20px;
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-bottom: 20px;
 }
 
 .front-content li {
-	font-size: 1.5rem;
-	margin-bottom: 35px;
-	color: #555;
+    font-size: 1.5rem;
+    margin-bottom: 35px;
+    color: #555555; /* Darker grey text */
 }
 
 .front-button {
-	margin-top: 25px;
-
-	display: block;
-	margin-left: 25%;
-	padding: 20px;
-	font-size: 1.25rem;
-	color: #fff;
-	background-color: #304ffe;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-	margin-bottom: 30px;
-	transition: background-color 0.3s ease;
-	border-radius: 2;
-	font-weight: bold;
+    margin-top: 25px;
+    display: block;
+    margin-left: 25%;
+    padding: 20px;
+    font-size: 1.25rem;
+    color: #ffffff; /* White text color */
+    background-color: #EE4434; /* Brand Red color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 30px;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
 }
 
 .front-button:hover {
-	background-color: #0026ca;
+    background-color: #d32f2f; /* Darker Brand Red color on hover */
 }
 
 .front-content p {
-	font-size: 0.875rem;
-	color: #777;
-	margin-bottom: 25px;
-	text-align: center;
+    font-size: 0.875rem;
+    color: #777777; /* Light grey text color */
+    margin-bottom: 25px;
+    text-align: center;
 }
