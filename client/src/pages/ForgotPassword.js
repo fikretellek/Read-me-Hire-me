@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios"; // For making HTTP requests
 import { useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
@@ -10,18 +9,31 @@ const ForgotPassword = () => {
 	const navigate = useNavigate();
 	const handleBack = () => {
 		navigate(-1);
-	}
+	};
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		try {
-			const response = await axios.post("/api/request-password-reset", {
-				email,
+			const response = await fetch("/api/request-password-reset", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ email }),
 			});
-			setMessage(response.data.message);
-			setError("");
+
+			if (response.ok) {
+				const result = await response.json();
+				setMessage(result.message);
+				setError("");
+			} else {
+				const errorResult = await response.json();
+				setError(errorResult.message || "An error occurred");
+				setMessage("");
+			}
 		} catch (err) {
-			setError(err.response?.data.message || "An error occurred");
+			console.error(err);
+			setError(err.response?.message || "An error occurred");
 			setMessage("");
 		}
 	};
@@ -43,7 +55,7 @@ const ForgotPassword = () => {
 			</form>
 			{message && <p style={{ color: "green" }}>{message}</p>}
 			{error && <p style={{ color: "red" }}>{error}</p>}
-			<button onClick={handleBack}>Back</button> 
+			<button onClick={handleBack}>Back</button>
 		</div>
 	);
 };

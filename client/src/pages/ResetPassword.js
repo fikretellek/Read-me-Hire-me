@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { useLocation } from "react-router-dom"; // To get query parameters
+import { useLocation } from "react-router-dom"; 
 import { useNavigate } from "react-router-dom";
 
 const ResetPassword = () => {
@@ -14,7 +13,7 @@ const ResetPassword = () => {
 	const token = queryParams.get("token");
 	const email = queryParams.get("email");
 
-    const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -24,21 +23,36 @@ const ResetPassword = () => {
 		}
 
 		try {
-			const response = await axios.post("/api/reset-password", {
-				email,
-				token,
-				password,
-				passwordHash: password, // Ensure hashing happens on the backend
+			const response = await fetch("/api/reset-password", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					email,
+					token,
+					password,
+				}),
 			});
-			setMessage(response.data.message);
-			setError("");
-            navigate("/signin");
 
+            if (response.ok) {
+                const result = await response.json();
+                setMessage(result.message);
+                setError("");
+            } else {
+                const errorResult = await response.json();
+                setError(errorResult.message || "An error occurred");
+                setMessage("");
+            }
 		} catch (err) {
-			setError(err.response?.data.message || "An error occurred");
+			setError(err.response?.message || "An error occurred");
 			setMessage("");
 		}
 	};
+
+    const handleSignIn = () => {
+        navigate("/signin");
+    };
 
 	return (
 		<div>
@@ -66,6 +80,7 @@ const ResetPassword = () => {
 			</form>
 			{message && <p style={{ color: "green" }}>{message}</p>}
 			{error && <p style={{ color: "red" }}>{error}</p>}
+			<button onClick={handleSignIn}>Sign In</button>
 		</div>
 	);
 };
