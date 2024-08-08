@@ -27,6 +27,11 @@
   border: none;
 }
 
+.signOut .noButton {
+  background-color: grey; 
+
+}
+
 .signOut button:hover  {
   background-color: #d32f2f; 
 }

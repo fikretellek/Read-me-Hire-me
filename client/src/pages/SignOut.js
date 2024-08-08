@@ -19,7 +19,7 @@ const SignOut = ({ setSignedIn }) => {
 				<h1>Are you sure you want to sign out?</h1>
 				<div className="signOutButtons" >
 					<button onClick={handleSignOut}>Yes</button>
-					<button onClick={handleNo}>No</button>
+					<button  className="noButton" onClick={handleNo}>No</button>
 				</div>
 			</div>
 		);
