@@ -1,10 +1,9 @@
 main {
 	display: flex;
-	flex: 1;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	min-height: 100vh;
+	min-height: calc(100vh - 80px);
 	background-color: #ffffff;
 	font-family: Arial, sans-serif;
 	color: #333333;
@@ -16,8 +15,10 @@ main > div {
 }
 
 .main_page_logo {
-    width: 90%;
-    height: 600px;
+	padding-top: 80px;
+	height: 50dvh;
+	min-height: 300px;
+	width: auto;
 }
 
 .message {
