@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom"; // To get query parameters
+import { useNavigate } from "react-router-dom";
 
 const ResetPassword = () => {
 	const [password, setPassword] = useState("");
@@ -12,6 +13,8 @@ const ResetPassword = () => {
 	const queryParams = new URLSearchParams(search);
 	const token = queryParams.get("token");
 	const email = queryParams.get("email");
+
+    const navigate = useNavigate();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -29,6 +32,8 @@ const ResetPassword = () => {
 			});
 			setMessage(response.data.message);
 			setError("");
+            navigate("/signin");
+
 		} catch (err) {
 			setError(err.response?.data.message || "An error occurred");
 			setMessage("");

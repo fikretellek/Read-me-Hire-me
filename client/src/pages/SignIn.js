@@ -29,7 +29,7 @@ const authenticateUser = async (email, password) => {
 };
 
 const SignIn = ({ setSignedIn }) => {
-	const [email, setUsername] = useState("");
+	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [message, setMessage] = useState("");
 	const navigate = useNavigate();
@@ -43,6 +43,7 @@ const SignIn = ({ setSignedIn }) => {
 		// Email validation check
 		if (!emailRegex.test(email)) {
 			setMessage("Error: Invalid email format");
+			setPassword("");
 			return;
 		}
 
@@ -58,6 +59,7 @@ const SignIn = ({ setSignedIn }) => {
 			}
 		} else {
 			setMessage(`Error: ${result.message}`);
+			setPassword("");
 		}
 	};
 
@@ -70,7 +72,7 @@ const SignIn = ({ setSignedIn }) => {
 					type="text"
 					id="email"
 					value={email}
-					onChange={(e) => setUsername(e.target.value)}
+					onChange={(e) => setEmail(e.target.value)}
 					required
 				/>
 				<br />
