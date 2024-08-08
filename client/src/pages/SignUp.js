@@ -111,6 +111,9 @@ const SignUp = () => {
 				<br />
 				<button type="submit">Sign Up</button>
 			</form>
+			<div className="unique-signup">
+				Do you have an account? <a href="/signin">Sign In</a>
+			</div>
 			{message && <div id="message">{message}</div>}
 		</div>
 	);

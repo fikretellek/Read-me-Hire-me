@@ -166,7 +166,7 @@
 /* Message styling */
 .signUpCard .message, .updatePasswordForm-container .message, .signInCard .message, .resetPasswordCard .message, .forgotPasswordCard .message {
     margin-top: 20px;
-    color: #333333; /* Dark text color */
+     color:#888888;
     text-align: center;
     font-size: 16px;
 }
@@ -205,5 +205,13 @@
     margin: 10px;
     transition: color 0.3s ease;
         cursor: pointer;
+
+}
+
+#message {
+   color:#888888;
+   margin: 10px;
+    font-size: 16px;
+    text-align: center;
 
 }
