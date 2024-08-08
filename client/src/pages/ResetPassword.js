@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom"; 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import "./FormStyles.css";
 
 const ResetPassword = () => {
 	const [password, setPassword] = useState("");
@@ -35,29 +35,29 @@ const ResetPassword = () => {
 				}),
 			});
 
-            if (response.ok) {
-                const result = await response.json();
-                setMessage(result.message);
-                setError("");
-            } else {
-                const errorResult = await response.json();
-                setError(errorResult.message || "An error occurred");
-                setMessage("");
-            }
+			if (response.ok) {
+				const result = await response.json();
+				setMessage(result.message);
+				setError("");
+			} else {
+				const errorResult = await response.json();
+				setError(errorResult.message || "An error occurred");
+				setMessage("");
+			}
 		} catch (err) {
 			setError(err.response?.message || "An error occurred");
 			setMessage("");
 		}
 	};
 
-    const handleSignIn = () => {
-        navigate("/signin");
-    };
+	const handleSignIn = () => {
+		navigate("/signin");
+	};
 
 	return (
-		<div>
+		<div className="resetPasswordCard">
 			<h1>Reset Password</h1>
-			<form onSubmit={handleSubmit}>
+			<form  onSubmit={handleSubmit}>
 				<label htmlFor="password">New Password:</label>
 				<input
 					type="password"
@@ -78,9 +78,9 @@ const ResetPassword = () => {
 				/>
 				<button type="submit">Reset Password</button>
 			</form>
-			{message && <p style={{ color: "green" }}>{message}</p>}
-			{error && <p style={{ color: "red" }}>{error}</p>}
-			<button onClick={handleSignIn}>Sign In</button>
+			{message && <p className="message">{message}</p>}
+			{error && <p className="error-message">{error}</p>}
+			<button className="signInButton" onClick={handleSignIn}>Sign In</button>
 		</div>
 	);
 };
