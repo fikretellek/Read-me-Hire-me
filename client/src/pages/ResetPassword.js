@@ -57,7 +57,7 @@ const ResetPassword = () => {
 	return (
 		<div className="resetPasswordCard">
 			<h1>Reset Password</h1>
-			<form  onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit}>
 				<label htmlFor="password">New Password:</label>
 				<input
 					type="password"
@@ -80,7 +80,9 @@ const ResetPassword = () => {
 			</form>
 			{message && <p className="message">{message}</p>}
 			{error && <p className="error-message">{error}</p>}
-			<button className="signInButton" onClick={handleSignIn}>Sign In</button>
+			<div className="goBack">
+				<a href="/signin">Sign In</a>
+			</div>
 		</div>
 	);
 };

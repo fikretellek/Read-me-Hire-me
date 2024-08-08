@@ -55,7 +55,9 @@ const ForgotPassword = () => {
 			</form>
 			{message && <p style={{ color: "green" }}>{message}</p>}
 			{error && <p style={{ color: "red" }}>{error}</p>}
-			<button onClick={handleBack}>Back</button>
+			<div className="goBack">
+				<a onClick={handleBack}>Go Back</a>
+			</div>
 		</div>
 	);
 };

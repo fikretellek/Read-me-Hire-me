@@ -196,3 +196,14 @@
     margin-top: 10px;
     transition: background-color 0.3s ease;
 }
+
+
+.goBack{
+        text-decoration: none;
+    color: #ee4434;
+    font-size: 18px;
+    margin: 10px;
+    transition: color 0.3s ease;
+        cursor: pointer;
+
+}
