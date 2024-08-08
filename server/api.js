@@ -308,11 +308,11 @@ router.post("/request-password-reset", async (req, res) => {
 			service: "Gmail",
 			auth: {
 				user: "readmehireme@gmail.com",
-				pass: "",
+				pass: `${config.emailAccountPassword}`,
 			},
 		});
 
-		const resetUrl = `http://localhost:3000/reset-password?token=${resetToken}&email=${email}`;
+		const resetUrl = `${config.appUrl}/reset-password?token=${resetToken}&email=${email}`;
 		const mailOptions = {
 			to: email,
 			from: "readmehireme@gmail.com",

@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios"; // For making HTTP requests
+import { useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
 	const [email, setEmail] = useState("");
 	const [message, setMessage] = useState("");
 	const [error, setError] = useState("");
 
+	const navigate = useNavigate();
+	const handleBack = () => {
+		navigate(-1);
+	}
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
@@ -38,6 +43,7 @@ const ForgotPassword = () => {
 			</form>
 			{message && <p style={{ color: "green" }}>{message}</p>}
 			{error && <p style={{ color: "red" }}>{error}</p>}
+			<button onClick={handleBack}>Back</button> 
 		</div>
 	);
 };

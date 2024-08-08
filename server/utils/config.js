@@ -6,6 +6,8 @@ export default {
 	port: parseInt(process.env.PORT ?? "3000", 10),
 	production: process.env.NODE_ENV === "production",
 	jwtSecret: process.env.JWT_SECRET,
+	emailAccountPassword: process.env.EMAIL_ACCOUNT_PASSWORD,
+	appUrl: process.env.APP_URL ?? "http://localhost:3000",
 };
 
 function createDatabaseUrl() {
