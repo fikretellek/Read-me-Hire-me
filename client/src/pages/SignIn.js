@@ -94,7 +94,7 @@ const SignIn = ({ setSignedIn }) => {
 				Don't have an account? <a href="/signup">Sign up</a>
 			</div>
 			<div className="forgot-password">
-				Did you forget your password?<a href="/forgot-password">Forgot Password?</a>
+				<a href="/forgot-password">Forgot your password?</a>
 			</div>
 		</div>
 	);

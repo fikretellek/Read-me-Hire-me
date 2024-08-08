@@ -176,7 +176,7 @@
     margin-top: 5px;
 }
 
-.unique-signup .forgot-password{
+.unique-signup, .forgot-password {
     margin-top: 20px;
     color:  #888888 ;
     text-align: center;
