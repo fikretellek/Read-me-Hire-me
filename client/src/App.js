@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, RouterProvider, Routes } from "react-router-dom";
 
 import Header from "./components/AppHeader/AppHeader";
 import Footer from "./components/Footer/Footer";
@@ -6,11 +6,11 @@ import About from "./pages/About";
 import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
+import ForgotPassword from "./pages/ForgotPassword";
 import UpdatePasswordForm from "./pages/UpdatePasswordForm";
 import InfoPage from "./components/Info/InfoPage";
 import Profile from "./components/Profile/Profile";
 import MentorDashboard from "./pages/MentorDashboard";
-
 import { Protected } from "./components/Protected";
 import Unauthorised from "./pages/Unauthorised";
 import SignOut from "./pages/SignOut";
@@ -35,6 +35,7 @@ const App = () => {
 			<Route path="/about/this/site" element={<About />} />
 			<Route path="/signup" element={<SignUp />} />
 			<Route path="/signIn" element={<SignIn setSignedIn={setSignedIn} />} />
+			<Route	path="/forgot-password" element={<ForgotPassword />} />
 			<Route
 				path="/info/:id"
 				element={
