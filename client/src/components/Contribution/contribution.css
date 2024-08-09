@@ -1,45 +1,39 @@
-/* Contributions table container styling */
 .activity-table {
-  grid-area: con; /* Grid area for layout */
-  padding: 20px; /* Padding inside the container */
-  background-color: #F3F3F3; /* Light grey background */
-  border: 1px solid #DEDEDE; /* Light grey border */
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  font-family: 'Arial', sans-serif; /* Consistent font */
-  max-width: 1300px; /* Max width for better readability */
+  grid-area: con; 
+  padding: 20px; 
+  background-color: #F3F3F3; 
+  border: 1px solid #DEDEDE; 
+  border-radius: 10px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  font-family: 'Arial', sans-serif;
+  max-width: 1300px; 
 }
 
-/* Heading styling */
 .activity-table h1 {
-  font-size: 28px; /* Font size for the main heading */
-  margin-bottom: 15px; /* Space below the heading */
+  font-size: 28px; 
+  margin-bottom: 15px; 
 }
 
-/* Table styling */
 .activity-table table {
-  width: 100%; /* Full width of the container */
-  border-collapse: collapse; /* Collapse borders for a clean look */
+  width: 100%; 
+  border-collapse: collapse; 
 }
 
-/* Table headers styling */
 .activity-table th {
-  background-color: #f4f4f4; /* Light grey background for headers */
-  font-weight: bold; /* Bold text for headers */
-  padding: 10px; /* Padding inside headers */
-  text-align: left; /* Align text to the left */
-  border-bottom: 2px solid #ddd; /* Slightly thicker border for header separation */
+  background-color: #f4f4f4; 
+  font-weight: bold; 
+  padding: 10px; 
+  text-align: left; 
+  border-bottom: 2px solid #ddd; 
 }
 
-/* Table cells styling */
 .activity-table td {
-  padding: 10px; /* Padding inside cells */
-  text-align: left; /* Align text to the left */
-  border-bottom: 1px solid #ddd; /* Border between rows */
-  color: #333; /* Dark text color for readability */
+  padding: 10px; 
+  text-align: left; 
+  border-bottom: 1px solid #ddd; 
+  color: #333; 
 }
 
-/* Alternate row background color */
 .activity-table tr:nth-child(even) {
-  background-color: #f9f9f9; /* Slightly different grey for alternate rows */
+  background-color: #f9f9f9; 
 }
