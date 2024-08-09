@@ -35,7 +35,7 @@ const Contribution = ({ userId }) => {
 	if (Object.keys(activities).length === 0) {
 		return <div className="Activity-container">There is no Activity</div>;
 	}
-	const radius = 40;
+	const radius = 80;
 	const circumference = 2 * Math.PI * radius;
 	const offset =
 		circumference -
@@ -69,19 +69,19 @@ const Contribution = ({ userId }) => {
 			<div className="contributions">
 				<div>
 					<p>Total PR's (90 days):</p>
-					<svg width="100" height="100" viewBox="0 0 100 100">
+					<svg width="200" height="200" viewBox="0 0 200 200">
 						{/* outer circle */}
 						<circle
-							cx="50"
-							cy="50"
+							cx="100"
+							cy="100"
 							r={1}
 							stroke="#357abd"
-							strokeWidth="95"
+							strokeWidth="170"
 							fill="none"
 						/>
 						<text
-							x="50"
-							y="50"
+							x="100"
+							y="100"
 							textAnchor="middle"
 							fontSize="30"
 							dominantBaseline="middle"
@@ -94,11 +94,11 @@ const Contribution = ({ userId }) => {
 				</div>
 				<div>
 					<p>Merged PR's rate:</p>
-					<svg width="100" height="100" viewBox="0 0 100 100">
+					<svg width="200" height="200" viewBox="0 0 200 200">
 						{/* outer circle */}
 						<circle
-							cx="50"
-							cy="50"
+							cx="100"
+							cy="100"
 							r={radius}
 							stroke="lightgray"
 							strokeWidth="15"
@@ -107,21 +107,21 @@ const Contribution = ({ userId }) => {
 
 						{/* merged percentage circle */}
 						<circle
-							cx="50"
-							cy="50"
+							cx="100"
+							cy="100"
 							r={radius}
 							stroke="#35bd57"
 							strokeWidth="15"
 							fill="none"
 							strokeDasharray={circumference}
 							strokeDashoffset={circumference - offset}
-							transform="rotate(-90 50 50)"
+							transform="rotate(-90 100 100)"
 						/>
 						<text
-							x="50"
-							y="50"
+							x="100"
+							y="100"
 							textAnchor="middle"
-							fontSize="20"
+							fontSize="30"
 							dominantBaseline="middle"
 							fill="black"
 							fontFamily="Arial"
