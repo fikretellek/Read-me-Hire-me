@@ -1,60 +1,52 @@
-/* Styles specific to the Forgot Password page */
 .forgotPasswordCard {
     max-width: 400px;
     margin: 50px auto;
     padding: 20px;
-    background-color: #F3F3F3; /* Light Grey background */
-    border: 1px solid #DEDEDE; /* Dark Grey border */
+    background-color: #F3F3F3; 
+    border: 1px solid #DEDEDE; 
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: 'Arial', sans-serif; /* Consistent font */
+    font-family: 'Arial', sans-serif; 
 }
 
-/* Header styling */
 .forgotPasswordCard h1 {
-    color: #333333; /* Body Text color */
+    color: #333333; 
     font-size: 24px;
     text-align: center;
     margin-bottom: 20px;
 }
 
-/* Label styling */
 .forgotPasswordCard label {
-    color: #333333; /* Body Text color */
+    color: #333333; 
     font-weight: bold;
     display: block;
     margin-bottom: 5px;
 }
 
-/* Input field styling */
 .forgotPasswordCard input[type="email"] {
-    width: calc(100% - 22px); /* Adjusted width to account for padding */
+    width: calc(100% - 22px);
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid #A9A9A9; /* Border color 2 for normal state */
+    border: 1px solid #A9A9A9; 
     border-radius: 2px;
     box-sizing: border-box;
 }
 
-/* Input field hover and focus styling */
 .forgotPasswordCard input[type="email"]:hover {
-    border-color: #495057; /* Hover border color */
+    border-color: #495057; 
 }
 
 .forgotPasswordCard input[type="email"]:focus {
-    border-color: #3455DB; /* Focus border color */
+    border-color: #3455DB; 
 }
 
-/* Error state for inputs */
 .forgotPasswordCard input[type="email"].error {
-    border-color: #FF0000; /* Error border color */
-}
+    border-color: #FF0000; }
 
-/* Button styling */
 .forgotPasswordCard button {
     width: 100%;
     padding: 10px;
-    background-color: #EE4434; /* Brand Red color */
+    background-color: #EE4434; 
     color: white;
     border: none;
     border-radius: 5px;
@@ -65,71 +57,65 @@
 }
 
 .forgotPasswordCard button:hover {
-    background-color: #d32f2f; /* Darker Brand Red color */
+    background-color: #d32f2f; 
 }
 
-/* Message styling */
 .forgotPasswordCard .message {
     margin-top: 20px;
-    color: #333333; /* Body Text color */
+    color: #333333; 
     text-align: center;
     font-size: 16px;
 }
 
 .forgotPasswordCard .error-message {
-    color: #FF0000; /* Error color */
+    color: #FF0000; 
     font-size: 14px;
     margin-top: 5px;
 }
 
-/* General styling for form containers */
 .signUpCard, .updatePasswordForm-container, .signInCard, .resetPasswordCard, .forgotPasswordCard {
     max-width: 400px;
     margin: 0px auto;
     padding: 20px;
-    background-color: #ffffff; /* Clean white background */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
-    font-family: 'Arial', sans-serif; /* Simple and modern font */
+    background-color: #ffffff; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    font-family: 'Arial', sans-serif; 
 }
 
-/* Header styling */
 .signUpCard h1, .updatePasswordForm-container h1, .signInCard h1, .resetPasswordCard h1, .forgotPasswordCard h1 {
-    color: #333333; /* Dark text color */
-    font-size: 24px; /* Readable font size */
+    color: #333333;
+    font-size: 24px; 
     text-align: center;
-    margin-bottom: 20px; /* Space below header */
+    margin-bottom: 20px; 
 }
 
-/* Label styling */
 .signUpCard label, .updatePasswordForm-container label, .signInCard label, .resetPasswordCard label, .forgotPasswordCard label {
-    color: #333333; /* Dark text color */
+    color: #333333; 
     font-weight: bold;
     display: block;
-    margin-bottom: 8px; /* Space below labels */
+    margin-bottom: 8px; 
 }
 
-/* Input and Select field styling */
 .signUpCard input[type="text"], .signUpCard input[type="password"], .signUpCard select,
 .updatePasswordForm-container input[type="password"],
 .signInCard input[type="text"], .signInCard input[type="password"], 
 .resetPasswordCard input[type="text"], .resetPasswordCard input[type="password"],
 .forgotPasswordCard input[type="email"] {
-    width: 100%; /* Full width */
-    padding: 10px; /* Comfortable padding */
-    margin: 10px 0; /* Space around fields */
-    border: 1px solid #e0e0e0; /* Light border */
-    border-radius: 4px; /* Slightly rounded corners */
-    box-sizing: border-box; /* Includes padding in width */
+    width: 100%; 
+    padding: 10px;
+    margin: 10px 0; 
+    border: 1px solid #e0e0e0; 
+    border-radius: 4px; 
+    box-sizing: border-box; 
 }
 
-/* Input field hover and focus styling */
 .signUpCard input[type="text"]:hover, .signUpCard input[type="password"]:hover, .signUpCard select:hover,
 .updatePasswordForm-container input[type="password"]:hover,
 .signInCard input[type="text"]:hover, .signInCard input[type="password"]:hover,
 .resetPasswordCard input[type="text"]:hover, .resetPasswordCard input[type="password"]:hover,
 .forgotPasswordCard input[type="email"]:hover {
-    border-color: #888888; /* Darker border on hover */
+    border-color: #888888; 
 }
 
 .signUpCard input[type="text"]:focus, .signUpCard input[type="password"]:focus, .signUpCard select:focus,
@@ -137,20 +123,17 @@
 .signInCard input[type="text"]:focus, .signInCard input[type="password"]:focus,
 .resetPasswordCard input[type="text"]:focus, .resetPasswordCard input[type="password"]:focus,
 .forgotPasswordCard input[type="email"]:focus {
-    border-color: #EE4434; /* Brand color on focus */
-}
+    border-color: #EE4434; }
 
-/* Error state for inputs */
 .signUpCard input.error, .updatePasswordForm-container input.error,
 .signInCard input.error, .resetPasswordCard input.error, .forgotPasswordCard input.error {
-    border-color: #FF0000; /* Red border for errors */
+    border-color: #FF0000; 
 }
 
-/* Button styling */
 .signUpCard button, .updatePasswordForm-container button, .signInCard button, .resetPasswordCard button, .forgotPasswordCard button {
     width: 100%;
     padding: 10px;
-    background-color: #EE4434; /* Brand color */
+    background-color: #EE4434; 
     color: white;
     border: none;
     border-radius: 4px;
@@ -160,10 +143,8 @@
 }
 
 .signUpCard button:hover, .updatePasswordForm-container button:hover, .signInCard button:hover, .resetPasswordCard button:hover, .forgotPasswordCard button:hover {
-    background-color: #d32f2f; /* Darker shade on hover */
+    background-color: #d32f2f; 
 }
-
-/* Message styling */
 .signUpCard .message, .updatePasswordForm-container .message, .signInCard .message, .resetPasswordCard .message, .forgotPasswordCard .message {
     margin-top: 20px;
      color:#888888;
@@ -172,7 +153,7 @@
 }
 
 .signUpCard .error-message, .updatePasswordForm-container .error-message, .signInCard .error-message, .resetPasswordCard .error-message, .forgotPasswordCard .error-message {
-    color: #FF0000; /* Red color for errors */
+    color: #FF0000; 
     font-size: 14px;
     margin-top: 5px;
 }

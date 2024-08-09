@@ -50,10 +50,6 @@ const ResetPassword = () => {
 		}
 	};
 
-	const handleSignIn = () => {
-		navigate("/signin");
-	};
-
 	return (
 		<div className="resetPasswordCard">
 			<h1>Reset Password</h1>
