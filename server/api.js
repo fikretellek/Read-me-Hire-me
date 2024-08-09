@@ -10,7 +10,12 @@ import fetchReadme from "./controller/fetchReadme";
 import infoRouter from "./routes/getInfoRouter";
 import FetchSkills from "./controller/fetchSkills";
 import hashPassword from "./middlewares/hashPassword";
+import nodemailer from "nodemailer";  // For sending emails
+import crypto from "crypto";  // For generating tokens
+
+
 import fetchPullRequests from "./controller/fetchPullRequests";
+
 const router = Router();
 
 // Email validation regex
@@ -273,5 +278,90 @@ router.get(
 		}
 	}
 );
+
+
+// 1. Route to request a password reset
+router.post("/request-password-reset", async (req, res) => {
+	const { email } = req.body;
+
+	if (!email || !emailRegex.test(email)) {
+		return res.status(422).json({ message: "Invalid email format" });
+	}
+
+	try {
+		const user = await db.query("SELECT * FROM users WHERE email = $1", [email]);
+
+		if (user.rows.length === 0) {
+			return res.status(404).json({ message: "No user found with that email address." });
+		}
+
+		// Generate reset token
+		const resetToken = crypto.randomBytes(32).toString("hex");
+		const resetTokenExpiry = Date.now() + 3600000; // 1 hour
+
+		await db.query(
+			"UPDATE users SET reset_token = $1, reset_token_expiry = $2 WHERE email = $3",
+			[resetToken, resetTokenExpiry, email]
+		);
+
+		// Send email with reset link
+		const transporter = nodemailer.createTransport({
+			service: "Gmail",
+			auth: {
+				user: "readmehireme@gmail.com",
+				pass: `${config.emailAccountPassword}`,
+			},
+		});
+
+		const resetUrl = `${config.appUrl}/reset-password?token=${resetToken}&email=${email}`;
+		const mailOptions = {
+			to: email,
+			from: "readmehireme@gmail.com",
+			subject: "Password Reset",
+			text: `Please click on the following link, or paste it into your browser to complete the password reset:\n\n${resetUrl}\n\nIf you did not request this, please ignore this email and your password will remain unchanged.\n`,
+		};
+
+		transporter.sendMail(mailOptions, (err) => {
+			if (err) {
+				console.error(err);
+				return res.status(500).json({ message: "Error sending reset email." });
+			}
+			res.status(200).json({ message: "Password reset email sent successfully." });
+		});
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ message: "Failed to initiate password reset." });
+	}
+});
+
+// 2. Route to reset the password
+router.post("/reset-password", hashPassword, async (req, res) => {
+	const { email, token, password, passwordHash } = req.body;
+
+	if (!email || !token || !password) {
+		return res.status(422).json({ message: "All fields are required." });
+	}
+
+	try {
+		const user = await db.query(
+			"SELECT * FROM users WHERE email = $1 AND reset_token = $2 AND reset_token_expiry > $3",
+			[email, token, Date.now()]
+		);
+
+		if (user.rows.length === 0) {
+			return res.status(400).json({ message: "Invalid or expired token." });
+		}
+
+		await db.query(
+			"UPDATE users SET password_hash = $1, reset_token = null, reset_token_expiry = null WHERE email = $2",
+			[passwordHash, email]
+		);
+
+		res.status(200).json({ message: "Password has been reset successfully." });
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ message: "Failed to reset password." });
+	}
+});
 router.use("/info", infoRouter);
 export default router;
