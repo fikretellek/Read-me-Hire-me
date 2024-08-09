@@ -10,6 +10,7 @@ import fetchReadme from "./controller/fetchReadme";
 import infoRouter from "./routes/getInfoRouter";
 import FetchSkills from "./controller/fetchSkills";
 import hashPassword from "./middlewares/hashPassword";
+import fetchPullRequests from "./controller/fetchPullRequests";
 const router = Router();
 
 // Email validation regex
@@ -155,9 +156,8 @@ router.post("/sign-in", hashPassword, async (req, res) => {
 		if (userType === "graduate" && userGithub) {
 			await fetchReadme(userGithub);
 			await fetchActivity(userGithub);
-
+			await fetchPullRequests(userGithub)
 			await FetchSkills(userGithub);
-
 			await fetchPinnedProjects(userGithub);
 		}
 
