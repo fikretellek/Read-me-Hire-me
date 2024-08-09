@@ -1,61 +1,58 @@
 .avatar_container {
-  max-width: 400px; /* Max width for the container */
-  padding: 20px; /* Padding inside the container */
-  background-color: #F3F3F3; /* Light grey background */
-  border: 1px solid #DEDEDE; /* Light grey border */
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  font-family: 'Arial', sans-serif; /* Consistent font family */
+  max-width: 400px;
+  padding: 20px;
+  background-color: #F3F3F3;
+  border: 1px solid #DEDEDE;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
-  grid-area: myAv; /* Grid area for layout */
+  grid-area: myAv;
 }
 
-/* Avatar image styling */
 .avatar-image {
-  border-radius: 50%; /* Circular avatar */
-  width: 360px; /* Width of the avatar */
-  height: 360px; /* Height of the avatar */
-  object-fit: cover; /* Ensure image covers the area */
-  border: 3px solid #ddd; /* Light border around the avatar */
+  border-radius: 50%;
+  width: 360px;
+  height: 360px;
+  object-fit: cover;
+  border: 3px solid #ddd;
 }
 
-/* GitHub link styling */
 .github-link {
-  text-decoration: none; /* Remove underline */
-  color: #333; /* Dark text color */
-  display: block; /* Block-level link */
-  margin-top: 15px; /* Space between avatar and link */
+  text-decoration: none;
+  color: #333;
+  display: block;
+  margin-top: 15px;
 }
 
 .github-link h1 {
-  font-size: 20px; /* Font size for GitHub username */
-  font-weight: bold; /* Bold text */
-  background-color: #ee4434; /* Background color */
-  color: white; /* White text color */
-  padding: 10px 20px; /* Padding inside the button */
-  border-radius: 5px; /* Rounded corners */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #ee4434;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .github-link h1:hover {
-  background-color: #d6332c; /* Darker background on hover */
+  background-color: #d6332c;
 }
 
 .skill_list {
-  grid-area: skills; /* Grid area for layout */
-  list-style: none; /* Remove default list styling */
-  padding: 0; /* Remove default padding */
+  grid-area: skills;
+  list-style: none;
+  padding: 0;
   display: flex;
-  flex-wrap: wrap; /* Wrap items to next line */
-  gap: 10px; /* Space between items */
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-/* Skill item styling */
 .skill_item {
-  background-color: #f0f0f0; /* Light grey background */
-  border-radius: 12px; /* Rounded corners */
-  padding: 10px 15px; /* Padding inside skill item */
-  font-size: 14px; /* Font size */
+  background-color: #f0f0f0;
+  border-radius: 12px;
+  padding: 10px 15px;
+  font-size: 14px;
 }

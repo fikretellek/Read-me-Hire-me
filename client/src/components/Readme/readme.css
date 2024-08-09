@@ -1,18 +1,16 @@
-/* Readme container styling */
 .readme-container {
-  max-width: 800px; /* Max width of the container */
-  padding: 20px; /* Padding inside the container */
-  background-color: #F3F3F3; /* Light grey background */
-  border: 1px solid #DEDEDE; /* Light grey border */
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  font-family: 'Arial', sans-serif; /* Consistent font */
-  line-height: 1.6; /* Line height for readability */
-  grid-area: readme; /* Grid area for layout */
+  max-width: 800px;
+  padding: 20px;
+  background-color: #F3F3F3;
+  border: 1px solid #DEDEDE;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  grid-area: readme;
 }
 
-/* Readme heading styling */
 .readme-container h1 {
-  font-size: 28px; /* Font size for the main heading */
-  margin-bottom: 20px; /* Space below the heading */
+  font-size: 28px;
+  margin-bottom: 20px;
 }

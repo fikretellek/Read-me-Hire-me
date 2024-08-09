@@ -1,17 +1,17 @@
 .profile-container {
-  background-color: #e3e3e3; /* Light grey background for a clean look */
+  background-color: #e3e3e3; 
   display: grid;
-  grid-template-columns: 1fr 2fr; /* Adjust column sizes */
-  grid-template-rows: auto auto; /* Auto-adjust rows based on content */
+  grid-template-columns: 1fr 2fr; 
+  grid-template-rows: auto auto; 
   grid-template-areas:
-    "myAv readme" /* Avatar and Readme side by side */
-    "mypr mypr" /* Skills under Avatar, Readme spans entire second column */
-    "con con"; /* Contributions span the entire width */
-  grid-gap: 20px; /* Increase gap for better spacing */
-  padding: 20px; /* Add padding for spacing around the content */
+    "myAv readme" 
+    "mypr mypr" 
+    "con con"; 
+  grid-gap: 20px; 
+  padding: 20px; 
   width: 100%;
-  max-width: 1300px; /* Restrict max width for better readability */
-  margin: 100px auto; /* Center container */
+  max-width: 1300px; 
+  margin: 100px auto; 
   box-sizing: border-box;
 
   
