@@ -14,6 +14,8 @@ import nodemailer from "nodemailer";  // For sending emails
 import crypto from "crypto";  // For generating tokens
 
 
+import fetchPullRequests from "./controller/fetchPullRequests";
+
 const router = Router();
 
 // Email validation regex
@@ -159,9 +161,8 @@ router.post("/sign-in", hashPassword, async (req, res) => {
 		if (userType === "graduate" && userGithub) {
 			await fetchReadme(userGithub);
 			await fetchActivity(userGithub);
-
+			await fetchPullRequests(userGithub)
 			await FetchSkills(userGithub);
-
 			await fetchPinnedProjects(userGithub);
 		}
 

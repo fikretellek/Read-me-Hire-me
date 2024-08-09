@@ -9,8 +9,6 @@
 	height: 100%;
 	box-sizing: border-box;
 	grid-area: con;
-	margin-bottom: 80px;
-	margin-top: 2%;
 }
 
 .activity-table table {
