@@ -9,31 +9,25 @@ body {
 .front-container {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
 	padding: 20px;
 	position: relative;
-	height: 90vh;
-	margin: 20px;
 	background-image: url("https://cdni.iconscout.com/illustration/premium/thumb/cute-panda-working-on-laptop-illustration-download-in-svg-png-gif-file-formats--business-illustrations-3535311.png?f=webp");
-	background-size: 35% 60%;
+	background-size: 30% auto;
 	background-position: right center;
 	background-repeat: no-repeat;
 }
 
 .cyf-img {
-	width: 15%;
-	position: relative;
-	left: 97%;
-	top: 25%;
+	width: 10%;
+    position: absolute;
+    right: calc(18% - 5px);
+    top: calc(52% - 30px);
 }
 
 .background-overlay {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 70%;
-	height: 100%;
+	width: 63%;
 	background: linear-gradient(to right, #dedede 70%, transparent 100%);
 	z-index: 1;
 }
