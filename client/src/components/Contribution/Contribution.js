@@ -65,103 +65,112 @@ const Contribution = ({ userId }) => {
 
 	return (
 		<div className="activity-table">
-			<div>
-				<p>Total PR's (90 days):</p>
-				<svg width="100" height="100" viewBox="0 0 100 100">
-					{/* outer circle */}
-					<circle
-						cx="50"
-						cy="50"
-						r={1}
-						stroke="#357abd"
-						strokeWidth="95"
-						fill="none"
-					/>
-					<text
-						x="50"
-						y="50"
-						textAnchor="middle"
-						fontSize="30"
-						dominantBaseline="middle"
-						fill="white"
-						fontFamily="Arial"
-					>
-						{activities.total}x
-					</text>
-				</svg>
-			</div>
-			<div>
-				<p>Merged PR's rate:</p>
-				<svg width="100" height="100" viewBox="0 0 100 100">
-					{/* outer circle */}
-					<circle
-						cx="50"
-						cy="50"
-						r={radius}
-						stroke="lightgray"
-						strokeWidth="15"
-						fill="none"
-					/>
-
-					{/* merged percentage circle */}
-					<circle
-						cx="50"
-						cy="50"
-						r={radius}
-						stroke="#35bd57"
-						strokeWidth="15"
-						fill="none"
-						strokeDasharray={circumference}
-						strokeDashoffset={circumference - offset}
-						transform="rotate(-90 50 50)"
-					/>
-					<text
-						x="50"
-						y="50"
-						textAnchor="middle"
-						fontSize="20"
-						dominantBaseline="middle"
-						fill="black"
-						fontFamily="Arial"
-					>
-						%{Math.floor((activities.merged_count / activities.total) * 100)}
-					</text>
-				</svg>
-			</div>
-			<div className="chart">
-				<div className="months-container">
-					<p id="left-legend" className="legend-type">pr counts</p>
-					<div
-						id="third-m"
-						className="month"
-						style={{
-							height: `${(intervals.between60and90Days / maxValue) * 100}%`,
-						}}
-					>
-						<p className="rate">x{intervals.between60and90Days}</p>
-					</div>
-					<div
-						id="second-m"
-						className="month"
-						style={{
-							height: `${(intervals.between30and60Days / maxValue) * 100 + 1}%`,
-						}}
-					>
-						<p className="rate">x{intervals.between30and60Days}</p>
-					</div>
-					<div
-						id="first-m"
-						className="month"
-						style={{ height: `${(intervals.last30Days / maxValue) * 100}%` }}
-					>
-						<p className="rate">x{intervals.last30Days}</p>
-					</div>
-					<p id="bottom-legend" className="legend-type">months</p>
+			<h1>Contributions</h1>
+			<div className="contributions">
+				<div>
+					<p>Total PR's (90 days):</p>
+					<svg width="100" height="100" viewBox="0 0 100 100">
+						{/* outer circle */}
+						<circle
+							cx="50"
+							cy="50"
+							r={1}
+							stroke="#357abd"
+							strokeWidth="95"
+							fill="none"
+						/>
+						<text
+							x="50"
+							y="50"
+							textAnchor="middle"
+							fontSize="30"
+							dominantBaseline="middle"
+							fill="white"
+							fontFamily="Arial"
+						>
+							{activities.total}x
+						</text>
+					</svg>
 				</div>
-				<div className="legend">
-					<p>month before</p>
-					<p>last month</p>
-					<p>this month</p>
+				<div>
+					<p>Merged PR's rate:</p>
+					<svg width="100" height="100" viewBox="0 0 100 100">
+						{/* outer circle */}
+						<circle
+							cx="50"
+							cy="50"
+							r={radius}
+							stroke="lightgray"
+							strokeWidth="15"
+							fill="none"
+						/>
+
+						{/* merged percentage circle */}
+						<circle
+							cx="50"
+							cy="50"
+							r={radius}
+							stroke="#35bd57"
+							strokeWidth="15"
+							fill="none"
+							strokeDasharray={circumference}
+							strokeDashoffset={circumference - offset}
+							transform="rotate(-90 50 50)"
+						/>
+						<text
+							x="50"
+							y="50"
+							textAnchor="middle"
+							fontSize="20"
+							dominantBaseline="middle"
+							fill="black"
+							fontFamily="Arial"
+						>
+							%{Math.floor((activities.merged_count / activities.total) * 100)}
+						</text>
+					</svg>
+				</div>
+				<div className="chart">
+					<div className="months-container">
+						<p id="left-legend" className="legend-type">
+							pr counts
+						</p>
+						<div
+							id="third-m"
+							className="month"
+							style={{
+								height: `${(intervals.between60and90Days / maxValue) * 100}%`,
+							}}
+						>
+							<p className="rate">x{intervals.between60and90Days}</p>
+						</div>
+						<div
+							id="second-m"
+							className="month"
+							style={{
+								height: `${
+									(intervals.between30and60Days / maxValue) * 100 + 1
+								}%`,
+							}}
+						>
+							<p className="rate">x{intervals.between30and60Days}</p>
+						</div>
+						<div
+							id="first-m"
+							className="month"
+							style={{ height: `${(intervals.last30Days / maxValue) * 100}%` }}
+						>
+							<p className="rate">x{intervals.last30Days}</p>
+						</div>
+						<p id="bottom-legend" className="legend-type">
+							months
+						</p>
+					</div>
+					<div className="legend">
+						<p>month before</p>
+						<p>last month</p>
+						<p>this month</p>
+					</div>
 				</div>
 			</div>
 		</div>
