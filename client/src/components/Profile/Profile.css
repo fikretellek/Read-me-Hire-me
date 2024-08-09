@@ -1,15 +1,18 @@
 .profile-container {
-	flex: 1;
-	background-color: #e3e3e3;
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: auto;
-	grid-template-areas:
-		"myAv myAv"
-		"readme mypr"
-		"con con";
-	grid-gap: 20px 10px;
-	padding: 20px 10px;
-	width: 100%;
-	box-sizing: border-box;
+  background-color: #e3e3e3; 
+  display: grid;
+  grid-template-columns: 1fr 2fr; 
+  grid-template-rows: auto auto; 
+  grid-template-areas:
+    "myAv readme" 
+    "mypr mypr" 
+    "con con"; 
+  grid-gap: 20px; 
+  padding: 20px; 
+  width: 100%;
+  max-width: 1300px; 
+  margin: 100px auto; 
+  box-sizing: border-box;
+
+  
 }

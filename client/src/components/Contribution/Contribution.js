@@ -31,10 +31,7 @@ const Contribution = ({ userId }) => {
 	if (error) {
 		return <div className="Activity-container">Error: {error}</div>;
 	}
-
-	if (Object.keys(activities).length === 0) {
-		return <div className="Activity-container">There is no Activity</div>;
-	}
+  
 	const radius = 40;
 	const circumference = 2 * Math.PI * radius;
 	const offset =
