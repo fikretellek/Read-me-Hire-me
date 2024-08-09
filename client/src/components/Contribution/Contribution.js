@@ -45,7 +45,7 @@ const Contribution = ({ userId }) => {
 						<th>Documentation</th>
 						<th>Collaboration</th>
 						<th>Total</th>
-						<th>PR Dates</th>
+						<th>PR Count</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -54,7 +54,7 @@ const Contribution = ({ userId }) => {
 						<td>{activities.documentation}</td>
 						<td>{activities.collaboration}</td>
 						<td>{activities.total}</td>
-						<td>{activities.pr_dates}</td>
+						{/* <td>{activities.pr_dates}</td> */}
 					</tr>
 				</tbody>
 			</table>
