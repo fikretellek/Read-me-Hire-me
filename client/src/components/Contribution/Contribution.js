@@ -19,7 +19,6 @@ const Contribution = ({ userId }) => {
 					throw new Error("Activity not found");
 				}
 				const result = await response.json();
-				console.log(result);
 				setActivity(result);
 			} catch (error) {
 				setError(error.message);
@@ -32,7 +31,7 @@ const Contribution = ({ userId }) => {
 		return <div className="Activity-container">Error: {error}</div>;
 	}
   
-	const radius = 40;
+	const radius = 80;
 	const circumference = 2 * Math.PI * radius;
 	const offset =
 		circumference -
@@ -44,7 +43,8 @@ const Contribution = ({ userId }) => {
 		between30and60Days: 0,
 		between60and90Days: 0,
 	};
-	activities.pr_dates_array.forEach((date) => {
+	if(activities.pr_dates_array){
+		activities.pr_dates_array.forEach((date) => {
 		const daysAgo = differenceInDays(now, parseISO(date));
 
 		if (daysAgo <= 30) {
@@ -55,6 +55,8 @@ const Contribution = ({ userId }) => {
 			intervals.between60and90Days += 1;
 		}
 	});
+	}
+	
 
 	const maxValue = Math.max(...Object.values(intervals));
 
