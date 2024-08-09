@@ -10,5 +10,5 @@ router.get("/:id/readme", getReadme);
 router.get("/:id/activity", getActivity);
 router.get("/:id/projects", getProjects);
 router.get("/:id/skills", getSkills);
-router.get("/:id/prs", getPullRequests)
+router.get("/:id/pullRequests", getPullRequests)
 export default router;
