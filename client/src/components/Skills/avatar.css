@@ -1,63 +1,58 @@
 .avatar_container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	background-color: #fff;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	border-radius: 20px;
-	padding: 20px;
-	width: 100%;
-	height: 100%;
-	box-sizing: border-box;
-	grid-area: myAv;
+  max-width: 400px;
+  padding: 20px;
+  background-color: #F3F3F3;
+  border: 1px solid #DEDEDE;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  grid-area: myAv;
 }
-.avatar_container h1 {
-	font-size: 30px;
-	color: #fff;
-	background-color: #EE4434; ;
-	padding: 17px 15px;
-	transition: background-color 0.3s ease;
-	font-family: Arial, Helvetica, sans-serif;
-	font-weight: bold;
-	text-decoration: none;
-	cursor: pointer;
-	box-sizing: border-box;
-	border-radius: 5px;
-	margin-bottom: 30px;
-}
-.avatar_container h1:hover {
-	background-color: #357abd;
-}
+
 .avatar-image {
-	width: 250px;
-	height: 250px;
-	border-radius: 10px;
-	margin-bottom: 20px;
+  border-radius: 50%;
+  width: 360px;
+  height: 360px;
+  object-fit: cover;
+  border: 3px solid #ddd;
 }
 
 .github-link {
-	margin-top: 10px;
+  text-decoration: none;
+  color: #333;
+  display: block;
+  margin-top: 15px;
+}
+
+.github-link h1 {
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #ee4434;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.github-link h1:hover {
+  background-color: #d6332c;
 }
 
 .skill_list {
-	list-style-type: none;
-	padding: 0;
-	margin: 10px 0;
-	width: 100%;
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-	gap: 25px;
+  grid-area: skills;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .skill_item {
-	padding: 15px 20px;
-	font-size: 18px;
-	background-color:  #357abd;
-	color: white;
-	border-radius: 5px;
-	transition: background-color 0.3s ease;
-	text-align: center;
-	outline: none;
-	text-decoration: none;
+  background-color: #f0f0f0;
+  border-radius: 12px;
+  padding: 10px 15px;
+  font-size: 14px;
 }
-

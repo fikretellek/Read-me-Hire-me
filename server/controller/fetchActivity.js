@@ -116,9 +116,3 @@ export default async function fetchActivity(username) {
 	}
 }
 
-// to test this function use this endpoint in api.js file
-
-// router.get("/fetchActivity", async (_, res) => {
-// 	const test = await fetchActivity("RbAvci")
-// 	res.send(test)
-// });

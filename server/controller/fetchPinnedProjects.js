@@ -68,9 +68,3 @@ export default async function fetchPinnedProjects(username) {
 	}
 }
 
-// to test this function use this endpoint in api.js file
-
-// router.get("/fetchPinnedProjects", async (_, res) => {
-// 	const test = await fetchPinnedProjects("RbAvci")
-// 	res.send(test)
-// });
