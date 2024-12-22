@@ -1,4 +1,4 @@
-FROM node:16-alpine3.17 AS build
+FROM node:20-alpine3.17 AS build
 
 
 RUN echo "Node $(node -v) / NPM v$(npm -v)"
@@ -17,7 +17,7 @@ COPY ./server ./server
 
 RUN npm run build
 
-FROM node:16-alpine3.17
+FROM node:20-alpine3.17
 
 LABEL maintainer="Jonathan Sharpe"
 
