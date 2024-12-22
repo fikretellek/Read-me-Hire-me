@@ -1,7 +1,4 @@
-ARG NODE_RELEASE=22.12
-ARG ALPINE_RELEASE=3.18
-
-FROM node:${NODE_RELEASE}-alpine${ALPINE_RELEASE} AS build
+FROM node:16-alpine3.17 AS build
 
 
 RUN echo "Node $(node -v) / NPM v$(npm -v)"
@@ -20,7 +17,7 @@ COPY ./server ./server
 
 RUN npm run build
 
-FROM node:${NODE_RELEASE}-alpine${ALPINE_RELEASE}
+FROM node:16-alpine3.17
 
 LABEL maintainer="Jonathan Sharpe"
 
